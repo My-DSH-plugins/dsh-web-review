@@ -1,10 +1,10 @@
-# Better-sidebar integration: register the dsh-web-review preview tab when `ctx.betterSidebar` is detected
+# Better-sidebar integration: register the dsh-web-review-english preview tab when `ctx.betterSidebar` is detected
 
 ## Outcome
 
 When the third-party `dsh-better-sidebar` plugin (or a fork such as
 `@starpivot/dsh-better-sidebar`) is installed and its client service
-`ctx.betterSidebar` is live, dsh-web-review registers its own tab
+`ctx.betterSidebar` is live, dsh-web-review-english registers its own tab
 (`dsh-web-review:preview`) into the sidebar's `+` menu. While that tab is
 live:
 

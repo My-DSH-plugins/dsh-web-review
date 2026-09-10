@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:53094/",
-    "title": "博客"
+    "title": "Blog"
   },
   "comments": [
     {
       "id": "22ef5dcb-2ac4-4e68-a8ea-a612964881a7",
-      "comment": "把博客主标题 My Blog 改成 Daily Notes",
+      "comment": "Change the blog’s main heading My Blog to Daily Notes",
       "tagName": "h1",
       "role": "heading",
       "label": "My Blog",

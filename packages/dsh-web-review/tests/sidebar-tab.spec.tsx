@@ -225,7 +225,7 @@ describe('SidebarPreviewTab', () => {
         ctx={ctx}
         scope={{ sessionId } as never}
         store={undefined as never}
-        tab={{ id: 'dsh-web-review:preview', type: 'dsh-web-review:preview', title: '网页预览' } as never}
+        tab={{ id: 'dsh-web-review:preview', type: 'dsh-web-review:preview', title: 'Web Preview' } as never}
         visible={true}
         deps={d}
       />,

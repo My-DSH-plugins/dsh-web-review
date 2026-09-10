@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52040/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "5c2fa7ff-2388-48ab-8d3f-563635d3a9b0",
-      "comment": "让首页宣传区的内容改为左对齐",
+      "comment": "Left-align the content in the homepage hero",
       "tagName": "h1",
       "role": "heading",
-      "label": "魔法 UI 演示页",
+      "label": "Magic UI Demo Page",
       "cssPath": "h1",
       "fullPath": "html > body > section.hero > h1",
       "stableClasses": [],
-      "textContent": "魔法 UI 演示页",
+      "textContent": "Magic UI Demo Page",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

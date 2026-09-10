@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52801/",
-    "title": "魔法商店"
+    "title": "Magic Shop"
   },
   "comments": [
     {
       "id": "6afb5fb8-5be8-4941-a249-88ed52aff311",
-      "comment": "把所有“加入购物车”按钮的圆角统一改成 999px",
+      "comment": "Change all“Add to cart”buttons’ border radius is uniformly changed to 999px",
       "tagName": "button",
       "role": "button",
-      "label": "加入购物车",
+      "label": "Add to cart",
       "cssPath": "article:nth-of-type(1) .buy",
       "fullPath": "html > body > div#root > div.page > main.products > article.product-card > button.buy",
       "stableClasses": [
         "buy"
       ],
-      "textContent": "加入购物车",
+      "textContent": "Add to cart",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

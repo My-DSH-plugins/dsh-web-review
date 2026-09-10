@@ -102,7 +102,7 @@ describe('Inspector controls', () => {
     const change = vi.fn()
     const scrub = vi.fn()
     const view = render(<ScrubNumber label="Size" value="12px" step={1} onChange={change} onScrubChange={scrub} />)
-    const handle = screen.getByRole('button', { name: 'Size · 拖动调整' })
+    const handle = screen.getByRole('button', { name: 'Size · drag to adjust' })
     const pointer = (type: string, clientX: number) => { fireEvent(handle, new MouseEvent(type, { bubbles: true, clientX })) }
 
     pointer('pointerdown', 100)
@@ -151,7 +151,7 @@ describe('Inspector controls', () => {
       />,
     )
 
-    const handle = screen.getByRole('button', { name: 'Margin top · 拖动调整' })
+    const handle = screen.getByRole('button', { name: 'Margin top · drag to adjust' })
     const pointer = (type: string, clientX: number) => {
       const event = new MouseEvent(type, { bubbles: true, clientX })
       Object.defineProperty(event, 'pointerId', { value: 1 })
@@ -163,9 +163,9 @@ describe('Inspector controls', () => {
     pointer('pointerup', 28)
 
     expect(change).toHaveBeenLastCalledWith(0, '12px')
-    expect(screen.getByRole('button', { name: 'Margin right · 拖动调整' }).textContent).toBe('→')
-    expect(screen.getByRole('button', { name: 'Margin bottom · 拖动调整' }).textContent).toBe('↓')
-    expect(screen.getByRole('button', { name: 'Margin left · 拖动调整' }).textContent).toBe('←')
+    expect(screen.getByRole('button', { name: 'Margin right · drag to adjust' }).textContent).toBe('→')
+    expect(screen.getByRole('button', { name: 'Margin bottom · drag to adjust' }).textContent).toBe('↓')
+    expect(screen.getByRole('button', { name: 'Margin left · drag to adjust' }).textContent).toBe('←')
     expect(screen.getAllByRole('spinbutton').map(field => field.getAttribute('aria-label'))).toEqual([
       'Margin top', 'Margin bottom', 'Margin left', 'Margin right',
     ])
@@ -312,7 +312,7 @@ describe('Inspector controls', () => {
     const change = vi.fn()
     render(<ColorControl label="Text color" value="rgba(97, 56, 56, .5)" onChange={change} />)
     fireEvent.click(screen.getByRole('button', { name: 'Text color' }))
-    fireEvent.change(screen.getByLabelText('Text color · 色谱'), { target: { value: '#112233' } })
+    fireEvent.change(screen.getByLabelText('Text color · Spectrum'), { target: { value: '#112233' } })
     expect(change).toHaveBeenCalledWith('rgba(17, 34, 51, 0.5)')
   })
 
@@ -321,8 +321,8 @@ describe('Inspector controls', () => {
     render(<div onKeyDown={outerKey}><ColorControl label="Text color" value="#613838" onChange={vi.fn()} /></div>)
     const trigger = screen.getByRole('button', { name: 'Text color' })
     fireEvent.click(trigger)
-    fireEvent.keyDown(screen.getByRole('dialog', { name: 'Text color · 颜色选择器' }), { key: 'Escape' })
-    expect(screen.queryByRole('dialog', { name: 'Text color · 颜色选择器' })).toBeNull()
+    fireEvent.keyDown(screen.getByRole('dialog', { name: 'Text color · Color picker' }), { key: 'Escape' })
+    expect(screen.queryByRole('dialog', { name: 'Text color · Color picker' })).toBeNull()
     expect(outerKey).not.toHaveBeenCalled()
   })
 })

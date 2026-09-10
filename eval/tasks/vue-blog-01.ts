@@ -9,13 +9,13 @@ export const task: EvalTask = {
   fixtureKind: 'vue',
   category: 'protocol-smoke',
   difficulty: 'easy',
-  title: '修改博客标题文案',
+  title: 'Change the blog title copy',
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'h1.title',
-      comment: '把博客主标题 My Blog 改成 Daily Notes',
+      comment: 'Change the blog’s main heading My Blog to Daily Notes',
     }],
     ...frozen,
   }],

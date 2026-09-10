@@ -39,8 +39,8 @@ describe('semantic eval grader adversarial boundaries', () => {
 
   it('rejects a transparent color that only has dominant RGB channels', async () => {
     const assertion: DomAssertion = { kind: 'dom', selector: '#target', colorDominance: { property: 'background-color', channel: 'red' } }
-    await expect(gradeHtml('<style>#target{background:rgba(255,0,0,0)}</style><div id="target">危险</div>', assertion)).resolves.toBe(false)
-    await expect(gradeHtml('<style>#target{background:rgb(180,30,40)}</style><div id="target">危险</div>', assertion)).resolves.toBe(true)
+    await expect(gradeHtml('<style>#target{background:rgba(255,0,0,0)}</style><div id="target">Danger</div>', assertion)).resolves.toBe(false)
+    await expect(gradeHtml('<style>#target{background:rgb(180,30,40)}</style><div id="target">Danger</div>', assertion)).resolves.toBe(true)
   })
 
   it('accepts a destructive cue in text or border without requiring a dark red fill', async () => {
@@ -77,8 +77,8 @@ describe('semantic eval grader adversarial boundaries', () => {
   })
 
   it('binds every accessible name to the title in its own card', async () => {
-    const assertion: DomAssertion = { kind: 'dom', selector: 'button', all: true, accessibleNameFromDescendant: { ancestorSelector: 'article', descendantSelector: 'h2', prefix: '收藏' } }
-    await expect(gradeHtml('<article><h2>台灯</h2><button aria-label="收藏商品"></button></article><article><h2>书桌</h2><button aria-label="收藏商品"></button></article>', assertion)).resolves.toBe(false)
-    await expect(gradeHtml('<article><h2>台灯</h2><button aria-label="收藏台灯"></button></article><article><h2>书桌</h2><button aria-label="收藏书桌"></button></article>', assertion)).resolves.toBe(true)
+    const assertion: DomAssertion = { kind: 'dom', selector: 'button', all: true, accessibleNameFromDescendant: { ancestorSelector: 'article', descendantSelector: 'h2', prefix: 'Favorite' } }
+    await expect(gradeHtml('<article><h2>Table Lamp</h2><button aria-label="Favorite item"></button></article><article><h2>Desk</h2><button aria-label="Favorite item"></button></article>', assertion)).resolves.toBe(false)
+    await expect(gradeHtml('<article><h2>Table Lamp</h2><button aria-label="Favorite Table Lamp"></button></article><article><h2>Desk</h2><button aria-label="Favorite Desk"></button></article>', assertion)).resolves.toBe(true)
   })
 })

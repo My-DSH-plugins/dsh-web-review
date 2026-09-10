@@ -1,7 +1,7 @@
 # Eval suite
 
 Local scenario bank plus runner/grader/report scripts measuring whether the
-dsh-web-review annotation channel supplies the evidence a coding model needs.
+dsh-web-review-english annotation channel supplies the evidence a coding model needs.
 The plugin-centered design is `docs/plugin-capability-eval-plan.md`; the
 original broad frontend bank plan is retained as historical input in
 `docs/frontend-eval-suite-plan.md`.
@@ -69,7 +69,7 @@ eval/reports/<NNN>/
 ```
 
 Archive directories use sequential numbers (`001`, `002`, …); the exact
-code state is recorded INSIDE the report — the header line 代码提交 shows the
+code state is recorded INSIDE the report — the header line Code commit shows the
 `repoCommit` the eval runs measured, and `summary.json` carries the same
 hash machine-readably. Re-persisting the same measured commit reuses its
 number (in-place update); a new commit gets the next number.
@@ -133,7 +133,7 @@ workspace is copied into the durable artifact only after the run.
 chunks, tool calls, per-step token usage), `trace.md`, `process.json`,
 `diff.txt`, `grader` evidence, and the launch stdout/stderr. The report
 embeds the trace, diff, and grader outcomes per task.
-The generated report uses Chinese UI copy. Each run links directly to its
+The generated report uses English UI copy. Each run links directly to its
 persisted Harness `session.jsonl` conversation log, provides a copyable
 `pnpm eval:view` command for opening it in the published DSH Web conversation
 UI, and shows the durable session id. The viewer stages a disposable copy in

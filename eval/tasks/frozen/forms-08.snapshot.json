@@ -3,15 +3,15 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51902/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "9a13103e-8d79-43b1-bcd2-b00844b133f3",
-      "comment": "给输入框聚焦时增加淡蓝色阴影",
+      "comment": "Add a light blue shadow when the input field is focused",
       "tagName": "input",
       "role": "textbox",
-      "label": "请输入姓名",
+      "label": "Enter your name",
       "cssPath": "#name",
       "fullPath": "html > body > form.form > div.form-field > input#name",
       "stableClasses": [],

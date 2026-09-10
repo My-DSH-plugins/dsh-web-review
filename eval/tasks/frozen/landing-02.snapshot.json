@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51982/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "e45830d5-d82c-4a5a-b512-89371681f107",
-      "comment": "把第三个卡片里的“了解更多”按钮文案改成“查看详情”",
+      "comment": "In the third card, change the“Learn more”button copy to“View Details”",
       "tagName": "button",
       "role": "button",
-      "label": "了解更多",
+      "label": "Learn more",
       "cssPath": "div:nth-of-type(3) .btn-ghost",
       "fullPath": "html > body > main.cards > div.card:nth-of-type(3) > button.btn-ghost",
       "stableClasses": [
         "btn-ghost"
       ],
-      "textContent": "了解更多",
+      "textContent": "Learn more",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

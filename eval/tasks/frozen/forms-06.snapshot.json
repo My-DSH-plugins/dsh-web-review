@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51864/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "49ecc3e1-2164-4743-8676-a4a4acae71b5",
-      "comment": "鼠标悬停提交按钮时背景加深为 #3b5bdb",
+      "comment": "Darken the submit button background on hover to #3b5bdb",
       "tagName": "button",
       "role": "button",
-      "label": "提交",
+      "label": "Submit",
       "cssPath": "button",
       "fullPath": "html > body > form.form > button",
       "stableClasses": [],
-      "textContent": "提交",
+      "textContent": "Submit",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

@@ -41,7 +41,7 @@ export interface BrowserCommentsPresentationComment {
  */
 export interface BrowserCommentsContextSource {
   readonly kind: 'plugin'
-  readonly plugin: 'dsh-web-review'
+  readonly plugin: 'dsh-web-review-english'
   readonly form: 'snapshot'
   readonly snapshotId: AnnotationSnapshotIdType
   readonly sections: readonly ContextSnapshotSection[]
@@ -89,7 +89,7 @@ function boundedString(value: unknown, cap: number, allowEmpty = true): string |
 export function browserCommentsContextSourceOf(value: unknown): BrowserCommentsContextSource | undefined {
   const source = exactRecord(value, ['kind', 'plugin', 'form', 'snapshotId', 'sections'])
   if (
-    source === undefined || source.kind !== 'plugin' || source.plugin !== 'dsh-web-review'
+    source === undefined || source.kind !== 'plugin' || source.plugin !== 'dsh-web-review-english'
     || source.form !== 'snapshot'
   ) return undefined
   const snapshotId = boundedString(source.snapshotId, ANNOTATION_LIMITS.snapshotId, false)
@@ -105,7 +105,7 @@ export function browserCommentsContextSourceOf(value: unknown): BrowserCommentsC
   }
   return {
     kind: 'plugin',
-    plugin: 'dsh-web-review',
+    plugin: 'dsh-web-review-english',
     form: 'snapshot',
     snapshotId: AnnotationSnapshotId(snapshotId),
     sections,

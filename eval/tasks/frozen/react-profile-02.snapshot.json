@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52455/",
-    "title": "个人主页"
+    "title": "Profile Page"
   },
   "comments": [
     {
       "id": "dc2e5b65-7318-4a18-bfaa-dc9dc6aaf452",
-      "comment": "把名字的字号加大到 24px",
+      "comment": "Increase the name font size to 24px",
       "tagName": "h1",
       "role": "heading",
-      "label": "李雷",
+      "label": "Li Lei",
       "cssPath": ".name",
       "fullPath": "html > body > div#root > div.profile > div.info > h1.name",
       "stableClasses": [
         "name"
       ],
-      "textContent": "李雷",
+      "textContent": "Li Lei",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

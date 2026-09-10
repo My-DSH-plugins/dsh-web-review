@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52100/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "b003c056-c00b-4d59-9a7d-5ab233373123",
-      "comment": "把主按钮的内边距加大到上下 10px、左右 24px",
+      "comment": "increase the primary button’s padding to top/bottom 10px, left and right 24px",
       "tagName": "button",
       "role": "button",
-      "label": "提交",
+      "label": "Submit",
       "cssPath": ".btn-primary",
       "fullPath": "html > body > main.cards > div.card > button.btn-primary",
       "stableClasses": [
         "btn-primary"
       ],
-      "textContent": "提交",
+      "textContent": "Submit",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

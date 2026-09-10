@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
-  <title id="title">CSS 数值与关键字复合输入原型</title>
-  <desc id="desc">三幅画板展示复合输入关闭态、下拉展开态与选择关键字后的状态，并对比纯数值和纯枚举控件。</desc>
+  <title id="title">CSS Numeric and keyword composite input prototype</title>
+  <desc id="desc">Three artboards show the composite input’s closed state, the dropdown expanded state, and the state after selecting a keyword, and compare pure-numeric and pure-enum controls.</desc>
   <defs>
     <filter id="shadow" x="-30%" y="-30%" width="170%" height="190%">
       <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#172033" flood-opacity=".16"/>
@@ -27,22 +27,22 @@
   </defs>
 
   <rect width="1440" height="900" fill="#f4f6f9"/>
-  <text x="54" y="58" class="title">数值可输入，关键字可选择</text>
-  <text x="54" y="86" class="subtitle">保留左侧拖动与中间文本输入；仅在支持常用 CSS 关键字时，于右侧显示下三角。</text>
+  <text x="54" y="58" class="title">Values can be typed, keywords can be selected</text>
+  <text x="54" y="86" class="subtitle">keeps the left drag handle and the middle text input; only when common CSS  keywords, a dropdown arrow is shown on the right.</text>
 
   <!-- 01 closed -->
   <g transform="translate(54 126)">
     <rect width="404" height="610" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="38" class="badge">01 · CLOSED</text>
-    <text x="24" y="68" class="state">默认关闭态</text>
-    <text x="24" y="91" class="tiny">直接输入、拖动、下拉三种方式并存</text>
+    <text x="24" y="68" class="state">Default closed state</text>
+    <text x="24" y="91" class="tiny">Direct input, dragging, and dropdown coexist</text>
 
     <g transform="translate(26 120)" filter="url(#shadow)">
       <rect width="352" height="404" rx="18" fill="#fff" stroke="#dfe3e8"/>
-      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">尺寸与布局</text>
+      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">Size & Layout</text>
       <path d="m324 24 5 5 5-5" fill="none" stroke="#868c95" stroke-width="1.3"/>
 
-      <text x="14" y="74" class="label">宽度</text>
+      <text x="14" y="74" class="label">Width</text>
       <g transform="translate(182 54)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -53,7 +53,7 @@
       </g>
       <g transform="translate(316 61)" color="#747a82"><use href="#reset"/></g>
 
-      <text x="14" y="108" class="label">高度</text>
+      <text x="14" y="108" class="label">Height</text>
       <g transform="translate(182 88)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -63,8 +63,8 @@
         <g transform="translate(109 8)" color="#747a82"><use href="#chevron"/></g>
       </g>
 
-      <text x="14" y="162" fill="#24282e" font-size="12" font-weight="700">间距</text>
-      <text x="14" y="201" class="label">外边距 · 上</text>
+      <text x="14" y="162" fill="#24282e" font-size="12" font-weight="700">Spacing</text>
+      <text x="14" y="201" class="label">Margin · Top</text>
       <g transform="translate(182 181)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -74,42 +74,42 @@
         <g transform="translate(109 8)" color="#747a82"><use href="#chevron"/></g>
       </g>
 
-      <text x="14" y="235" class="label">内边距 · 上</text>
+      <text x="14" y="235" class="label">padding · Top</text>
       <g transform="translate(182 215)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
         <text x="15" y="18" fill="#747a82" font-size="10" text-anchor="middle">↑</text>
         <text x="117" y="18" class="value" text-anchor="end">16px</text>
       </g>
-      <text x="308" y="267" class="tiny" text-anchor="end">纯数值：不显示下三角</text>
+      <text x="308" y="267" class="tiny" text-anchor="end">Plain number: no dropdown arrow shown</text>
 
-      <text x="14" y="312" fill="#24282e" font-size="12" font-weight="700">显示</text>
-      <text x="14" y="351" class="label">显示方式</text>
+      <text x="14" y="312" fill="#24282e" font-size="12" font-weight="700">Show</text>
+      <text x="14" y="351" class="label">Display</text>
       <g transform="translate(182 331)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <text x="96" y="18" class="value" text-anchor="end">flex</text>
         <g transform="translate(109 8)" color="#747a82"><use href="#chevron"/></g>
       </g>
-      <text x="308" y="382" class="tiny" text-anchor="end">纯枚举：沿用现有菜单</text>
+      <text x="308" y="382" class="tiny" text-anchor="end">Pure enum: reuse the existing menu</text>
     </g>
 
     <path d="M305 203 C342 186 354 163 346 143" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="220" y="138" class="callout">新增独立下三角按钮</text>
+    <text x="220" y="138" class="callout">Added a standalone dropdown arrow button</text>
   </g>
 
   <!-- 02 open -->
   <g transform="translate(518 126)">
     <rect width="404" height="610" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="38" class="badge">02 · OPEN</text>
-    <text x="24" y="68" class="state">关键字菜单展开</text>
-    <text x="24" y="91" class="tiny">菜单 portaled 到宿主，不受编辑器滚动裁切</text>
+    <text x="24" y="68" class="state">Keyword menu expanded</text>
+    <text x="24" y="91" class="tiny">The menu portaled to the host, unaffected by editor scroll clipping</text>
 
     <g transform="translate(26 120)" filter="url(#shadow)">
       <rect width="352" height="404" rx="18" fill="#fff" stroke="#dfe3e8"/>
-      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">约束</text>
+      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">Constraints</text>
       <path d="m324 24 5 5 5-5" fill="none" stroke="#868c95" stroke-width="1.3"/>
 
-      <text x="14" y="74" class="label">最大宽度</text>
+      <text x="14" y="74" class="label">Max width</text>
       <g transform="translate(182 54)">
         <rect width="126" height="28" rx="7" fill="#eef3ff" stroke="#4176e6"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#cdd9f6"/>
@@ -119,7 +119,7 @@
         <g transform="translate(109 8) rotate(180 7 7)" color="#4176e6"><use href="#chevron"/></g>
       </g>
 
-      <text x="14" y="128" class="label">最小宽度</text>
+      <text x="14" y="128" class="label">Min width</text>
       <g transform="translate(182 108)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -151,23 +151,23 @@
     </g>
 
     <path d="M194 344 C153 361 143 391 157 412" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="41" y="431" class="callout">数值当前值不复制进菜单</text>
-    <text x="41" y="453" class="tiny">输入框始终保留 640px；菜单只提供关键字快捷项</text>
+    <text x="41" y="431" class="callout">The numeric current value is not copied into the menu</text>
+    <text x="41" y="453" class="tiny">The input box always keeps 640px; the menu only provides keyword shortcuts</text>
   </g>
 
   <!-- 03 selected -->
   <g transform="translate(982 126)">
     <rect width="404" height="610" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="38" class="badge">03 · SELECTED</text>
-    <text x="24" y="68" class="state">选择关键字后</text>
-    <text x="24" y="91" class="tiny">同一 onChange 链路：预览、reset、Confirm、Cancel</text>
+    <text x="24" y="68" class="state">After selecting a keyword</text>
+    <text x="24" y="91" class="tiny">Same onChange chain: preview,reset, Confirm, Cancel</text>
 
     <g transform="translate(26 120)" filter="url(#shadow)">
       <rect width="352" height="404" rx="18" fill="#fff" stroke="#dfe3e8"/>
-      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">约束</text>
+      <text x="14" y="31" fill="#24282e" font-size="12" font-weight="700">Constraints</text>
       <path d="m324 24 5 5 5-5" fill="none" stroke="#868c95" stroke-width="1.3"/>
 
-      <text x="14" y="74" class="label">最大宽度</text>
+      <text x="14" y="74" class="label">Max width</text>
       <g transform="translate(182 54)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -179,7 +179,7 @@
       <g transform="translate(316 61)" color="#4176e6"><use href="#reset"/></g>
       <circle cx="329" cy="74" r="4" fill="#4176e6"/>
 
-      <text x="14" y="128" class="label">行高</text>
+      <text x="14" y="128" class="label">Line height</text>
       <g transform="translate(182 108)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -189,7 +189,7 @@
         <g transform="translate(109 8)" color="#747a82"><use href="#chevron"/></g>
       </g>
 
-      <text x="14" y="182" class="label">层级</text>
+      <text x="14" y="182" class="label">Z-index</text>
       <g transform="translate(182 162)">
         <rect width="126" height="28" rx="7" fill="#f3f5f7"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#dde1e6"/>
@@ -200,8 +200,8 @@
       </g>
 
       <line x1="0" y1="218" x2="352" y2="218" stroke="#e8eaed"/>
-      <text x="14" y="249" fill="#24282e" font-size="12" font-weight="700">值仍可手动覆盖</text>
-      <text x="14" y="282" class="label">最大宽度</text>
+      <text x="14" y="249" fill="#24282e" font-size="12" font-weight="700">Values can still be overridden manually</text>
+      <text x="14" y="282" class="label">Max width</text>
       <g transform="translate(182 262)">
         <rect width="126" height="28" rx="7" fill="#eef3ff" stroke="#4176e6"/>
         <line x1="30" y1="5" x2="30" y2="23" stroke="#cdd9f6"/>
@@ -211,30 +211,30 @@
         <g transform="translate(109 8)" color="#4176e6"><use href="#chevron"/></g>
         <line x1="54" y1="22" x2="97" y2="22" stroke="#4176e6"/>
       </g>
-      <text x="308" y="320" class="tiny" text-anchor="end">下拉不会锁死文本输入</text>
+      <text x="308" y="320" class="tiny" text-anchor="end">The dropdown does not lock out text input</text>
 
       <rect x="14" y="350" width="58" height="32" rx="16" fill="#fff" stroke="#d9dde2"/>
-      <text x="43" y="371" fill="#252a31" font-size="12" text-anchor="middle">取消</text>
+      <text x="43" y="371" fill="#252a31" font-size="12" text-anchor="middle">Cancel</text>
       <circle cx="322" cy="366" r="16" fill="#4176e6"/>
       <g transform="translate(315 359)" color="#fff"><use href="#check"/></g>
     </g>
 
     <path d="M327 200 C357 181 365 156 355 136" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="216" y="133" class="callout">选择后立即显示 reset</text>
+    <text x="216" y="133" class="callout">After selection, immediately shows reset</text>
   </g>
 
   <g transform="translate(54 780)">
     <rect width="1332" height="72" rx="14" fill="#fff" stroke="#dfe3e8"/>
-    <text x="22" y="28" fill="#4c535e" font-size="12" font-weight="600">控件判定</text>
+    <text x="22" y="28" fill="#4c535e" font-size="12" font-weight="600">Control detection</text>
     <text x="118" y="28" class="value">number + keywords</text>
     <path d="M275 23h52m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="341" y="28" class="label">复合输入：左 scrub / 中输入 / 右下拉</text>
+    <text x="341" y="28" class="label">Composite input: left scrub / middle input / right dropdown</text>
     <text x="703" y="28" class="value">number only</text>
     <path d="M802 23h52m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="868" y="28" class="label">维持现有数值输入</text>
+    <text x="868" y="28" class="label">Keep the existing numeric input</text>
     <text x="1087" y="28" class="value">enum only</text>
     <path d="M1170 23h42m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="1224" y="28" class="label">维持 OptionMenu</text>
-    <text x="22" y="53" class="tiny">状态只属于当前编辑器组件；不进入 store、wire 或模型上下文。</text>
+    <text x="1224" y="28" class="label">Keep OptionMenu</text>
+    <text x="22" y="53" class="tiny">State belongs only to the current editor component; it does not enter the store, wire or model context.</text>
   </g>
 </svg>

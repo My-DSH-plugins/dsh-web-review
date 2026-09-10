@@ -5,8 +5,8 @@ export function App() {
     <div className="profile">
       <div className="info">
         <img className="avatar" src={AVATAR} />
-        <h1 className="name">李雷</h1>
-        <p className="bio">一名专注于产品体验的前端工程师</p>
+        <h1 className="name">Li Lei</h1>
+        <p className="bio">A frontend engineer focused on product experience</p>
       </div>
     </div>
   )

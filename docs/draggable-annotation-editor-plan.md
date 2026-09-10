@@ -1,102 +1,102 @@
-# 批注编辑器拖拽与缩放方案
+# Annotation editor drag and resize plan
 
-## 目标
+## Goals
 
-在批注编辑器展开态的顶栏增加一个 `:::` 拖拽把手，并允许从四边或四角调整浮窗尺寸，让用户在编辑器遮挡页面内容时可以主动整理工作区，同时保留现有自动避让、临时隐藏、属性拖调、元素切换、回滚和发送行为。
+Add a `:::` drag handle, and allow the floating window to be resized from any of its four edges or corners, so users can actively tidy their workspace when the editor covers page content, while preserving the existing auto-avoidance, temporary-hide, property-scrub, element-switch, rollback and send behaviors.
 
-本次改动只影响宿主侧 `AnnotationEditor` 的位置交互；iframe 内选中框、编号标记、批注数据和模型上下文不变。
+This change only affects the host-side `AnnotationEditor` ’s position interactions;iframe internal selection box, number markers, annotation data and model context stay unchanged.
 
-## 调研结论
+## Research findings
 
-- 把手采用 34×34px 的真实按钮，超过 WCAG 2.2 [Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum) 的 24×24 CSS px 最低尺寸，并沿用现有顶栏按钮间距。
-- 拖动期间使用 Pointer Events，并在 `pointerdown` 后调用 [`setPointerCapture()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture)，确保指针离开把手或浮窗后仍能可靠收到 move/up；`pointercancel` 和 `lostpointercapture` 都按取消路径收口。
-- 只有把手设置 `touch-action: none`、`cursor: grab/grabbing` 和临时禁选文本。整张卡片不作为拖动区域，避免评论输入、选择/调整按钮、滚动条和数值拖调发生冲突。
-- 缩放采用四边加四角八个连续空间命中区：四角为 24×24px；边缘在细指针下为 12px、粗指针下扩大到 20px。WCAG 2.2 把按空间位置选值的连续区域视为一个目标，边缘因此不拆成密集的小按钮。
+- The handle uses 34×34px real button, exceeding WCAG 2.2 [Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum) of 24×24 CSS px minimum size, and reuses the existing top bar button spacing.
+- During dragging, use Pointer Events, and after `pointerdown` and then call [`setPointerCapture()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture), ensuring they are still reliably received after the pointer leaves the handle or floating panel move/up; `pointercancel` and `lostpointercapture` all converge on the cancel path.
+- Only the handle sets `touch-action: none`, `cursor: grab/grabbing` and temporary text-selection blocking. The whole card is not used as a drag area, avoiding conflicts with comment input, selection/adjust buttons, the scrollbar, and numeric dragging conflict.
+- Resizing uses eight contiguous hit areas — four edges plus four corners: the four corners are 24×24px; edge hit areas are 12px, and with a coarse pointer expands to 20px.WCAG 2.2 treats a continuous region for selecting a value by spatial position as one target, so the edges are not split into densely packed small buttons.
 
-## 顶栏方案
+## Top bar approach
 
-- 仅在 `mode !== 'collapsed'` 的展开态显示 `:::`，放在评论输入框与眼睛按钮之间。
-- 按钮视觉尺寸 34×34px，图形为 2×3 六点把手；语义文案为“移动编辑器”。
-- 默认状态使用 `grab`；有效拖动中使用 `grabbing`，按钮进入业务蓝浅底，浮窗阴影略收紧，不播放位移动画。
-- 单击或移动未超过 3px 时不改变位置，也不打开附加面板。
+- Only when `mode !== 'collapsed'` is displayed in the expanded state `:::`, placed between the comment input and the eye button.
+- Button visual size 34×34px, with the graphic being 2×3 six-dot handle; the accessible label is“Move editor”.
+- The default state uses `grab`; during an active drag it uses `grabbing`, the button takes on a light brand-blue background, the floating panel’s shadow tightens slightly, and no movement animation plays.
+- If a click or movement does not exceed 3px does not change the position and does not open the attached panel.
 
-## 位置状态
+## Position state
 
-编辑会话持有以下纯 UI 状态，不写入共享 store，也不进入批注快照：
+The edit session holds the following pure UI state, not written to the shared store, nor does it enter the annotation snapshot:
 
 ```ts
 type EditorPosition = { left: number; top: number } | null
 type EditorSize = { width: number; height: number } | null
 ```
 
-- `null` 表示自动模式，继续使用 `placeFloatingEditor()` 的目标避让结果。
-- 拖动超过 3px 后记录手动坐标；移动值以预览画布坐标记录。
-- 手动位置在“选择 / 调整”切换、目标层级切换、临时隐藏与恢复之间保留；关闭编辑事务、确认、取消或换页后重置。
-- 用户手动定位后，目标元素滚动不再把编辑器拉回目标旁边；预览尺寸变化和编辑器高度变化只做边界钳制。
-- `EditorSize` 只在展开态生效；Select 与 Adjust 切换、目标切换、隐藏和恢复均保留尺寸。松手后的偏好宽高写入浏览器 profile，关闭再开或刷新后恢复；位置仍随编辑事务释放。
-- 小画布只钳制当前渲染尺寸，不覆盖已保存的偏好尺寸；画布恢复后继续使用用户选择的宽高。
+- `null`  means automatic mode, continuing to use `placeFloatingEditor()` ’s target-avoidance result.
+- Drag more than 3px  and beyond, the manual coordinates are recorded; move values are recorded in preview canvas coordinates.
+- The manual position is preserved in“Select / Adjust”switching, target-level switching and temporary hide/restore; and it resets after closing the edit transaction, confirming, cancelling or changing pages.
+- After the user positions it manually, scrolling the target element no longer pulls the editor back next to the target; preview size changes and editor height changes only clamp to the boundary.
+- `EditorSize` only takes effect in the expanded state;Select and Adjust switching, target switching, hiding and restoring all preserve the size. The preferred width and height after release is written into the browser profile, and it is restored after closing and reopening or refreshing; the position is still released with the editing transaction.
+- A small canvas only clamps the current render size and does not overwrite the saved preferred size; once the canvas is restored, the width and height chosen by the user continue to apply.
 
-## 边缘缩放
+## Edge resizing
 
-1. 展开态提供 `n / ne / e / se / s / sw / w / nw` 八个命中区；折叠态不缩放，避免与紧凑胶囊操作冲突。
-2. 沿西边或北边缩放时固定对边，同步修改 `left` / `top`，不会在跨过最小值后反向跳动。
-3. 宽度最小 320px；Select 高度最小 260px；Adjust 高度最小 300px。画布更小时，最小值退让为画布尺寸减去两侧 8px。
-4. 内部检查器使用剩余高度滚动；顶栏、底栏与评论草稿不会因缩放丢失。
-5. 缩放同样使用 3px 启动阈值、Pointer Capture 和取消回滚；不提供点击缩放、键盘缩放、惯性或吸附。
+1. In the expanded state, provide `n / ne / e / se / s / sw / w / nw` eight hit zones; the collapsed state does not scale, avoiding conflicts with the compact pill’s interactions.
+2. When resizing from the west or north edge, the opposite edge stays fixed while `left` / `top`, and it will not jump back after crossing the minimum value.
+3. Minimum width 320px; Select minimum height 260px; Adjust minimum height 300px. When the canvas is smaller, the minimum value yields to the canvas size minus 8px.
+4. The inner inspector scrolls using the remaining height; the top bar, bottom bar, and comment draft are not lost on resize.
+5. Resizing likewise uses 3px activation threshold,Pointer Capture  and rollback on cancel; no click-to-zoom, keyboard zoom, inertia, or snapping is provided.
 
-## 指针交互
+## Pointer interaction
 
-1. 仅响应主按钮 `pointerdown`，记录指针起点与浮窗起点，并捕获当前 pointer。
-2. 移动距离超过 3px 后进入 `dragging`，实时更新经过边界钳制的浮窗坐标。
-3. 每一帧把位置限制在预览画布内：四边至少保留 8px，完整顶栏始终可见。
-4. `pointerup` 提交最终坐标；`pointercancel` 和 `lostpointercapture` 恢复拖动起点。
-5. 未越过阈值的 `pointerup` 不执行任何动作。
+1. Respond only to the primary button `pointerdown`, recording the pointer start point and the floating panel start point, and capturing the current pointer.
+2. Once the movement exceeds 3px then enters `dragging`, updating the boundary-clamped floating panel coordinates in real time.
+3. each frame clamps the position within the preview canvas, keeping at least 8px, keeping the full top bar always visible.
+4. `pointerup` commits the final coordinates;`pointercancel` and `lostpointercapture` restore the drag start point.
+5. Not crossing the threshold, `pointerup`  performs no action.
 
-## 组件改动
+## Component changes
 
 1. `floating-position.ts`
-   - 提取 `clampFloatingEditorPosition()`，统一处理手动坐标、编辑器尺寸变化和预览 resize。
-   - 保留 `placeFloatingEditor()` 作为自动模式，不把用户偏移混入目标避让算法。
+   - Extract `clampFloatingEditorPosition()`, uniformly handling manual coordinates, editor size changes and preview resize.
+   - Keep `placeFloatingEditor()` as the automatic mode, without mixing the user’s offset into the target-avoidance algorithm.
 
 2. `AnnotationEditor.tsx`
-   - 新增 `DragHandleIcon`、把手按钮和 pointer capture 生命周期。
-   - 接收当前 `EditorPosition` 与更新回调，使目标切换导致组件换 key 时仍保留手动位置。
-   - 接收 `EditorSize`，渲染八方向缩放层，并把西/北方向的位置变化与尺寸变化一起提交。
-   - 拖动时暂停自动 reposition；隐藏眼睛 FAB 使用最终手动位置的右上角锚点。
+   - Add `DragHandleIcon`, the handle button, and pointer capture lifecycle.
+   - Receives the current `EditorPosition` and an update callback, so that when a target switch causes the component to change key still retains the manual position.
+   - Accepts `EditorSize`, renders the eight-direction resize layer, and commits the west/north-direction position changes and size changes are committed together.
+   - While dragging, pause automatic reposition; hiding the eye FAB uses the top-right anchor of the final manual position.
 
 3. `WebviewView.tsx`
-   - 把 `EditorPosition` 放入现有本地 `EditorSession`，切换目标时沿用，关闭事务时自然释放。
-   - `EditorSize` 不进入共享 store 或批注 wire；只在缩放提交点写入防御性校验的 profile 本地偏好。
-   - 不新增 store action，不改变批注 wire 数据。
+   - Change `EditorPosition` into the existing local `EditorSession`, reused when switching targets, and released naturally when the transaction is closed.
+   - `EditorSize` does not enter the shared store or annotation wire; it only writes a defensively validated profile local preferences.
+   - Adds no new store action, without changing the annotation wire  data.
 
-4. 键盘与层级选择
-   - 元素树为指针选择器，不建立 treeitem 键盘焦点，也不显示 `focus-visible` 高亮。
-   - 父级、子级、上一个、下一个快捷键由浮窗画布统一捕获；可编辑输入仍保留原生文本键盘行为。
-   - iframe 页面控件在拾取时释放焦点，避免其原生按键动作和焦点环干扰层级快捷键。
+4. Keyboard and hierarchy selection
+   - The element tree is a pointer picker and does not establish treeitem keyboard focus, nor does it show `focus-visible` highlight.
+   - The parent, child, previous, and next keyboard shortcuts are captured centrally by the floating canvas; editable inputs still keep native text keyboard behavior.
+   - iframe Page controls release focus when picked, so their native key actions and focus ring do not interfere with the hierarchy shortcuts.
 
-5. 浮层分离
-   - 使用稳定的三层投影增强浅色页面上的边界辨识度。
-   - 不使用 `clip-path` 裁卡片，因为它会同时裁掉外部阴影；内容继续由 `overflow: hidden` 与 18px 圆角裁切。
+5. Overlay separation
+   - Use a stable three-layer shadow to improve edge definition on light pages.
+   - Does not use `clip-path` clip the card, because it would clip away the outer shadow at the same time; the content continues to be `overflow: hidden` and 18px rounded-corner clipping.
 6. `AnnotationEditor.module.css` / `locales.ts`
-   - 增加把手、缩放命中区、拖动态与投影样式，并移除编辑器键盘焦点高亮。
-   - 增加中文产品文案和对应英文 locale；代码注释继续使用英文。
+   - adds a handle, resize hit areas, a dragging state and a drop shadow, and removes the editor’s keyboard focus highlight.
+   - Add Chinese product copy and the matching English locale; code comments continue to be in English.
 
-## 边界规则
+## Boundary rules
 
-- 安全边距沿用现有浮窗定位的 8px；任一时刻 `left >= 8`、`top >= 8`，且右边与底边不越界。
-- 当浮窗比可用画布更大时，优先保证完整顶栏可见，并允许现有检查器滚动区域继续缩高；不能通过拖动把关闭/隐藏/移动控件送出画布。
-- 拖动浮窗时不改变选中元素、临时样式、评论草稿和编辑器滚动位置。
-- 属性数值拖调优先于浮窗拖动；两个 pointer capture 生命周期互不共享状态。
-- `prefers-reduced-motion` 下不增加吸附、回弹或惯性；普通模式也不使用惯性，以免浮窗越过用户预期落点。
+- The safe margin follows the existing floating-window positioning of 8px; at all times `left >= 8`, `top >= 8`, and the right and bottom edges stay within bounds.
+- When the floating window is larger than the available canvas, prioritize keeping the entire top bar visible and let the existing inspector scroll area stay tall; dragging must not push the close/Hide/move the controls out of the canvas by dragging.
+- Dragging the floating window does not change the selected element, temporary styles, comment draft or editor scroll position.
+- Property value scrubbing takes priority over floating-panel dragging; the two pointer capture lifecycles do not share state with each other.
+- `prefers-reduced-motion` does not add snapping, bounce, or inertia; normal mode also does not use inertia, so the floating window does not overshoot the user’s expected drop point.
 
-## 验证计划
+## Verification plan
 
-- `floating-position.spec.ts`：手动位置四边钳制、编辑器尺寸变化、窄画布和超高编辑器。
-- `annotation-editor.spec.tsx`：展开态才显示把手和八个缩放区；3px 阈值；pointer capture；拖动/缩放提交；cancel/lost capture 回滚；隐藏后按手动几何恢复。
-- `panel.spec.tsx`：切换目标、选择/调整模式和临时隐藏时保留位置；确认、取消和换页重置；共享批注状态无变化。
-- `webview.e2e.spec.ts`：在真实预览中拖至不同位置、从角落缩放、验证最小值与边界，且属性控件仍可拖调。
-- 实现后运行 `pnpm check` 与 `pnpm test:e2e`，再启动真实 DSH 预览做手动验收。
+- `floating-position.spec.ts`: clamping the manual position on all four sides, editor size changes, narrow canvases and very tall editors.
+- `annotation-editor.spec.tsx`: the handle and the eight resize zones only appear in the expanded state;3px threshold;pointer capture; drag/resize commit;cancel/lost capture rollback; after hiding, it is restored from the manual geometry.
+- `panel.spec.tsx`: switching targets, selecting/the position is preserved in adjust mode and when temporarily hidden; it resets on confirm, cancel, and page change; shared annotation state is unchanged.
+- `webview.e2e.spec.ts`: drag to different positions in a real preview, resize from the corners, verify the minimum size and boundaries, and confirm the property controls can still be scrubbed.
+- After implementing, run `pnpm check` and `pnpm test:e2e`, then start the real DSH preview for manual acceptance.
 
-## 原型
+## Prototype
 
 - `docs/draggable-annotation-editor-prototype.svg`

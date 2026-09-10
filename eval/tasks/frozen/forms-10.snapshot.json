@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51944/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "16d6b69e-9a2c-4ba6-b046-241b0f75253e",
-      "comment": "把所有输入框的圆角统一改成 8px",
+      "comment": "Change all input fields’ border radii uniformly to 8px",
       "tagName": "input",
       "role": "textbox",
       "label": "",

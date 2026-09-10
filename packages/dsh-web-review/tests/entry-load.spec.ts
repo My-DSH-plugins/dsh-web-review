@@ -38,7 +38,7 @@ describe('package alias import (0812 Loader resolution path)', () => {
       inject: string[]
       hasApply: boolean
     }
-    expect(parsed.name).toBe('dsh-web-review')
+    expect(parsed.name).toBe('dsh-web-review-english')
     expect(parsed.inject).toEqual(['webServer', 'agents', 'systemPrompt', 'skills'])
     expect(parsed.hasApply).toBe(true)
   })

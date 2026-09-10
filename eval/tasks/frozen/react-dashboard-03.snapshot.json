@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52248/",
-    "title": "数据看板"
+    "title": "Data Dashboard"
   },
   "comments": [
     {
       "id": "50019e2f-72fd-4778-bde1-6e53bf818b86",
-      "comment": "把用户头像的尺寸改成 48px",
+      "comment": "Change the user avatar’s size to 48px",
       "tagName": "div",
       "role": "",
-      "label": "用户头像",
+      "label": "User avatar",
       "cssPath": ".avatar",
       "fullPath": "html > body > div#root > div.dashboard > header.topbar > div.avatar",
       "stableClasses": [
         "avatar"
       ],
-      "textContent": "李",
+      "textContent": "Li",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

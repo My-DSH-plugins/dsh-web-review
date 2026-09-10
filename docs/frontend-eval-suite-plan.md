@@ -4,7 +4,7 @@
 
 ## Goal
 
-Measure whether the dsh-web-review plugin's annotation channel helps an AI
+Measure whether the dsh-web-review-english plugin's annotation channel helps an AI
 complete frontend modification tasks **effectively and efficiently**. The suite
 ships a local question bank (60 tasks) plus local runner/grader/report scripts
 that execute the full plugin loop against a real model and produce an HTML
@@ -205,10 +205,10 @@ interface EvalTask {
 {
   id: 'landing-01', fixture: 'landing', category: 'color', difficulty: 'easy',
   title: 'Darken the primary button',
-  instruction: '把首页主按钮的背景颜色改深一点，改成 #224466',
+  instruction: 'Make the homepage primary button background color a bit darker, change it to #224466',
   capture: {
     target: 'button.btn-primary',
-    comment: '把首页主按钮的背景颜色改深一点，改成 #224466',
+    comment: 'Make the homepage primary button background color a bit darker, change it to #224466',
     adjusts: [{ property: 'background-color', after: '#224466' }],
   },
   // snapshot + captureMeta frozen by eval/capture.ts
@@ -220,15 +220,15 @@ interface EvalTask {
 
 // forms-07 · accessibility · medium
 {
-  instruction: '给顶部搜索输入框补上可访问名称"搜索"',
-  capture: { target: 'input[type="search"]', comment: '给顶部搜索输入框补上可访问名称"搜索"' },
-  grader: { pass: [{ selector: 'input[type="search"]', accessibleName: '搜索' }] },
+  instruction: 'Add an accessible name to the top search input field"Search"',
+  capture: { target: 'input[type="search"]', comment: 'Add an accessible name to the top search input field"Search"' },
+  grader: { pass: [{ selector: 'input[type="search"]', accessibleName: 'Search' }] },
 }
 
 // react-todo-05 · interaction · hard (hover state + source anchor)
 {
-  instruction: '让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff',
-  capture: { target: 'li.nav-item', comment: '让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff' },
+  instruction: 'Make sidebar list items highlight on hover with a background of #eef2ff',
+  capture: { target: 'li.nav-item', comment: 'Make sidebar list items highlight on hover with a background of #eef2ff' },
   grader: { pass: [{ selector: 'li.nav-item', hover: true, style: { 'background-color': '#eef2ff' } }] },
 }
 ```
@@ -302,7 +302,7 @@ selection replaced:
    `{ kind: 'skill-invocation', name, form: 'instructions' }`, content =
    `renderSkillContent` over the plugin's bundled skill markdown), then the
    Browser comments message (source
-   `{ kind: 'plugin', plugin: 'dsh-web-review', snapshotId }`), then the
+   `{ kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId }`), then the
    loaded-skill reminder. `inject` queues context for the next pre-step
    without waking the driver — the same mechanism the real web flow relies
    on, so the message set, order, and sources are byte-identical to a real

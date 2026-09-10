@@ -9,17 +9,17 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'accessibility',
   difficulty: 'medium',
-  title: '为头像添加可访问名称',
-  instruction: '给头像补充可访问名称“用户头像”',
+  title: 'Add an accessible name to the avatar',
+  instruction: 'Add an accessible name to the avatar“User avatar”',
   capture: {
     target: '.avatar',
-    comment: '给头像补充可访问名称“用户头像”',
+    comment: 'Add an accessible name to the avatar“User avatar”',
   },
   snapshot,
   captureMeta,
   grader: {
-    pass: [{ kind: 'dom', selector: '.avatar', accessibleName: '用户头像' }],
-    noRegression: [{ kind: 'dom', selector: '.name', text: '李雷' }],
+    pass: [{ kind: 'dom', selector: '.avatar', accessibleName: 'User avatar' }],
+    noRegression: [{ kind: 'dom', selector: '.name', text: 'Li Lei' }],
   },
   golden: { kind: 'git-patch', patchFile: 'golden.patch' },
 }

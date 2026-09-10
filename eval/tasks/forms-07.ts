@@ -9,16 +9,16 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'text',
   difficulty: 'medium',
-  title: '修改邮箱错误提示文案',
-  instruction: '把邮箱错误提示文案改成“请填写有效的邮箱地址”',
+  title: 'Change the email error message copy',
+  instruction: 'Change the email error message text to“Please enter a valid email address”',
   capture: {
     target: '.error',
-    comment: '把邮箱错误提示文案改成“请填写有效的邮箱地址”',
+    comment: 'Change the email error message text to“Please enter a valid email address”',
   },
   snapshot,
   captureMeta,
   grader: {
-    pass: [{ kind: 'dom', selector: '.error', text: '请填写有效的邮箱地址' }],
+    pass: [{ kind: 'dom', selector: '.error', text: 'Please enter a valid email address' }],
   },
   golden: { kind: 'html-dir', dir: 'golden' },
 }

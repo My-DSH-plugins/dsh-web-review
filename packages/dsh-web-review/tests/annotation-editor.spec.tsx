@@ -382,15 +382,15 @@ describe('AnnotationEditor', () => {
     expect(screen.getByRole('button', { name: zh['editor.select.previousSibling'] }).textContent).toContain(zh['editor.select.previousSibling.short'])
     expect(screen.getByRole('button', { name: zh['editor.select.sibling'] }).textContent).toContain(zh['editor.select.sibling.short'])
     expect(document.querySelectorAll('[data-webview-element-selector] kbd')).toHaveLength(4)
-    expect(document.querySelector('[data-webview-element-selector]')?.textContent).not.toContain('当前元素')
-    const htmlDisclosure = screen.getByRole('button', { name: '收起 html' })
+    expect(document.querySelector('[data-webview-element-selector]')?.textContent).not.toContain('Current element')
+    const htmlDisclosure = screen.getByRole('button', { name: 'Collapse html' })
     expect(htmlDisclosure.getAttribute('data-state')).toBe('expanded')
     fireEvent.click(htmlDisclosure)
-    expect(screen.getByRole('button', { name: '展开 html' }).getAttribute('data-state')).toBe('collapsed')
+    expect(screen.getByRole('button', { name: 'Expand html' }).getAttribute('data-state')).toBe('collapsed')
     expect(document.querySelector('[data-webview-element-selector] [aria-selected="true"]')).toBeNull()
-    fireEvent.click(screen.getByRole('button', { name: '展开 html' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand html' }))
     expect(document.querySelector('[data-webview-element-selector] [aria-selected="true"]')).toBeTruthy()
-    expect(document.querySelector('[data-webview-element-selector]')?.textContent).not.toContain('点击元素可切换批注目标')
+    expect(document.querySelector('[data-webview-element-selector]')?.textContent).not.toContain('Click an element to switch the annotation target')
     const editor = document.querySelector('[data-webview-annotation-editor]') as HTMLDivElement
     const currentTreeItem = document.querySelector('[data-webview-element-tree] [aria-selected="true"]') as HTMLLIElement
     expect(currentTreeItem.tabIndex).toBe(-1)
@@ -449,9 +449,9 @@ describe('AnnotationEditor', () => {
       t, onCancel: vi.fn(), onConfirm: vi.fn(), onSelectElement: vi.fn(),
     }
     const view = render(<AnnotationEditor {...baseProps} navigationFeedback={null} />)
-    expect(document.querySelector('[data-webview-navigation-feedback]')?.textContent).toContain('已选择 h1')
+    expect(document.querySelector('[data-webview-navigation-feedback]')?.textContent).toContain('Selected h1')
     fireEvent.click(screen.getByRole('button', { name: zh['editor.adjust'] }))
-    expect(document.querySelector('[data-webview-navigation-feedback]')?.textContent).toContain('已选择 h1')
+    expect(document.querySelector('[data-webview-navigation-feedback]')?.textContent).toContain('Selected h1')
     view.unmount()
     render(
       <AnnotationEditor
@@ -481,7 +481,7 @@ describe('AnnotationEditor', () => {
     )
     fireEvent.click(screen.getByRole('button', { name: zh['editor.adjust'] }))
     const editor = document.querySelector('[data-webview-annotation-editor]') as HTMLDivElement
-    const handle = screen.getByRole('button', { name: `${zh['editor.property.fontSize']} · 拖动调整` })
+    const handle = screen.getByRole('button', { name: `${zh['editor.property.fontSize']} · drag to adjust` })
     const activeRow = handle.closest('[data-inspector-row]') as HTMLDivElement
     const compose = screen.getByPlaceholderText(zh['editor.comment']).parentElement as HTMLElement
     const pointer = (type: string, clientX: number) => { fireEvent(handle, new MouseEvent(type, { bubbles: true, clientX })) }

@@ -6,7 +6,7 @@ Present the durable Browser Comments message as a first-class DSH Context disclo
 
 ## User information hierarchy
 
-The collapsed row answers three questions: what this context is, which page it describes, and how many active comments it contains. It reads `页面批注 · <page title> · <count> 处批注` and carries only the standard disclosure affordance. Delivery state is omitted because a durable transcript row already proves admission.
+The collapsed row answers three questions: what this context is, which page it describes, and how many active comments it contains. It reads `Page annotations · <page title> · <count> annotations` and carries only the standard disclosure affordance. Delivery state is omitted because a durable transcript row already proves admission.
 
 The expanded body presents information in this order:
 
@@ -23,7 +23,7 @@ The normal presentation excludes `snapshotId`, CSS selectors, full DOM paths, vi
 
 The row reuses DSH's `DisclosureRow`: 16px leading icon, 6px gap, 14px/24px text, neutral label colors, hover chevron, and no card border or status badge. The expanded body uses the generic Context body's 22px left alignment, an 8px radius, the existing muted Context background, 13px primary copy, 11–12px secondary metadata, hairline separators, and neutral numbering and requested values.
 
-The presentation has no delivery dot, `已发送` label, footer, audit callout, or nested disclosure. The outer Context row is the only expansion mechanism.
+The presentation has no delivery dot, `Sent` label, footer, audit callout, or nested disclosure. The outer Context row is the only expansion mechanism.
 
 ## Harness extension
 
@@ -41,7 +41,7 @@ The client registers one `conversation.chat.contextview` entry whose selector cl
 
 Harness owns only form dispatch and the generic fallback. It does not import web-review types, copy, colors, or renderers. The external plugin owns Browser Comments parsing, locale strings, the native-style component, and its CSS Module.
 
-The durable `user/message` remains separate from the human prompt and retains `{ kind: 'plugin', plugin: 'dsh-web-review', snapshotId }`. Adding the form changes presentation metadata but not ordering, acknowledgement, deduplication, clearing, or model-facing content.
+The durable `user/message` remains separate from the human prompt and retains `{ kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId }`. Adding the form changes presentation metadata but not ordering, acknowledgement, deduplication, clearing, or model-facing content.
 
 ## Verification
 

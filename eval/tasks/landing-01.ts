@@ -9,13 +9,13 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'protocol-smoke',
   difficulty: 'easy',
-  title: '加深主按钮颜色',
+  title: 'Darken the primary button color',
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'button.btn-primary',
-      comment: '把首页主按钮的背景颜色改深一点，改成 #224466',
+      comment: 'Make the homepage primary button background color a bit darker, change it to #224466',
       adjusts: [{ property: 'background-color', after: '#224466' }],
     }],
     ...frozen,

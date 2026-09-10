@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52759/",
-    "title": "魔法商店"
+    "title": "Magic Shop"
   },
   "comments": [
     {
       "id": "8d94861d-1868-40a8-b339-04d7915dbacb",
-      "comment": "把商品网格改成每行三列",
+      "comment": "Change the product grid to three columns per row",
       "tagName": "main",
       "role": "",
-      "label": "星空投影灯¥129加入购物车磁悬浮音箱¥299加入购物车复古机械键盘¥459加入购物车桌面苔藓…",
+      "label": "Starlight Projector¥129Add to cart Magnetic Levitation Speaker¥299Add to cart Retro Mechanical Keyboard¥459Add to cart Desktop moss…",
       "cssPath": ".products",
       "fullPath": "html > body > div#root > div.page > main.products",
       "stableClasses": [
         "products"
       ],
-      "textContent": "星空投影灯¥129加入购物车磁悬浮音箱¥299加入购物车复古机械键盘¥459加入购物车桌面苔藓盆栽¥89加入购物车便携咖啡手冲壶¥158加入购物车云朵氛围夜灯¥69加入购物车",
+      "textContent": "Starlight Projector¥129Add to cart Magnetic Levitation Speaker¥299Add to cart Retro Mechanical Keyboard¥459Add to Cart Desktop Moss Planter¥89Add to cart Portable Coffee Pour-Over Kettle¥158Add to cart Cloud Ambience Night Light¥69Add to cart",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

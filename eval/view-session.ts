@@ -176,7 +176,7 @@ async function main(): Promise<void> {
     const historyLoaded = page.waitForResponse(response => response.url().endsWith('/api/session.history'), { timeout: 30_000 })
     await page.reload({ waitUntil: 'domcontentloaded' })
     await historyLoaded
-    console.log(`已在正式版 DSH 中打开 ${basename(dirname(log))} / ${header.id}`)
+    console.log(`Opened in the release version of DSH open in ${basename(dirname(log))} / ${header.id}`)
     if (process.argv.includes('--headless')) {
       await browser.close()
     } else {

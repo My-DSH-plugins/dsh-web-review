@@ -57,7 +57,7 @@ describe('plugin capability eval contexts', () => {
   })
 
   it('accepts the snapshot arm with staged directories and rejects mismatches', () => {
-    const round = (id: string) => ({ prompt: '请根据页面批注修改前端实现。', capture: [], snapshot: { ...snapshot, sessionId: id }, captureMeta: undefined })
+    const round = (id: string) => ({ prompt: 'Modify the frontend implementation based on the page annotations.', capture: [], snapshot: { ...snapshot, sessionId: id }, captureMeta: undefined })
     const task = {
       id: 'snapshot-ab', fixture: 'landing', fixtureKind: 'static', category: 'trust', difficulty: 'easy', title: 'ab',
       tokenBudget: { expected: 20_000, warnAbove: 30_000 },
@@ -71,7 +71,7 @@ describe('plugin capability eval contexts', () => {
   })
 
   it('preserves generic prompts and round order in runner payloads', () => {
-    const round = (id: string) => ({ prompt: '请根据页面批注修改前端实现。', capture: [], snapshot: { ...snapshot, sessionId: id }, captureMeta: undefined })
+    const round = (id: string) => ({ prompt: 'Modify the frontend implementation based on the page annotations.', capture: [], snapshot: { ...snapshot, sessionId: id }, captureMeta: undefined })
     const task = {
       id: 'iterative', fixture: 'landing', fixtureKind: 'static', category: 'iterative', difficulty: 'long', title: 'two rounds',
       tokenBudget: { expected: 20_000, warnAbove: 30_000 },
@@ -81,7 +81,7 @@ describe('plugin capability eval contexts', () => {
     const payload = runnerTaskPayload(task, 'oracle')
     expect(payload.rounds.map(candidate => (candidate.snapshot as AnnotationSnapshot).sessionId)).toEqual(['round-1', 'round-2'])
     expect(payload.rounds.map(candidate => candidate.prompt)).toEqual([
-      '请根据页面批注修改前端实现。', '请根据页面批注修改前端实现。',
+      'Modify the frontend implementation based on the page annotations.', 'Modify the frontend implementation based on the page annotations.',
     ])
   })
 

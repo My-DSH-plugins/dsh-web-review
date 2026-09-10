@@ -5,21 +5,21 @@
   ],
   "page": {
     "url": "http://127.0.0.1:52371/",
-    "title": "订单运营中心"
+    "title": "Order Operations Center"
   },
   "comments": [
     {
       "id": "dee73122-b9c2-491b-9402-70921621c124",
-      "comment": "当前所在栏目不够醒目。只增强选中态：增加深一点的底色，并在左侧加一条 #7aa2ff 的强调线；不要改变其他导航项。",
+      "comment": "The current section is not prominent enough. Only strengthen the selected state: add a slightly darker background, and add on the left a #7aa2ff  accent line; do not change other nav items.",
       "tagName": "a",
       "role": "link",
-      "label": "订单",
+      "label": "Order",
       "cssPath": ".active",
       "fullPath": "html > body > div#root > div.app-shell > aside.sidebar > nav > a.nav-link.active:nth-of-type(2)",
       "stableClasses": [
         "nav-link"
       ],
-      "textContent": "订单",
+      "textContent": "Order",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -36,16 +36,16 @@
     },
     {
       "id": "9b5de56c-809a-4de5-87aa-889e4b0189be",
-      "comment": "筛选区和结果卡片混在一起了。把这里做成浅蓝灰色的独立筛选面板，边框也更明确，内部留白增加到 20px。",
+      "comment": "The filter area and the result cards are mixed together. Make this a separate light blue-gray filter panel with a clearer border, and increase the inner padding to 20px.",
       "tagName": "section",
       "role": "",
-      "label": "订单筛选",
+      "label": "Order filters",
       "cssPath": ".filter-bar",
       "fullPath": "html > body > div#root > div.app-shell > main.main-content > section.filter-bar",
       "stableClasses": [
         "filter-bar"
       ],
-      "textContent": "筛选订单快速缩小结果范围状态全部状态待处理已发货搜索应用筛选",
+      "textContent": "Filter orders Quickly narrow the results Status All statuses Pending Shipped Search Apply filter",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -68,16 +68,16 @@
     },
     {
       "id": "15a6db52-28e3-4634-9f5c-8a69a965b59a",
-      "comment": "三张指标卡之间太挤，卡片间距和这一组上下留白都调整到 24px。",
+      "comment": "The three metric cards are too cramped; the card spacing and this group’s vertical padding are both adjusted to 24px.",
       "tagName": "section",
       "role": "",
-      "label": "订单指标",
+      "label": "Order Metrics",
       "cssPath": ".metrics",
       "fullPath": "html > body > div#root > div.app-shell > main.main-content > section.metrics:nth-of-type(2)",
       "stableClasses": [
         "metrics"
       ],
-      "textContent": "今日订单128较昨日 +12%待处理24需要及时跟进本月成交¥842,600目标完成 76%",
+      "textContent": "Today’s orders128vs. yesterday +12%Pending24Needs timely follow-up This month’s deals¥842,600Target completion 76%",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -100,10 +100,10 @@
     },
     {
       "id": "e8f9ca58-f388-4263-8c8f-d4c31c3caf98",
-      "comment": "“取消订单”是危险操作，所有订单行里的这个操作都使用危险按钮样式；不要影响“导出数据”和“新建订单”。",
+      "comment": "“Cancel order”is a destructive action, so this action in every order row uses the danger button style; do not affect“Export data”and“New Order”.",
       "tagName": "button",
       "role": "button",
-      "label": "取消订单",
+      "label": "Cancel order",
       "cssPath": "tbody tr:nth-of-type(1) .primary",
       "fullPath": "html > body > div#root > div.app-shell > main.main-content > section.results:nth-of-type(3) > div.table-scroll:nth-of-type(2) > table > tbody > tr > td.actions:nth-of-type(5) > button.button.primary.cancel-order:nth-of-type(2)",
       "stableClasses": [
@@ -111,7 +111,7 @@
         "primary",
         "cancel-order"
       ],
-      "textContent": "取消订单",
+      "textContent": "Cancel order",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -128,14 +128,14 @@
     },
     {
       "id": "3ad6fcbd-85fc-4708-917a-0ee5d53d2739",
-      "comment": "手机宽度下标题太长会挤掉关闭按钮。窄屏时保持单行并用省略号截断，关闭按钮必须始终可见。",
+      "comment": "At phone widths the title is too long and squeezes out the close button. On narrow screens keep it on a single line and truncate with an ellipsis; the close button must always stay visible.",
       "tagName": "h2",
       "role": "heading",
-      "label": "ORD-1048 · 星河科技 · 企业采购与定制服务",
+      "label": "ORD-1048 · Galaxy Tech · Enterprise Procurement and Custom Services",
       "cssPath": ".drawer h2",
       "fullPath": "html > body > div#root > div.app-shell > div.drawer-backdrop > aside.drawer > header > div > h2",
       "stableClasses": [],
-      "textContent": "ORD-1048 · 星河科技 · 企业采购与定制服务",
+      "textContent": "ORD-1048 · Galaxy Tech · Enterprise Procurement and Custom Services",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -152,14 +152,14 @@
     },
     {
       "id": "76cc1f27-b815-405a-b603-36d767395bfc",
-      "comment": "手机端筛选区只保留标题和说明，状态、搜索框与应用按钮先隐藏；桌面端保持完整。",
+      "comment": "On mobile the filter area keeps only the title and description, hiding the status, search box and apply button first; the desktop layout stays complete.",
       "tagName": "span",
       "role": "",
-      "label": "快速缩小结果范围",
+      "label": "Quickly narrow the results",
       "cssPath": ".filter-heading span",
       "fullPath": "html > body > div#root > div.app-shell > main.main-content > section.filter-bar > div.filter-heading > span",
       "stableClasses": [],
-      "textContent": "快速缩小结果范围",
+      "textContent": "Quickly narrow the results",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

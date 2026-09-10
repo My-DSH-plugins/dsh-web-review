@@ -66,8 +66,8 @@ function sessionSource() {
         ...snapshot,
         nodes: [...snapshot.nodes, {
           kind: 'context', seq, time: 1, content: [{ type: 'text', text: '# Browser comments' }],
-          source: { kind: 'plugin', plugin: 'dsh-web-review', snapshotId },
-          provenance: { role: 'inject', label: 'dsh-web-review' }, form: null,
+          source: { kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId },
+          provenance: { role: 'inject', label: 'dsh-web-review-english' }, form: null,
         }],
       }
       for (const listener of listeners) listener()
@@ -335,7 +335,7 @@ describe('WebviewView', () => {
     expect(screen.getByText(zh['panel.noUrl'])).toBeTruthy()
     expect(document.querySelector('iframe')).toBeNull()
     expect(document.querySelector('[data-webview-send]')).toBeNull()
-    expect(screen.queryByRole('button', { name: /^发送 / })).toBeNull()
+    expect(screen.queryByRole('button', { name: /^Send / })).toBeNull()
   })
 
   it('navigates through the proxy, clears stale picks and resets the title', async () => {
@@ -573,10 +573,10 @@ describe('WebviewView', () => {
     })
 
     const toolbar = document.querySelector('[data-webview-annotation-toolbar]') as HTMLDivElement
-    expect(toolbar.textContent).toContain('正在批注 · http://localhost:5173/')
-    expect(screen.getByRole('button', { name: '退出注释模式' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: '清空注释' })).toBeTruthy()
-    const send = screen.getByRole('button', { name: '发送 1' })
+    expect(toolbar.textContent).toContain('Annotating · http://localhost:5173/')
+    expect(screen.getByRole('button', { name: 'Exit comment mode' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Clear annotations' })).toBeTruthy()
+    const send = screen.getByRole('button', { name: 'Send 1' })
     await act(async () => { fireEvent.click(send) })
     expect(sendAnnotationsWithoutDraft).toHaveBeenCalledOnce()
     expect(returnToChat).toHaveBeenCalledOnce()
@@ -595,7 +595,7 @@ describe('WebviewView', () => {
       store.actions.setAnnotationSync({ status: 'ready', snapshotId: AnnotationSnapshotId('manual-2') })
       store.actions.togglePickMode()
     })
-    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '发送 1' })) })
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'Send 1' })) })
     expect(submit).toHaveBeenCalledOnce()
     expect(returnToChat).toHaveBeenCalledOnce()
     expect(fallback).not.toHaveBeenCalled()
@@ -610,8 +610,8 @@ describe('WebviewView', () => {
       store.actions.setAnnotationSync({ status: 'ready', snapshotId: AnnotationSnapshotId('send-1') })
       store.actions.togglePickMode()
     })
-    fireEvent.click(screen.getByRole('button', { name: '发送 1' }))
-    const sending = screen.getByRole('button', { name: '发送 1' }) as HTMLButtonElement
+    fireEvent.click(screen.getByRole('button', { name: 'Send 1' }))
+    const sending = screen.getByRole('button', { name: 'Send 1' }) as HTMLButtonElement
     expect(sending.disabled).toBe(true)
     expect(sending.textContent).toContain(zh['panel.pick.sending'])
     act(() => { store.actions.clearPicks() })
@@ -626,7 +626,7 @@ describe('WebviewView', () => {
       busy.actions.setAnnotationSync({ status: 'ready', snapshotId: AnnotationSnapshotId('busy-1') })
       busy.actions.togglePickMode()
     })
-    expect((screen.getByRole('button', { name: '发送 1' }) as HTMLButtonElement).disabled).toBe(true)
+    expect((screen.getByRole('button', { name: 'Send 1' }) as HTMLButtonElement).disabled).toBe(true)
     expect(busySubmit).not.toHaveBeenCalled()
     cleanup()
 
@@ -637,7 +637,7 @@ describe('WebviewView', () => {
       slash.actions.setAnnotationSync({ status: 'ready', snapshotId: AnnotationSnapshotId('slash-1') })
       slash.actions.togglePickMode()
     })
-    fireEvent.click(screen.getByRole('button', { name: '发送 1' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Send 1' }))
     expect(slashSubmit).not.toHaveBeenCalled()
     expect(slash.getSnapshot().error).toBe(zh['panel.pick.slashDraft'])
   })
@@ -650,7 +650,7 @@ describe('WebviewView', () => {
       store.actions.setAnnotationSync({ status: 'ready', snapshotId: AnnotationSnapshotId('manual-3') })
       store.actions.togglePickMode()
     })
-    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '发送 1' })) })
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'Send 1' })) })
     expect(store.getSnapshot()).toMatchObject({ pickMode: true, error: zh['panel.pick.sendError'] })
     expect(store.getSnapshot().picks).toHaveLength(1)
   })
@@ -725,7 +725,7 @@ describe('DraftOverlayBar', () => {
   it('activates a conversation tab by its accessible label', () => {
     const chat = document.createElement('button')
     chat.setAttribute('role', 'tab')
-    chat.textContent = '对话'
+    chat.textContent = 'Chat'
     const preview = document.createElement('button')
     preview.setAttribute('role', 'tab')
     preview.textContent = zh['view.tab']

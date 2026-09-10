@@ -10,21 +10,21 @@ function snapshot(): AnnotationSnapshot {
   return {
     sessionId: 'session-1',
     selectedSkills: [],
-    page: { url: 'http://localhost:5173/magic', title: '魔法 UI 演示页' },
+    page: { url: 'http://localhost:5173/magic', title: 'Magic UI Demo Page' },
     comments: [{
       id: 'pick-1',
-      comment: '标题再克制一点。',
+      comment: 'Make the heading a bit more restrained.',
       tagName: 'h1',
       role: 'heading',
-      label: '魔法 UI',
+      label: 'Magic UI',
       cssPath: '#app > h1',
       fullPath: 'html > body > #app > h1',
       stableClasses: ['hero_title'],
-      textContent: '魔法 UI',
+      textContent: 'Magic UI',
       inToolChrome: false,
       anchor: { framework: 'react', component: 'Hero', file: 'src/Hero.tsx', line: 18 },
       changes: [{ property: 'font-size', before: '48px', after: '40px' }],
-      textChange: { before: '魔法 UI', after: '魔法界面' },
+      textChange: { before: 'Magic UI', after: 'Magic Interface' },
       viewport: { width: 1280, height: 800 },
     }],
   }
@@ -34,8 +34,8 @@ describe('Browser Comments durable presentation', () => {
   it('keeps user-relevant fields and excludes selector, full path, viewport, and tool state', () => {
     const presentation = browserCommentsPresentationOf(snapshot())
     expect(presentation).toMatchObject({
-      page: { title: '魔法 UI 演示页' },
-      comments: [{ comment: '标题再克制一点。', anchor: { file: 'src/Hero.tsx' } }],
+      page: { title: 'Magic UI Demo Page' },
+      comments: [{ comment: 'Make the heading a bit more restrained.', anchor: { file: 'src/Hero.tsx' } }],
     })
     expect(JSON.stringify(presentation)).not.toContain('cssPath')
     expect(JSON.stringify(presentation)).not.toContain('fullPath')
@@ -46,7 +46,7 @@ describe('Browser Comments durable presentation', () => {
   it('accepts only the exact snapshot-form payload and declines malformed or foreign records', () => {
     const source = {
       kind: 'plugin',
-      plugin: 'dsh-web-review',
+      plugin: 'dsh-web-review-english',
       form: 'snapshot',
       snapshotId: AnnotationSnapshotId('snapshot-1'),
       sections: [

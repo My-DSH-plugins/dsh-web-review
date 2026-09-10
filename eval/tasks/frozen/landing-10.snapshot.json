@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52142/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "8e46a2b4-1229-42d2-9b16-5bcd567b17f5",
-      "comment": "把所有卡片的圆角从 12px 改成 8px",
+      "comment": "Change the border radius of all cards from 12px to 8px",
       "tagName": "div",
       "role": "",
-      "label": "主按钮 用于提交表单的主要操作。 提交",
+      "label": "Primary button The main action for submitting the form. Submit",
       "cssPath": "div:nth-of-type(1).card",
       "fullPath": "html > body > main.cards > div.card",
       "stableClasses": [
         "card"
       ],
-      "textContent": "\n      主按钮\n      用于提交表单的主要操作。\n      提交\n    ",
+      "textContent": "\n      Primary button\n      The main action for submitting the form.\n      Submit\n    ",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

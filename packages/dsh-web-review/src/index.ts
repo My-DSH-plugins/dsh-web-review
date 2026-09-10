@@ -38,7 +38,7 @@ export { PREVIEW_SESSIONS_PATH } from './preview-contract.ts'
 export { PREVIEW_GUIDANCE } from './preview-guidance.ts'
 
 /** Plugin identity for diagnostics and the client-modules scan. */
-export const name = 'dsh-web-review'
+export const name = 'dsh-web-review-english'
 /** Services required before the routes register. */
 export const inject = ['webServer', 'agents', 'systemPrompt', 'skills']
 
@@ -59,10 +59,10 @@ export async function apply(ctx: Context, config: PluginConfig): Promise<void> {
     previewServer = await startIsolatedPreviewServer(bridgeSource)
     ctx.logger.info(`isolated preview server listening on 127.0.0.1:${String(previewServer.port)}`)
     return async () => { await previewServer?.close() }
-  }, 'dsh-web-review: isolated preview server')
-  if (previewServer === undefined) throw new Error('dsh-web-review: preview server failed to start')
+  }, 'dsh-web-review-english: isolated preview server')
+  if (previewServer === undefined) throw new Error('dsh-web-review-english: preview server failed to start')
   ctx.systemPrompt.section({
-    name: 'plugin:dsh-web-review-preview',
+    name: 'plugin:dsh-web-review-english-preview',
     order: -97,
     text: PREVIEW_GUIDANCE,
   })
@@ -71,14 +71,14 @@ export async function apply(ctx: Context, config: PluginConfig): Promise<void> {
     kind: 'exact',
     path: PREVIEW_SESSIONS_PATH,
     handler: previewSessionsHandler(livePreviewServer),
-  }), 'dsh-web-review: preview-session control route')
+  }), 'dsh-web-review-english: preview-session control route')
   ctx.effect(
     () => ctx.webServer.register({
       kind: 'exact',
       path: ANNOTATIONS_PREFIX,
       handler: annotationsHandler(ctx, annotations),
     }),
-    'dsh-web-review: /webview-annotations route',
+    'dsh-web-review-english: /webview-annotations route',
   )
   ctx.on('agent/pre-step', ({ agent, messages, signal }, next) =>
     attachPendingAnnotationContext(annotations, agent, ctx.skills, signal, messages, next))
@@ -101,7 +101,7 @@ async function readBridgeSource(): Promise<string> {
       failure = error
     }
   }
-  throw new Error('dsh-web-review: lib/bridge.js is missing; run the package build', { cause: failure })
+  throw new Error('dsh-web-review-english: lib/bridge.js is missing; run the package build', { cause: failure })
 }
 
 function requestOrigin(req: IncomingMessage): string | undefined {

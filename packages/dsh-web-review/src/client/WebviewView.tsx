@@ -1,5 +1,5 @@
 /**
- * WebviewView: the "网页预览" conversation view tab. Renders browse chrome or
+ * WebviewView: the "Web Preview" conversation view tab. Renders browse chrome or
  * the annotation toolbar above a
  * full-height isolated iframe with the bridge-owned picker and annotation
  * echo layer (hover outline and numbered marker circles).

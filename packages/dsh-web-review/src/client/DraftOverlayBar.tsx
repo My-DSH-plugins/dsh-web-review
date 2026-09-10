@@ -144,7 +144,7 @@ export function DraftOverlayBar({ useWebviewStore, useSession, actions, syncAnno
 
   const clearing = state.picks.length === 0
   // The pristine idle state must NOT read as 'synced' while annotations are
-  // pending: the commit effect has not run yet, so "发送时注入" would be a
+  // pending: the commit effect has not run yet, so "injected on send" would be a
   // lie and a caller (or test) that accepts 'synced' could send before the
   // host ever stored the pending snapshot. Pending picks + idle renders as
   // syncing (preparing) until the host acknowledges the submission.

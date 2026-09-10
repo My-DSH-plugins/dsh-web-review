@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:53029/",
-    "title": "待办清单"
+    "title": "Todo list"
   },
   "comments": [
     {
       "id": "8438ef57-9568-4fba-a3be-88238a3cb3d5",
-      "comment": "把侧边栏\"草稿\"这一项改成\"草稿箱\"",
+      "comment": "Change the sidebar\"Drafts\" item to\"Draft Box\"",
       "tagName": "li",
       "role": "",
-      "label": "草稿",
+      "label": "Drafts",
       "cssPath": "li:nth-of-type(3).nav-item",
       "fullPath": "html > body > div#root > div.layout > nav.sidebar > ul.nav-list > li.nav-item:nth-of-type(3)",
       "stableClasses": [
         "nav-item"
       ],
-      "textContent": "草稿",
+      "textContent": "Drafts",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

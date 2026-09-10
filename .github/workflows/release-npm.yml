@@ -145,7 +145,7 @@ jobs:
           PACKAGE_FILE="$package_file" node -e '
             const fs = require("node:fs");
             const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
-            if (manifest.name !== "@canglongcl/dsh-web-review") throw new Error(`unexpected package ${manifest.name}`);
+            if (manifest.name !== "dsh-web-review-english") throw new Error(`unexpected package ${manifest.name}`);
             if (manifest.publishConfig?.access !== "public") throw new Error("package is not public");
             if (`refs/tags/v${manifest.version}` !== process.env.GITHUB_REF) throw new Error("tag/version mismatch");
             const version = String(manifest.version);
@@ -224,6 +224,6 @@ jobs:
           PRERELEASE: ${{ steps.notes.outputs.prerelease }}
         run: |
           set -euo pipefail
-          flags=(--repo "$GITHUB_REPOSITORY" --title "dsh-web-review v$VERSION" --notes-file "$RUNNER_TEMP/release-notes.md")
+          flags=(--repo "$GITHUB_REPOSITORY" --title "dsh-web-review-english v$VERSION" --notes-file "$RUNNER_TEMP/release-notes.md")
           if [[ "$PRERELEASE" == "true" ]]; then flags+=(--prerelease); fi
           gh release create "$GITHUB_REF_NAME" "${flags[@]}" release/*.tgz release/SHA256SUMS

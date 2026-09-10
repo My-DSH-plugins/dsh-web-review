@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52002/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "89ef5b61-5ae9-42b4-83a3-7cbdaaabfacf",
-      "comment": "把首页主标题的字号从 28px 加大到 32px",
+      "comment": "Increase the homepage main heading’s font size from 28px increased to 32px",
       "tagName": "h1",
       "role": "heading",
-      "label": "魔法 UI 演示页",
+      "label": "Magic UI Demo Page",
       "cssPath": "h1",
       "fullPath": "html > body > section.hero > h1",
       "stableClasses": [],
-      "textContent": "魔法 UI 演示页",
+      "textContent": "Magic UI Demo Page",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

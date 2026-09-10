@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51963/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "1ef3d040-9545-4533-9d8a-f0edd89727e2",
-      "comment": "把首页主按钮的背景颜色改深一点，改成 #224466",
+      "comment": "Make the homepage primary button background color a bit darker, change it to #224466",
       "tagName": "button",
       "role": "button",
-      "label": "提交",
+      "label": "Submit",
       "cssPath": ".btn-primary",
       "fullPath": "html > body > main.cards > div.card > button.btn-primary",
       "stableClasses": [
         "btn-primary"
       ],
-      "textContent": "提交",
+      "textContent": "Submit",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

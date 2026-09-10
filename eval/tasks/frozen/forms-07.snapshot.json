@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51883/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "6c3a0740-2623-4ac9-b0ee-d8e87052722b",
-      "comment": "把邮箱错误提示文案改成“请填写有效的邮箱地址”",
+      "comment": "Change the email error message text to“Please enter a valid email address”",
       "tagName": "div",
       "role": "",
-      "label": "邮箱格式不正确",
+      "label": "Invalid email format",
       "cssPath": ".error",
       "fullPath": "html > body > form.form > div.form-field:nth-of-type(2) > div.error",
       "stableClasses": [
         "error"
       ],
-      "textContent": "邮箱格式不正确",
+      "textContent": "Invalid email format",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

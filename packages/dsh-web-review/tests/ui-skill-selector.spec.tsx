@@ -17,7 +17,7 @@ afterEach(cleanup)
 describe('UiSkillSelector', () => {
   it('expands like an Inspector section and opens the Skill choices from a field', () => {
     render(<UiSkillSelector selected={['better-ui', 'better-writing']} t={t} onToggle={vi.fn()} />)
-    const sectionTrigger = screen.getByRole('button', { name: '内置 Skill' })
+    const sectionTrigger = screen.getByRole('button', { name: 'Built-in Skill' })
     expect(sectionTrigger.getAttribute('aria-expanded')).toBe('false')
     expect(sectionTrigger.querySelector('svg')).toBeTruthy()
     expect(sectionTrigger.textContent).not.toContain('✦')
@@ -28,7 +28,7 @@ describe('UiSkillSelector', () => {
     const field = screen.getByRole('button', { name: zh['editor.skills.field'] })
     expect(field.nextElementSibling?.textContent).toBe(zh['editor.skills.command'])
     expect(field.textContent).toContain('better-ui, better-writing')
-    expect(field.textContent).toContain('2 个')
+    expect(field.textContent).toContain('2')
     expect(document.querySelector('[data-webview-ui-skill-popover]')).toBeNull()
 
     fireEvent.click(field)
@@ -40,7 +40,7 @@ describe('UiSkillSelector', () => {
   it('reports the exact checked Skill', () => {
     const onToggle = vi.fn()
     render(<UiSkillSelector selected={[]} t={t} onToggle={onToggle} />)
-    fireEvent.click(screen.getByRole('button', { name: '内置 Skill' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Built-in Skill' }))
     fireEvent.click(screen.getByRole('button', { name: zh['editor.skills.field'] }))
     fireEvent.click(screen.getByRole('checkbox', { name: /better-layout/u }))
     expect(onToggle).toHaveBeenCalledWith('better-layout')
@@ -48,7 +48,7 @@ describe('UiSkillSelector', () => {
 
   it('dismisses the floating panel on outside pointer input or Escape', () => {
     render(<UiSkillSelector selected={[]} t={t} onToggle={vi.fn()} />)
-    const sectionTrigger = screen.getByRole('button', { name: '内置 Skill' })
+    const sectionTrigger = screen.getByRole('button', { name: 'Built-in Skill' })
 
     fireEvent.click(sectionTrigger)
     const field = screen.getByRole('button', { name: zh['editor.skills.field'] })

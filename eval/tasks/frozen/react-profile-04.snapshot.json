@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52545/",
-    "title": "个人主页"
+    "title": "Profile Page"
   },
   "comments": [
     {
       "id": "5ae26ea5-f355-4971-a16f-75921c1365fa",
-      "comment": "给头像补充可访问名称“用户头像”",
+      "comment": "Add an accessible name to the avatar“User avatar”",
       "tagName": "img",
       "role": "img",
       "label": "",

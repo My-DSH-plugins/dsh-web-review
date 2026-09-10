@@ -9,17 +9,17 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'spacing',
   difficulty: 'medium',
-  title: '加大待办事项之间的间距',
-  instruction: '加大待办事项之间的间距',
+  title: 'Increase the spacing between todo items',
+  instruction: 'Increase the spacing between todo items',
   capture: {
     target: '.todo-item',
-    comment: '加大待办事项之间的间距',
+    comment: 'Increase the spacing between todo items',
   },
   snapshot,
   captureMeta,
   grader: {
     pass: [{ kind: 'dom', selector: '.todo-item', styleGreaterThan: { 'margin-bottom': '4px' }, all: true }],
-    noRegression: [{ kind: 'dom', selector: '.todo-item', text: '写评测用例' }],
+    noRegression: [{ kind: 'dom', selector: '.todo-item', text: 'Write eval cases' }],
   },
   golden: { kind: 'git-patch', patchFile: 'golden.patch' },
 }

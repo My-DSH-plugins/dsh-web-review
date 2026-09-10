@@ -43,8 +43,8 @@ export function formatTextOnlyContext(snapshot: ValidatedSnapshot): string {
  */
 export function armContextTexts(arm: EvalArm, snapshot: ValidatedSnapshot, productionContext: string, oracleContext?: string): ArmContextText[] {
   const primary = arm === 'text-only'
-    ? { plugin: 'dsh-web-review', text: formatTextOnlyContext(snapshot) }
-    : { plugin: 'dsh-web-review', text: productionContext }
+    ? { plugin: 'dsh-web-review-english', text: formatTextOnlyContext(snapshot) }
+    : { plugin: 'dsh-web-review-english', text: productionContext }
   if (arm !== 'oracle') return [primary]
   if (oracleContext === undefined || oracleContext.trim() === '') throw new Error('oracle arm needs source hints')
   return [primary, {

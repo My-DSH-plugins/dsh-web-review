@@ -1,34 +1,34 @@
-# CSS 数值 / 关键字复合输入方案
+# CSS Numeric values / Composite keyword input design
 
-## 目标
+## Goals
 
-为既接受数值又接受 CSS 关键字的属性增加右侧下三角。用户仍可直接输入 `320px`、`50%`、`var(...)` 等任意有效值，也可以从紧凑下拉菜单选择 `auto`、`normal`、`none` 等常用关键字。
+for properties that accept both numeric values and CSS adds a dropdown arrow on the right. Users can still type `320px`, `50%`, `var(...)` and any other valid values, and can also choose from the compact dropdown menu `auto`, `normal`, `none` and other common keywords.
 
-本次只增强现有属性编辑器的输入方式，不改变可编辑属性白名单、临时预览、回滚、批注快照、共享 store 或模型上下文格式。已经是纯枚举的 `display`、`position`、`overflow` 等控件继续使用现有 `OptionMenu`；纯数值属性不显示下三角。
+This change only enhances the input method of the existing property editor; it does not change the editable property whitelist, temporary preview, rollback, annotation snapshot, or shared store or the model context format. Those that are already pure enums, `display`, `position`, `overflow` and other controls continue to use the existing `OptionMenu`; pure numeric properties do not show the dropdown caret.
 
-## 控件交互
+## Control interaction
 
-复合控件保持现有 126px 宽度，并分成三个区域：
+Composite controls keep the existing 126px width, divided into three areas:
 
-1. 左侧 30px 拖动柄保持现有数值 scrub 行为。
-2. 中间是可编辑文本输入，保留单位、CSS 函数、自定义属性引用和 Escape 回滚。
-3. 右侧新增独立的下三角按钮；只有配置了关键字建议的数值控件才渲染。
+1. Left 30px The drag handle keeps the existing numeric scrub behavior.
+2. the middle is an editable text input that preserves units,CSS functions, custom property references, and Escape rollback.
+3. A separate drop-down triangle button is added on the right; it only renders for numeric controls configured with keyword suggestions.
 
-点击下三角后，通过 DSH `Menu` 在宿主 `document.body` 中打开紧凑菜单并靠右对齐。选择关键字调用现有 `onChange`，因此继续走相同的 CSS 有效性检查、iframe 实时预览、changed 状态和逐项重置链路。当前值命中建议项时显示选择标记；当前值是数值或不在建议项中时不额外插入一条“当前值”菜单项。
+After clicking the dropdown arrow, DSH `Menu` in the host `document.body`  opens a compact menu aligned to the right. Selecting a keyword calls the existing `onChange`, so it continues through the same CSS validity check,iframe live preview,changed state and per-item reset chain. When the current value matches a suggestion a selection mark is shown; when the current value is numeric or is not among the suggestions, no additional“Current value” menu item.
 
-键盘与焦点规则：
+Keyboard and focus rules:
 
-- 输入框的 ArrowUp / ArrowDown、Shift ×10、Alt ×0.1 和 Escape 行为不变。
-- 下三角是可聚焦按钮，带 `aria-haspopup="menu"`、`aria-expanded` 和本地化名称。
-- Escape、点外部或选择后关闭菜单；选择后焦点回到下三角。
-- 关键字值仍可通过现有 fallback 开始拖动；第一次数值调整会把它转换成带单位的数值，不静默改写未操作的值。
-- 菜单打开期间的 Escape 只关闭菜单，不取消整个批注事务。
+- The input’s ArrowUp / ArrowDown, Shift ×10, Alt ×0.1 and Escape  behavior is unchanged.
+- The dropdown caret is a focusable button with `aria-haspopup="menu"`, `aria-expanded` and a localized name.
+- Escape, clicking outside, or selecting closes the menu; after a selection, focus returns to the dropdown arrow.
+- Keyword values can still be dragged using the existing fallback start dragging; the first numeric adjustment converts it into a value with a unit, and values that were not touched are never silently rewritten.
+- While the menu is open, Escape only closes the menu and does not cancel the entire annotation transaction.
 
-## 关键字清单
+## Keyword list
 
-清单覆盖当前 allowlist 中所有“数值控件 + 常用非数值 CSS 值”的属性。通用级联关键字 `inherit`、`initial`、`unset`、`revert`、`revert-layer` 不进入每个菜单；`calc(...)`、`clamp(...)`、`var(...)`、`fit-content(...)` 等参数化值继续通过输入框填写。
+The list covers the current allowlist ’s all“numeric controls + common non-numeric CSS value”properties. The universal cascade keywords `inherit`, `initial`, `unset`, `revert`, `revert-layer` do not appear in every menu;`calc(...)`, `clamp(...)`, `var(...)`, `fit-content(...)` and other parameterized values are still entered through the input field.
 
-| 属性 | 下拉建议 |
+| Property | Dropdown suggestions |
 | --- | --- |
 | `font-size` | `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, `xx-large`, `xxx-large`, `smaller`, `larger` |
 | `line-height` | `normal` |
@@ -42,88 +42,88 @@
 | `margin-top`, `margin-right`, `margin-bottom`, `margin-left` | `auto` |
 | `border-width` | `thin`, `medium`, `thick` |
 
-以下数值控件不增加下拉：`opacity`、四边 `padding`、`border-radius`，以及阴影 / transform 复合控件内部的数值分量。它们在当前编辑模型中没有需要快捷选择的常用非数值值。纯枚举控件已经有下三角，无需迁移到复合输入。
+The following numeric controls do not get a dropdown:`opacity`, four-side `padding`, `border-radius`, as well as shadow / transform numeric components inside composite controls. In the current editing model they have no commonly used non-numeric values that need quick selection. Pure enum controls already have a dropdown caret and do not need to migrate to composite input.
 
-关键字范围以 CSSWG 的 [CSS Sizing](https://drafts.csswg.org/css-sizing-3/)、[CSS Positioned Layout](https://drafts.csswg.org/css-position/)、[CSS Box Model](https://drafts.csswg.org/css-box-4/)、[CSS Box Alignment](https://drafts.csswg.org/css-align/)、[CSS Fonts](https://drafts.csswg.org/css-fonts/) 和 [CSS Backgrounds and Borders](https://drafts.csswg.org/css-backgrounds/) 语法为基线；菜单只提供稳定、常用且无参数的快捷项，输入框仍是完整 CSS 值的兜底入口。
+The keyword scope is based on CSSWG of [CSS Sizing](https://drafts.csswg.org/css-sizing-3/), [CSS Positioned Layout](https://drafts.csswg.org/css-position/), [CSS Box Model](https://drafts.csswg.org/css-box-4/), [CSS Box Alignment](https://drafts.csswg.org/css-align/), [CSS Fonts](https://drafts.csswg.org/css-fonts/) and [CSS Backgrounds and Borders](https://drafts.csswg.org/css-backgrounds/) syntax is the baseline; the menu only offers stable, commonly used, parameterless shortcuts, and the input box remains the full CSS value fallback entry point.
 
-## 需要改造的文件
+## Files that need changes
 
-### 产品代码
+### Product code
 
 1. `src/client/property-editor-config.ts`
-   - 让 `number(...)` 元数据接收关键字建议，并按上表配置所有复合属性。
-   - 保持 `menu` 的有限枚举与 `number` 的关键字建议语义可区分，避免把纯枚举控件误渲染成文本输入。
-   - 为尺寸、间距等复合控件提供同一份配置来源，禁止在组件内重复硬编码关键字。
+   - lets `number(...)`  metadata accepts keyword suggestions, and all composite properties are configured per the table above.
+   - Keep `menu` ’s limited enumeration and `number` ’s keyword suggestion semantics stay distinguishable, avoiding rendering pure enum controls as text inputs by mistake.
+   - Provides a single configuration source for composite controls such as size and spacing, and forbids repeating hardcoded keywords inside components.
 
 2. `src/client/InspectorControls.tsx`
-   - 扩展 `ScrubNumber`：新增可选建议项和本地化菜单按钮名称。
-   - 在数值输入右侧增加 DSH `Menu` 触发按钮，处理 open、selectedId、关闭、焦点返回和 Escape 隔离。
-   - 扩展 `BoxModelControl`，把 margin 的 `auto` 建议传到四个边输入；padding 不传建议。
-   - 保留 `parseNumeric`、scrub fallback、invalid 和 focus-entry Escape 回滚逻辑。
+   - Extend `ScrubNumber`: adds optional suggestions and localized menu button labels.
+   - On the right side of the numeric input, add DSH `Menu` trigger button, handling open, selectedId, close, focus return and Escape isolation.
+   - Extend `BoxModelControl`, pass margin of `auto` pass suggestions to the four side inputs;padding no suggestions are passed.
+   - Keep `parseNumeric`, scrub fallback, invalid and focus-entry Escape rollback logic.
 
 3. `src/client/CompositeControls.tsx`
-   - 让内部 `Cell` 与 `SizeControl` 透传关键字建议，使 W/H 两个输入都显示同一类尺寸关键字。
-   - Radius、Shadow、Transform 的内部数值分量保持不变。
+   - Let the inner `Cell` and `SizeControl` pass through keyword suggestions, so that W/H Both inputs show the same kind of size keyword.
+   - Radius, Shadow, Transform ’s internal numeric components stay unchanged.
 
 4. `src/client/AnnotationEditor.tsx`
-   - `renderControl` 将数值属性元数据中的建议项传给 `ScrubNumber`。
-   - Size、margin 等组合行从 property registry 读取建议并传给组合控件。
-   - 选择关键字仍统一调用 `updateProperty`，不新增第二套预览或校验状态。
+   - `renderControl` pass the suggestions from the numeric property metadata to `ScrubNumber`.
+   - Size, margin  and other composite rows property registry read suggestions and pass them to the composite control.
+   - Selecting a keyword still uniformly calls `updateProperty`, without adding a second set of preview or validation state.
 
 5. `src/client/InspectorControls.module.css`
-   - 为右侧下三角预留 22–24px，调整输入框右 padding，同时保留左侧 30px scrub 区。
-   - 增加触发按钮 hover、focus-visible、open 和 disabled 样式，全部使用现有 DSH token。
-   - 覆盖普通行、窄容器、Size 双字段和 BoxModel 双轴布局，确保 320px 宽度下不溢出。
+   - Reserve space for the right-side chevron 22–24px, adjust the input field’s right padding, while keeping the left 30px scrub area.
+   - Add, for the trigger button, hover, focus-visible, open and disabled styles, all using the existing DSH token.
+   - Cover normal rows, narrow containers,Size dual-field and BoxModel two-axis layout, ensuring 320px width without overflowing.
 
 6. `src/client/locales.ts`
-   - 增加“选择预设值”的中英文无障碍文案；可见菜单项继续使用 CSS 原值，不翻译关键字。
+   - Add“Choose preset” Chinese and English accessibility strings; visible menu items continue to use CSS original values; keywords are not translated.
 
-### 测试与视觉验证
+### Testing and visual validation
 
 7. `tests/property-editor-config.spec.ts`
-   - 固定完整属性 → 关键字映射。
-   - 断言纯数值属性没有建议、纯菜单属性仍保持原 kind。
+   - Pin the complete property →  keyword mapping.
+   - Assert that purely numeric properties have no suggestions and that purely menu properties keep their original kind.
 
 8. `tests/inspector-controls.spec.tsx`
-   - 覆盖有 / 无建议时的下三角渲染。
-   - 覆盖数值当前值打开菜单、关键字选择、selected 状态、点选 / Escape 关闭和焦点返回。
-   - 覆盖菜单 Escape 不冒泡到外层编辑器，以及关键字值继续通过 fallback scrub 转成数值。
-   - 覆盖 BoxModel 四边的 `auto` 选择仍服从现有轴向 / 全部联动规则。
+   - Covers chevron rendering with / dropdown caret rendering when there are no suggestions.
+   - Cover opening the menu with the current numeric value, keyword selection,selected state, click-to-select / Escape closing, and focus return.
+   - overlay menu Escape does not bubble up to the outer editor, and that keyword values continue to pass through fallback scrub converted to numeric values.
+   - Cover BoxModel the four sides’ `auto` selection still follows the existing axis / all-linked rules.
 
 9. `tests/composite-controls.spec.tsx`
-   - 覆盖 SizeControl 的 W/H 两个建议菜单和宽高联动后的值更新。
+   - Cover SizeControl of W/H the W/H suggestion menus of SizeControl and the value updates after the width/height link
 
 10. `tests/annotation-editor.spec.tsx`
-    - 在真实 iframe 元素上选择 `width: auto`、`max-width: none` 或 `line-height: normal`，断言实时样式、changed / reset、Confirm diff 和 Cancel 精确回滚。
-    - 断言纯数值属性没有下三角，纯枚举 `display` 仍是原有菜单。
+    - on a real iframe select on the element `width: auto`, `max-width: none` or `line-height: normal`, asserting live styles,changed / reset, Confirm diff and Cancel precise rollback.
+    - assert that pure numeric properties have no dropdown arrow, while pure enum `display` still uses the original menu.
 
-11. `tests/webview.e2e.spec.ts` 与 `tests/visual-shot.ts`
-    - E2E 打开真实属性编辑器，从右侧菜单选择一个关键字，确认页面预览和最终结构化变更一致。
-    - 增加菜单打开态的宽屏与窄屏截图，验证 portal 菜单不被 editor overflow 裁切且不逃出视口。
+11. `tests/webview.e2e.spec.ts` and `tests/visual-shot.ts`
+    - E2E Open the real property editor, select a keyword from the menu on the right, and confirm the page preview matches the final structured change.
+    - Add wide-screen and narrow-screen screenshots of the open menu state to verify portal the menu is not editor overflow clipping and does not escape the viewport.
 
-### 文档
+### Documentation
 
-12. `docs/figma-property-editor-plan.md`、根 `README.md` 与 package README
-    - 将原来“semantic presets”的设计意图更新为已经落地的复合输入行为，并说明手输 CSS 值始终保留。
-    - 不修改 wire、模型上下文或已知限制文档，因为这些契约没有变化。
+12. `docs/figma-property-editor-plan.md`, the root `README.md` and package README
+    - Updated the original“semantic presets”’s design intent was updated to the composite input behavior that has already shipped, noting that manually entered CSS values are always preserved.
+    - Do not modify wire, model context, or known-limitations documentation, because those contracts have not changed.
 
-## 明确不改造的部分
+## Parts explicitly left unchanged
 
-- `annotation-properties.ts`：属性白名单不变。
-- `live-patch.ts`：关键字与数值都继续作为字符串走现有预览 / 回滚账本。
-- `stores.ts`、annotation contract、node route、context formatter：不增加状态或字段。
-- iframe picker、元素层级选择、浮层定位：不参与本功能。
-- Harness slot、store seat 和注入关系：不变；本次是宿主组件内的本地展示状态。
+- `annotation-properties.ts`: the property allowlist is unchanged.
+- `live-patch.ts`: both keywords and numeric values continue to pass through the existing preview as strings /  rollback ledger.
+- `stores.ts`, annotation contract, node route, context formatter: no state or fields are added.
+- iframe picker, element hierarchy selection, and overlay positioning: not part of this feature.
+- Harness slot, store seat and injection relationships: unchanged; this time it is local display state inside the host component.
 
-## 验收标准
+## Acceptance criteria
 
-- 只有支持建议关键字的数值型 CSS 控件显示右侧下三角。
-- 用户可以在同一控件中自由切换手输数值 / CSS 文本与下拉关键字，原始字符串不被无操作归一化。
-- 下拉选择立即预览、可逐项 reset、可 Cancel 精确回滚，并只在 Confirm 后进入现有结构化 diff。
-- 纯枚举、纯数值和复合特效控件没有视觉或行为回归。
-- 键盘、焦点、窄屏与 portaled menu 均可用；菜单 Escape 不会误取消批注。
-- 实现后通过 `pnpm check` 与 `pnpm test:e2e`，并完成真实 DSH Preview 手工验收。
+- Only numeric CSS controls show a drop-down triangle on the right.
+- Users can freely switch within the same control between manually entered numeric values / CSS text and dropdown keywords, and the raw string is not normalized by no-op handling.
+- Dropdown selection previews immediately, supports per-item reset, can Cancel precise rollback, and only after Confirm then, after Confirm, enter the existing structured diff.
+- Pure enum, pure numeric and composite effect controls have no visual or behavioral regressions.
+- Keyboard, focus, narrow-screen, and portaled menu are all usable; the menu Escape does not accidentally cancel the annotation.
+- After implementation, pass `pnpm check` and `pnpm test:e2e`, and complete a real DSH Preview manual acceptance testing.
 
-## 原型
+## Prototype
 
 - `docs/css-keyword-menu-prototype.svg`

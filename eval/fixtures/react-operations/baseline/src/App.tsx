@@ -9,9 +9,9 @@ import { orders, type Order } from './data.ts'
 export function App() {
   const [selected, setSelected] = useState<Order | null>(orders[0]!)
   return <div className="app-shell"><Sidebar /><main className="main-content">
-    <header className="page-heading"><div><p>运营工作台</p><h1>订单管理</h1></div><button className="button primary">新建订单</button></header>
+    <header className="page-heading"><div><p>Operations Console</p><h1>Order management</h1></div><button className="button primary">New Order</button></header>
     <FilterBar />
-    <section className="metrics" aria-label="订单指标"><MetricCard label="今日订单" value="128" delta="较昨日 +12%" /><MetricCard label="待处理" value="24" delta="需要及时跟进" /><MetricCard label="本月成交" value="¥842,600" delta="目标完成 76%" /></section>
+    <section className="metrics" aria-label="Order Metrics"><MetricCard label="Today’s orders" value="128" delta="vs. yesterday +12%" /><MetricCard label="Pending" value="24" delta="Needs timely follow-up" /><MetricCard label="Deals this month" value="¥842,600" delta="Target completion 76%" /></section>
     <OrderTable orders={orders} onOpen={setSelected} />
   </main>{selected !== null && <OrderDrawer order={selected} onClose={() => setSelected(null)} />}</div>
 }

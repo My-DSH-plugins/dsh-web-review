@@ -3,15 +3,15 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51826/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "5426bc76-0ab9-4da4-b82d-cfd0721ee8a2",
-      "comment": "加大表单项之间的垂直间距",
+      "comment": "Increase the vertical spacing between form fields",
       "tagName": "input",
       "role": "textbox",
-      "label": "请输入姓名",
+      "label": "Enter your name",
       "cssPath": "#name",
       "fullPath": "html > body > form.form > div.form-field > input#name",
       "stableClasses": [],

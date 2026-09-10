@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51758/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "9b1690e6-b4f1-45b2-9c17-447a157f39a7",
-      "comment": "把提交按钮文案从“提交”改成“立即提交”",
+      "comment": "Change the submit button label from“Submit”to“Submit now”",
       "tagName": "button",
       "role": "button",
-      "label": "提交",
+      "label": "Submit",
       "cssPath": "button",
       "fullPath": "html > body > form.form > button",
       "stableClasses": [],
-      "textContent": "提交",
+      "textContent": "Submit",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

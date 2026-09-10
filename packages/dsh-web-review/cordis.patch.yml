@@ -1,4 +1,4 @@
 # Official DSH profile bundle layer.
 - insert:
-    - id: dsh-web-review
-      name: "@canglongcl/dsh-web-review"
+    - id: dsh-web-review-english
+      name: "dsh-web-review-english"

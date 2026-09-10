@@ -1,71 +1,71 @@
-# dsh-web-review
+# dsh-web-review-english
 
-[English](./README_en.md)
+> English variant of [CanglongCl's dsh-web-review](https://github.com/CanglongCl/dsh-web-review).
 
-> ⭐ 如果这个项目对你有帮助，欢迎点个 Star 支持一下！你的支持是我持续维护和改进的动力。
+> ⭐ If this project is helpful to you, feel free to give it a Star show some support! Your support is what keeps me maintaining and improving this.
 
-在内置浏览器中，像使用设计工具一样选择页面元素、填写修改意见，并临时调整文本、颜色、字体、尺寸、间距、边框与效果。确认发送后，Agent 会结合页面批注修改当前工作区中的源码。
+In the built-in browser, select page elements as you would in a design tool, write your change requests, and temporarily adjust text, color, font, size, spacing, borders and effects. After you confirm and send,Agent will modify the source code in the current workspace based on the page annotations.
 
 <p align="center">
-  <img width="100%" alt="dsh-web-review 网页预览、元素批注与视觉调整演示" src="./docs/assets/web-review-demo.gif" />
+  <img width="100%" alt="dsh-web-review-english Webpage preview, element annotation, and visual adjustment demo" src="./docs/assets/web-review-demo.gif" />
 </p>
 
 <p align="center">
-  <img width="49%" alt="dsh-web-review 网页预览" src="./docs/assets/web-review-preview.jpg" />
-  <img width="49%" alt="dsh-web-review 元素批注与属性调整器" src="./docs/assets/web-review-annotation-editor.jpg" />
+  <img width="49%" alt="dsh-web-review-english Web Preview" src="./docs/assets/web-review-preview.jpg" />
+  <img width="49%" alt="dsh-web-review-english Element annotation and property adjuster" src="./docs/assets/web-review-annotation-editor.jpg" />
 </p>
 
-> 如果你用过 v0、Codex 等 Coding Agent 应用的内置浏览器，你应该对此会很熟悉。
+> If you have used v0, Codex , and other Coding Agent app’s built-in browser, this should feel familiar.
 
-## 安装
+## Installation
 
-安装并启动：
+Install and start:
 
 ```sh
-dsh plugin --profile web add @canglongcl/dsh-web-review
+dsh plugin --profile web add dsh-web-review-english
 dsh web
 ```
 
-## 使用方法
+## Usage
 
-1. 告诉启动要评审的前端页面，点击AI返回的地址页面。
-   也可以切换到 DSH 的「网页预览」Tab，输入页面的绝对 HTTP(S) URL。
-2. 点击批注按钮，再点击页面中的目标元素。
-3. 填写修改意见；如需视觉调整，展开「调整」并修改属性。
-4. 点击批注工具栏中的发送按钮，发送后会自动切回「对话」Tab；或在 DSH 的输入框中填写更多提示词，然后点击 DSH 发送按钮，注释会随着你的提示词一同发送。
-5. Agent 修改源码后，刷新预览进行验收；不满意可以继续下一轮批注。
+1. Tell it to start the frontend page to be reviewed, then clickAIreturned address page.
+   You can also switch to DSH ’s “Web Preview”Tab, enter the page’s absolute HTTP(S) URL.
+2. Click the annotation button, then click the target element on the page.
+3. write your change request; for visual adjustments, expand “Adjust” and edit the properties.
+4. Click the send button in the annotation toolbar; after sending it automatically switches back to the “Chat”Tab; or in DSH the input box to enter more prompts, then click DSH send button, and the annotation is sent along with your prompt.
+5. Agent After the agent modifies the source, refresh the preview to review the result; if you are not satisfied, you can continue with another round of annotations.
 
-## 主要功能
+## Key Features
 
-### 网页预览
+### Web Preview
 
-- 在 DSH 内打开 Agent 提供的链接页面
+- In DSH open Agent  provided link page
 
-### 元素批注
+### Element annotation
 
-- 悬停高亮并点选页面元素。
-- 为多个目标添加批注。
-- 自动附带选择器、文本、可访问名称和源码线索，帮助 Agent 找到对应实现。
+- Hover to highlight and click to select page elements.
+- Add annotations for multiple targets.
+- Automatically includes the selector, text, accessible name, and source code clues to help Agent find the corresponding implementation.
 
-### 实时视觉调整
+### Live visual adjustments
 
-- 修改文本、颜色、字体、字号、行高、尺寸和透明度。
-- 调整间距、布局、边框、圆角和效果。
-- 所有修改即时预览。
+- Modify text, color, font, font size, line height, size, and opacity.
+- Adjust spacing, layout, borders, border radius, and effects.
+- All changes preview instantly.
 
-### AI 协作
+### AI Collaboration
 
-- 批注会作为独立上下文随你的提示词注入。
-- 对话中的页面批注沿用 DSH 原生折叠行：收起时显示页面与批注数，展开后只展示目标、修改意图、前后值和可用源码线索。
-- Agent 根据批注修改当前工作区源码，页面中的临时调整不会直接写入工程。
+- Annotations are injected as a separate context alongside your prompt.
+- Page annotations in the conversation follow DSH native collapsible row: when collapsed it shows the page and the annotation count, and when expanded it shows only the target, the change intent, the before/after values, and the available source code clues.
+- Agent modifies the current workspace source based on the annotations; temporary adjustments made on the page are not written directly into the project.
 
-### `dsh-better-sidebar`集成
+### `dsh-better-sidebar`Integration
 
-安装 [dsh-better-sidebar](https://www.npmjs.com/package/dsh-better-sidebar) 后，网页预览会自动在侧边栏中打开。你也可以在侧边栏新建 `tab` 菜单中打开`网页预览`以启用。
+Installation [dsh-better-sidebar](https://www.npmjs.com/package/dsh-better-sidebar) , the web preview opens automatically in the sidebar. You can also create a new `tab` open from the menu`Web Preview`to enable it.
 
-### UI 优化 Skills
+### UI optimization Skills
 
-插件内置了 [Jakub Krehel 的设计 Skills](https://github.com/jakubkrehel/skills)：
+The plugin has built-in [Jakub Krehel ’s design Skills](https://github.com/jakubkrehel/skills): 
 
 - `better-ui`
 - `better-typography`
@@ -76,26 +76,26 @@ dsh web
 - `better-interface`
 - `interface-review`
 
-你可以通过斜杠命令调用 skill，也可以在批注编辑器中选择，让 Agent 在本轮修改中参考相应规则。
+You can invoke the skill, or select one in the annotation editor so that Agent reference the corresponding rules in this round of changes.
 
-## 插件能力评测
+## Plugin capability evaluation
 
-项目包含一套面向真实使用流程的评测，用于验证 Agent 在收到插件生成的页面批注后，能否正确定位源码并完成前端修改。
+The project includes a suite of evaluations built around real usage workflows, to verify Agent whether the Agent can correctly locate the source code and complete the frontend changes after receiving page annotations generated by the plugin.
 
-评测覆盖：
+Evaluation coverage:
 
-- 文案、样式、布局和响应式修改。
-- 多元素与多项关联修改。
-- React、Vue 和静态页面。
-- 源码锚点可用及缺失时的定位。
-- 语义化与无障碍要求。
-- 多轮批注和修改范围判断。
-- Token 使用量、执行步骤和运行耗时。
+- Copy, style, layout, and responsive changes.
+- Multi-element and multi-item related changes.
+- React, Vue and static pages.
+- Locating when the source anchor is available and when it is missing.
+- Semantic and accessibility requirements.
+- Multiple rounds of annotations and judging the scope of changes.
+- Token  usage, execution steps, and run duration.
 
-评测设计、运行方式和结果解释见 [Eval suite](./eval/README.md)。
+See the eval design, how to run it, and how to interpret the results in [Eval suite](./eval/README.md).
 
-## 参与开发
+## Contributing
 
-开发环境、架构说明与验证流程见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+Development setup, architecture notes, and the verification workflow are described in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-版本变更记录见 [CHANGELOG.md](./CHANGELOG.md)。
+For the version changelog, see [CHANGELOG.md](./CHANGELOG.md).

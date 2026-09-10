@@ -80,11 +80,11 @@ export async function ensureAcceptanceHistory(options: AcceptanceHistoryOptions)
     const session = sessionModule.Session.create(id)
     session.append('turn/start', { turn: 1 })
     const user = session.append('user/message', llm.createUserMessage({
-      content: [{ type: 'text', text: '打开网页批注验收页。' }],
+      content: [{ type: 'text', text: 'Open the web annotation acceptance page.' }],
       source: { kind: 'user' },
     }), { surfaceOp: 'append' })
     session.append('session/title', {
-      title: '网页批注验收',
+      title: 'Web Annotation Acceptance',
       messageSeqs: [user.seq],
       source: { kind: 'fallback' },
     })
@@ -97,11 +97,11 @@ export async function ensureAcceptanceHistory(options: AcceptanceHistoryOptions)
         content: [{
           type: 'text',
           text: [
-            '验收环境已经准备好。',
+            'The acceptance environment is ready.',
             '',
-            `[打开网页批注 Demo](${demoUrl})`,
+            `[Open Web Annotation Demo](${demoUrl})`,
             '',
-            '点击链接后进入“网页预览”，添加页面注释并选择元素；在“调整”面板点击宽度等属性右侧的下三角即可验收 CSS 关键词菜单。',
+            'After clicking the link, you enter“Web Preview”, add a page annotation and select an element; in the“Adjust”panel, click the dropdown arrow to the right of properties such as width to verify CSS the keyword menu.',
           ].join('\n'),
         }],
         source: { kind: 'model', provider: 'acceptance-fixture', model: 'acceptance-fixture' },

@@ -75,7 +75,7 @@ describe('better-sidebar integration', () => {
     await expect.poll(
       async () => frame.locator('h1').textContent(),
       { timeout: 20_000, message: 'isolated demo page should render inside the sidebar tab' },
-    ).toBe('魔法 UI 演示页')
+    ).toBe('Magic UI Demo Page')
   })
 
   it('shares one per-session engine with the dock: a pick in the sidebar tab echoes in the composer capsule', async () => {
@@ -94,7 +94,7 @@ describe('better-sidebar integration', () => {
     await expect.poll(
       async () => frame.locator('h1').textContent(),
       { timeout: 20_000 },
-    ).toBe('魔法 UI 演示页')
+    ).toBe('Magic UI Demo Page')
 
     // Enter pick mode inside the sidebar tab and annotate a heading.
     const pick = page.getByRole('button', { name: 'Add page comments' })
@@ -103,7 +103,7 @@ describe('better-sidebar integration', () => {
     await frame.locator('h1').click()
     const editor = page.locator('[data-webview-annotation-editor] .dsh-wv-comment-input')
     await editor.waitFor({ timeout: 10_000 })
-    await editor.fill('把标题改为「侧边栏批注演示」')
+    await editor.fill('Change the title to “Sidebar annotation demo”')
     await editor.press('Enter')
     await editor.waitFor({ state: 'detached', timeout: 10_000 })
 
@@ -150,7 +150,7 @@ describe('better-sidebar integration', () => {
     await expect.poll(
       async () => page.frameLocator('iframe[title="Web preview"]').locator('h1').textContent(),
       { timeout: 20_000, message: 'assistant link should render inside the sidebar tab' },
-    ).toBe('魔法 UI 演示页')
+    ).toBe('Magic UI Demo Page')
     // single:true dedupe: exactly one preview surface, never a duplicate tab.
     expect(await surface.count()).toBe(1)
 

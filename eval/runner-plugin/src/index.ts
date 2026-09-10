@@ -230,7 +230,7 @@ async function run(ctx: Context, config: Config, io: RunnerIo): Promise<void> {
     // next-step inbox before the user message wakes the driver.
     if (payload.arm === 'snapshot' && round.snapshotDir !== undefined) {
       agent.inject(createUserMessage({
-        source: { kind: 'plugin', plugin: 'dsh-web-review' },
+        source: { kind: 'plugin', plugin: 'dsh-web-review-english' },
         content: [{ type: 'text', text: formatSnapshotGuide(round.snapshotDir) }],
       }))
     }

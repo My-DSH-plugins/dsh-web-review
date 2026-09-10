@@ -52,7 +52,7 @@ async function loadDemoPage(page: Page): Promise<FrameLocator> {
   await expect.poll(
     async () => frame.locator('h1').textContent(),
     { timeout: 20_000, message: 'isolated demo page should render' },
-  ).toBe('魔法 UI 演示页')
+  ).toBe('Magic UI Demo Page')
   return frame
 }
 
@@ -132,7 +132,7 @@ async function openLastContext(page: Page): Promise<import('playwright').Locator
   // supersedes caption. Rows share the producer label, so the body text is
   // the discriminator: expand each candidate until the '# Browser comments'
   // overview section appears.
-  const rows = page.locator('[data-chat-flow-kind="context"]').filter({ has: page.locator('[data-context-source]', { hasText: 'dsh-web-review' }) })
+  const rows = page.locator('[data-chat-flow-kind="context"]').filter({ has: page.locator('[data-context-source]', { hasText: 'dsh-web-review-english' }) })
   await expect.poll(async () => rows.count(), { timeout: 30_000 }).toBeGreaterThan(0)
   const count = await rows.count()
   for (let index = count - 1; index >= 0; index -= 1) {
@@ -181,10 +181,10 @@ async function assertSnapshotFiles(dir: string): Promise<void> {
     html: { file: string; bytes: number }
     screenshot: { file: string } | { error: string }
   }
-  expect(manifest.page.title).toBe('魔法 UI 演示页')
+  expect(manifest.page.title).toBe('Magic UI Demo Page')
   expect(manifest.page.url.startsWith(services.demoUrl)).toBe(true)
   const html = await readFile(join(dir, 'page.html'), 'utf8')
-  expect(html).toContain('魔法 UI 演示页')
+  expect(html).toContain('Magic UI Demo Page')
   if (!('file' in manifest.screenshot)) {
     throw new Error('expected a screenshot file in the demo page snapshot')
   }
@@ -193,7 +193,7 @@ async function assertSnapshotFiles(dir: string): Promise<void> {
   expect(png.length).toBeGreaterThan(0)
 }
 
-describe('dsh-web-review e2e', () => {
+describe('dsh-web-review-english e2e', () => {
   it('opens an assistant-authored HTTP link directly in Preview', async () => {
     const page = await newPage(browser)
     onTestFailed(() => saveFailureShot(page, 'assistant-link-preview'))
@@ -219,7 +219,7 @@ describe('dsh-web-review e2e', () => {
     await expect.poll(
       async () => page.frameLocator('iframe[title="Web preview"]').locator('h1').textContent(),
       { timeout: 20_000, message: 'assistant link target should render in Preview' },
-    ).toBe('魔法 UI 演示页')
+    ).toBe('Magic UI Demo Page')
     await page.close()
   })
 
@@ -246,7 +246,7 @@ describe('dsh-web-review e2e', () => {
     await expect.poll(
       async () => frame.locator('h1').textContent(),
       { timeout: 20_000, message: 'cross-Origin handoff target should render' },
-    ).toBe('魔法 UI 演示页')
+    ).toBe('Magic UI Demo Page')
     await expect.poll(async () => input.inputValue()).toBe(
       new URL(services.demoUrl.replace('127.0.0.1', 'localhost')).href,
     )
@@ -293,7 +293,7 @@ describe('dsh-web-review e2e', () => {
     const details = page.locator('[data-webview-annotation-details]')
     await details.waitFor({ timeout: 10_000 })
     expect(await details.textContent()).toContain('button')
-    expect(await details.textContent()).toContain('提交')
+    expect(await details.textContent()).toContain('Submit')
     expect(await details.textContent()).toContain('Make the button color darker.')
 
     await details.locator('[data-webview-annotation-row] button').first().click()
@@ -333,7 +333,7 @@ describe('dsh-web-review e2e', () => {
     expect(await selector.getByRole('button', { name: 'Previous sibling' }).textContent()).toContain('Previous')
     expect(await selector.getByRole('button', { name: 'Next sibling' }).textContent()).toContain('Next')
     expect(await selector.locator('kbd').count()).toBe(4)
-    expect(await selector.textContent()).not.toMatch(/个子元素|当前元素|进入下一级|回到父元素|下一兄弟/u)
+    expect(await selector.textContent()).not.toMatch(/child elements|Current element|Enter child level|Go to parent element|Next sibling/u)
     expect(await selector.locator('[aria-selected="true"]').textContent()).toContain('div')
     await selector.getByRole('button', { name: 'Next sibling' }).click()
     await expect.poll(async () => frame.locator('.card').nth(1).getAttribute('data-dsh-wv-selected')).not.toBeNull()
@@ -343,7 +343,7 @@ describe('dsh-web-review e2e', () => {
     await expect.poll(async () => frame.locator('.card').first().getAttribute('data-dsh-wv-selected')).not.toBeNull()
 
     expect(await selector.locator('[aria-selected="true"]').textContent()).toContain('div')
-    await selector.getByRole('button', { name: 'button “提交”' }).click()
+    await selector.getByRole('button', { name: 'button “Submit”' }).click()
     await expect.poll(async () => submit.getAttribute('data-dsh-wv-selected')).not.toBeNull()
     expect(await editor.getByPlaceholder('Describe these changes…').inputValue()).toBe('Re-anchor this review')
 
@@ -616,7 +616,7 @@ describe('dsh-web-review e2e', () => {
       const fieldRect = element.getBoundingClientRect()
       return fieldRect.left > editorRect.left + editorRect.width / 2
     })).toBe(true)
-    const fontSizeHandle = editor.getByRole('button', { name: 'Font size · 拖动调整' })
+    const fontSizeHandle = editor.getByRole('button', { name: 'Font size · drag to adjust' })
     await fontSizeHandle.scrollIntoViewIfNeeded()
     const handleBox = await fontSizeHandle.boundingBox()
     if (handleBox === null) throw new Error('Font-size scrub handle has no layout box')
@@ -767,7 +767,7 @@ describe('dsh-web-review e2e', () => {
     expect(contextText).toContain('Use the reviewed heading treatment.')
     expect(contextText).toContain('- color: rgb(255, 255, 255) -> #613838')
     expect(contextText).toContain(`- width: ${original.width} -> auto`)
-    expect(contextText).toContain('- text: "魔法 UI 演示页" -> "Reviewed magic UI"')
+    expect(contextText).toContain('- text: "Magic UI Demo Page" -> "Reviewed magic UI"')
     expect(contextText).toContain('Visible viewport at edit time:')
     expect(contextText).not.toContain('font-size')
     await page.close()

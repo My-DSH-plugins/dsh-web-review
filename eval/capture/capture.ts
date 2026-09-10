@@ -119,7 +119,7 @@ async function bootGui(): Promise<{ webUrl: string; stop: () => Promise<void> }>
   const overlayPath = join(dshHome, 'capture.cordis.yml')
   writeFileSync(overlayPath, [
     '- insert:',
-    '    - id: dsh-web-review',
+    '    - id: dsh-web-review-english',
     `      name: ${JSON.stringify(entryName.name)}`,
     '- id: directory-picker',
     '  disabled: true',
@@ -226,7 +226,7 @@ async function driveAdjusts(page: Page, editor: import('playwright').Locator, ad
       // The picker's selection highlight tints the picked element's
       // background with 10% alpha; a user asking for a solid color raises
       // alpha back to 100%.
-      await page.getByRole('spinbutton', { name: `${control.label} · 透明度` }).fill('100')
+      await page.getByRole('spinbutton', { name: `${control.label} · Opacity` }).fill('100')
     } else if (control.kind === 'spinbutton') {
       await editor.getByRole('spinbutton', { name: control.label, exact: true }).fill(adjust.after)
     } else if (control.kind === 'menu') {

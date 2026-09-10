@@ -15,24 +15,24 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'multi-target',
   difficulty: 'long',
-  title: '统一处理待办页面的四条批注',
+  title: 'Handle the four annotations on the to-do page together',
   tokenBudget: { expected: 45000, warnAbove: 60000 },
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'li.nav-item',
-      comment: '让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff',
+      comment: 'Make sidebar list items highlight on hover with a background of #eef2ff',
     }, {
       target: '.todo-item',
-      comment: '加大待办事项之间的间距',
+      comment: 'Increase the spacing between todo items',
     }, {
       target: '.add-button',
-      comment: '把“添加任务”按钮文案改成“新建任务”，并给它加上柔和阴影',
-      adjusts: [{ property: 'text', after: '新建任务' }],
+      comment: 'Change“Add task”button copy to“New task”, and give it a soft shadow',
+      adjusts: [{ property: 'text', after: 'New task' }],
     }, {
       target: 'li.nav-item:nth-of-type(3)',
-      comment: '把侧边栏“草稿”这一项改成“草稿箱”',
+      comment: 'Change the sidebar“Drafts” item to“Draft Box”',
     }],
     ...frozen,
   }],

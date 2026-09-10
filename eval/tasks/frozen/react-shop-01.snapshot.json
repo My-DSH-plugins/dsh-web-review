@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52631/",
-    "title": "魔法商店"
+    "title": "Magic Shop"
   },
   "comments": [
     {
       "id": "ee6aea1b-8b99-4af1-a0c2-9edda2b3cc8f",
-      "comment": "把价格文字的颜色改成 #e8590c",
+      "comment": "Change the price text color to #e8590c",
       "tagName": "p",
       "role": "",
       "label": "¥129",

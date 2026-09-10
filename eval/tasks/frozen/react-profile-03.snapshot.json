@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52503/",
-    "title": "个人主页"
+    "title": "Profile Page"
   },
   "comments": [
     {
       "id": "eaee7435-2ea8-470c-a152-81eaaa5319d5",
-      "comment": "把头像尺寸改成 96px",
+      "comment": "Change the avatar size to 96px",
       "tagName": "img",
       "role": "img",
       "label": "",

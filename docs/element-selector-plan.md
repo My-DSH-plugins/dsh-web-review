@@ -1,63 +1,63 @@
-# 元素层级选择器计划
+# Element Hierarchy Selector Plan
 
-## 目标
+## Goals
 
-在现有批注浮层中增加一个与“调整”并列的“选择”入口，让用户无需退出当前批注即可沿 DOM 层级切换目标元素，并同时提供接近 Figma 的键盘导航。
+In the existing annotation overlay, add a“Adjust”alongside“Select” entry point so users can switch target elements along the DOM switch the target element along the DOM hierarchy, while also providing a keyboard navigation close to Figma keyboard navigation.
 
-原型见 [`element-selector-ui-prototype.svg`](./element-selector-ui-prototype.svg)。
+See the prototype at [`element-selector-ui-prototype.svg`](./element-selector-ui-prototype.svg).
 
-## 产品交互
+## Product interactions
 
-### 折叠态
+### Collapsed state
 
-- 选中页面元素后，浮层左侧依次显示“选择”和“调整”两个圆形按钮，右侧保留评论输入与确认按钮。
-- 两个面板互斥：打开“选择”会收起“调整”，打开“调整”会收起“选择”。
-- 切换目标元素不会提交或新建批注；它更新当前编辑事务的目标、页面圆角选中框、浮层锚点与待提交快照。
-- 评论输入框下方常驻一条紧凑的当前目标信息条；“调整”展开后仍保留，只有展开元素树时隐藏。
+- After a page element is selected, the left side of the floating panel shows, in order,“Select”and“Adjust”two circular buttons, with the comment input and confirm button kept on the right.
+- The two panels are mutually exclusive: opening“Select”will collapse“Adjust”, opening“Adjust”will collapse“Select”.
+- Switching the target element does not submit or create an annotation; it updates the current edit transaction’s target, the page’s rounded selection outline, the overlay anchor and the pending snapshot.
+- A compact current-target info bar stays pinned below the comment input;“Adjust”remains visible after expanding; it is only hidden when the element tree is expanded.
 
-### 选择器展开态
+### Selector expanded state
 
-- 顶部是一行四个紧凑操作：“子级 / 父级 / 上一个 / 下一个”。每项尾部显示弱化的小键帽提示，不再叠加重复表达方向的图标。
-- 下方显示当前文档的可浏览元素树。每行由展开箭头、元素类型图标、tag，以及“直接文本摘要”或“子元素数量”组成。
-- 当前元素使用 DSH 业务蓝浅底、蓝色描边和左侧强调条，不显示额外状态胶囊；祖先路径自动展开，并保证当前行滚动到可见区域。
-- 有元素子节点的行可以展开/收起；点击任意行立即切换当前目标。文本节点不单独成行，短文本归入所属元素的摘要。
-- `html`、`body` 可以出现在树中并被选中；宿主注入的 marker/chrome 不进入树。不可见元素仍显示，但以弱化文字呈现。
-- 到达边界时，对应操作按钮禁用：无元素子节点时禁用“进入”，到达 `body`/配置根节点时禁用“父级”，无下一元素兄弟时禁用“下一个”。
+- At the top is a row of four compact actions:“Child / Parent / Previous / Next”. Each item shows a subdued keycap hint at its end, with no redundant direction icons layered on top.
+- Below is a browsable element tree of the current document. Each row consists of an expand arrow, an element type icon,tag, and“direct text summary”or“Child element count”composed of.
+- The current element uses DSH Business-blue light fill, blue outline and a left accent bar, with no extra status pill; the ancestor path expands automatically and the current row is scrolled into view.
+- Rows with element children can be expanded/collapse; clicking any row immediately switches the current target. Text nodes do not get their own row; short text is folded into the summary of its owning element.
+- `html`, `body` can appear in the tree and be selected; host-injected marker/chrome do not enter the tree. Invisible elements are still shown, but rendered with dimmed text.
+- When a boundary is reached, the corresponding action button is disabled: with no child elements, disable“Enter”, reaching `body`/when the configured root node is reached, disable“Parent”, and disabled when there is no next element sibling“Next”.
 
-### 快捷键
+### Keyboard shortcuts
 
-- `Enter`：进入第一个元素子节点。
-- `\`（`KeyboardEvent.code === 'Backslash'`）：回到父元素。
-- `Shift+Tab` / `Tab`：画布焦点面中切换到上一个 / 下一个元素兄弟，并阻止浏览器默认焦点移动。
-- 选择器未展开时，选中元素后焦点进入宿主拥有的画布焦点面；页面自身的 `window` / `document` 监听器不会收到这些快捷键。
-- 选择器展开后，`Enter` / `Backslash` / `Shift+Tab` / `Tab` 仍执行四种层级切换；`↑` / `↓` 移动可见行，`→` 展开或进入子级，`←` 收起或返回父级，`Space` 选择当前聚焦行。
-- 选择器未展开时，当前目标信息条保持可见；每次成功切换只对目标文本做短促的方向动画，子级/父级使用垂直方向，上一个/下一个使用水平方向，边界保持原样，reduced-motion 仅淡入淡出。
-- 页面选中框是复用的 6px 圆角浮层：目标切换时在新旧矩形间移动，滚动和尺寸变化时即时跟随，reduced-motion 不做位置移动。
-- 输入框、文本域、`contenteditable`、菜单/弹窗和组合输入期间不拦截快捷键。评论输入中的 `Enter` 继续确认批注，普通 UI 的 `Tab` 继续无障碍焦点导航。
+- `Enter`: move into the first element child.
+- `\` (`KeyboardEvent.code === 'Backslash'`: go back to the parent element.
+- `Shift+Tab` / `Tab`: in the canvas focus surface, switch to the previous / next element sibling, and prevents the browser’s default focus movement.
+- When the selector is collapsed, focus moves into the host-owned canvas focus surface after an element is selected; the page’s own `window` / `document` listeners do not receive these shortcuts.
+- After the selector is expanded,`Enter` / `Backslash` / `Shift+Tab` / `Tab` still perform the four hierarchy switches;`↑` / `↓` moves through visible rows,`→` expands or enters a child,`←` collapse or return to the parent,`Space` selects the currently focused row.
+- When the selector is collapsed, the current-target info bar stays visible; each successful switch applies only a brief directional animation to the target text, while child/the parent level uses the vertical direction, and the previous/next use the horizontal direction, and the boundary stays as it is,reduced-motion only fades in and out.
+- The page selection box is a reusable 6px rounded overlay: it moves between the old and new rectangles when the target switches, and follows immediately on scroll and size changes,reduced-motion does not move position.
+- Input fields, textareas,`contenteditable`, menus/Shortcuts are not intercepted during menus, popups or IME composition. In the comment input, `Enter` continues to confirm the annotation, while normal UI of `Tab` continues to handle accessible focus navigation.
 
-## 状态与边界
+## States and boundaries
 
-- `AnnotationEditor` 增加 `mode: 'collapsed' | 'select' | 'adjust'` 本地 UI 状态；DOM 展开状态也保留在编辑器本地，不进入共享 store。
-- `WebviewView` 继续拥有 live `Element` 与 patch ledger，并向编辑器提供 `onSelectElement(next)`；元素切换逻辑在此处统一完成。
-- 切换目标前恢复旧目标的当前事务预览值；随后基于新元素创建新的 patch、snapshot 和编辑事务。评论草稿保留，样式/文本改动清空，避免把旧元素的 CSS diff 错配到新元素。
-- 已提交批注目标若被切换，视为将该批注重新锚定：原目标恢复到进入编辑前的已提交状态，新目标从干净基线开始；只有再次确认后才更新 store。
-- 树只持有当前 iframe 文档内的短生命周期 `Element` 引用。导航、iframe reload、关闭编辑器或卸载时全部释放。
+- `AnnotationEditor` Add `mode: 'collapsed' | 'select' | 'adjust'` Local UI state;DOM expansion state is also kept local to the editor and does not enter the shared store.
+- `WebviewView` continues to own live `Element` and patch ledger, and provide the editor with `onSelectElement(next)`; the element-switching logic is handled centrally here.
+- before switching targets, restore the old target’s current transaction preview values; then create a new patch, snapshot and the edit transaction. Comment drafts are kept, while style/text changes are cleared, to avoid mapping the old element’s CSS diff be mismatched onto the new element.
+- If a committed annotation’s target is switched, the annotation is treated as re-anchored: the original target reverts to the committed state it had before entering edit mode, and the new target starts from a clean baseline; only after confirming again does it update store.
+- The tree only holds the current iframe document’s short-lived `Element` references. Navigation,iframe reload, and are all released when the editor closes or unmounts.
 
-## 实现拆分
+## Implementation breakdown
 
-1. 新增纯 DOM 导航模块 `element-navigation.ts`：过滤宿主 chrome，计算父/首个元素子节点/下一元素兄弟、生成树行 label，并提供可单测的边界行为。
-2. 扩展 picker surface：允许宿主用同一 `select(element)` 更新高亮；不把树逻辑塞入 iframe 注入脚本。
-3. 在 `WebviewView` 中实现原子 `switchEditorElement`：回滚旧 patch、创建新 patch/snapshot、更新 selection 与编辑器定位。
-4. 新增 `ElementSelector.tsx` 与 CSS Module：工具栏、可展开树、当前项样式、自动展开祖先和滚动定位；所有文案进入 `locales.ts`。
-5. 扩展 `AnnotationEditor`：加入选择按钮、互斥面板状态、目标切换回调，并把高度/宽度测量覆盖到选择器状态。
-6. 在宿主画布焦点面和元素树接入 Figma 式层级快捷键，元素树同时实现 roving-tabindex 与方向键浏览；iframe capture 只作为页面被显式重新聚焦后的同源兜底。
-7. 更新 README 的用户说明，但不改变结构化批注 wire、模型上下文和共享 store 形状。
+1. Add a pure DOM navigation module `element-navigation.ts`: filter out host chrome, computing the parent/first element child/next element sibling, and generating the tree row label, and provides unit-testable boundary behavior.
+2. Extend picker surface: allow the host to use the same `select(element)` update the highlight; without cramming tree logic into iframe injection script.
+3. In `WebviewView` implement the atomic `switchEditorElement`: roll back the old patch, creating a new patch/snapshot, and update selection and editor positioning.
+4. Add `ElementSelector.tsx` and CSS Module: toolbar, expandable tree, current-item styling, automatic ancestor expansion and scroll positioning; all copy goes into `locales.ts`.
+5. Extend `AnnotationEditor`: add a select button, mutually exclusive panel state and a target-switch callback, and extend the height/width measurement to cover the selector state.
+6. Integrate into the host canvas focus surface and element tree Figma -style hierarchy shortcuts, and the element tree also implements roving-tabindex  and arrow-key navigation;iframe capture serves only as a same-origin fallback after the page is explicitly refocused.
+7. Update README user documentation, but does not change the structured annotation wire, model context, and the shared store shape.
 
-## 验证计划
+## Verification plan
 
-- 纯函数：首个子元素、父元素、上/下兄弟、忽略文本节点和注入 chrome、根节点与无兄弟边界、树摘要截断。
-- 组件：选择按钮可见；“选择/调整”互斥；祖先自动展开；树行展开/收起；点击行与三个按钮切换目标；禁用边界正确。
-- 键盘：画布焦点面与树内的 `Enter`、`Backslash`、`Shift+Tab`、`Tab`；树内方向键、展开收起和 Space 选择；输入框、菜单、IME 不被劫持。
-- 事务：切换前精确回滚旧元素；新目标无旧 diff；评论保留；确认后 snapshot 指向新元素；取消后两边 DOM 均恢复。
-- E2E：在 demo 卡片中从 `button` 回到 `.card`、进入 `h3`、切换兄弟，校验常驻目标信息条、唯一圆角选中框的移动动画、浮层重定位、树同步和最终批注目标；页面预先注册捕获期键盘监听器，证明正常画布流程不会把快捷键泄漏给页面，并验证树内层级快捷键与方向键浏览。
-- 完整门禁：`pnpm check`，随后 `pnpm test:e2e` 与窄宽/深色主题视觉截图。
+- Pure functions: first child element, parent element, previous/next sibling, ignoring text nodes and injected chrome, the root node and no-sibling boundaries, and tree summary truncation.
+- Components: the select button is visible;“Select/Adjust”are mutually exclusive; ancestors expand automatically; tree rows expand/collapse; clicking a row or any of the three buttons switches the target; disabled boundaries behave correctly.
+- Keyboard: the canvas focus surface and the in-tree `Enter`, `Backslash`, `Shift+Tab`, `Tab`; arrow keys inside the tree, expand/collapse and Space selection; text inputs, menus,IME  are not hijacked.
+- transaction: precisely roll back the old element before switching; the new target has no old diff; the comment is preserved; after confirming snapshot  points to the new element; after cancel, both sides DOM are both restored.
+- E2E: in demo card, from `button` back to `.card`, enter `h3`, switch between siblings, and verify the persistent target info bar, the movement animation of the single rounded selection box, overlay repositioning, tree syncing, and the final annotation target; the page pre-registers keyboard listeners during the capture phase to prove that the normal canvas flow does not leak shortcuts to the page, and to verify the in-tree hierarchy shortcuts and arrow-key navigation.
+- Full gate:`pnpm check`, followed by `pnpm test:e2e`  and narrow-width/dark theme visual screenshots.

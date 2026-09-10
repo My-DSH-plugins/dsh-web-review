@@ -95,7 +95,7 @@ const configOf = (value: unknown): BridgeConfig | undefined => {
 }
 
 const parsedConfig = configOf(window.__DSH_WEB_REVIEW_BRIDGE_CONFIG__)
-if (parsedConfig === undefined) throw new Error('dsh-web-review: invalid bridge configuration')
+if (parsedConfig === undefined) throw new Error('dsh-web-review-english: invalid bridge configuration')
 const config: BridgeConfig = parsedConfig
 delete window.__DSH_WEB_REVIEW_BRIDGE_CONFIG__
 

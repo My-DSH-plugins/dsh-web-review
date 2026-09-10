@@ -19,7 +19,7 @@ and the interim eager-`agent.inject` design.
 
 ## Assistant review links
 
-- The node face registers the reviewed `plugin:dsh-web-review-preview` system-prompt
+- The node face registers the reviewed `plugin:dsh-web-review-english-preview` system-prompt
   section, which advertises the verified-link → Preview → annotation loop.
 - The always-mounted dock delegates ordinary clicks on assistant-authored absolute
   credential-free absolute HTTP(S) links into the shared preview store and activates the Preview tab.
@@ -82,7 +82,7 @@ sequenceDiagram
 - The `agent/pre-step` listener awaits `next()`. On `reject`, it preserves the decision;
   on `enter`, it appends its plugin message after the returned messages and never edits
   their content.
-- The source is `{ kind: 'plugin', plugin: 'dsh-web-review', snapshotId }` so the
+- The source is `{ kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId }` so the
   transcript, replay path, and exact acknowledgement preserve provenance.
 - The browser sends structured JSON. It never assembles model-facing XML or Markdown.
 - The node face validates every field, enforces request/count/field/context limits, and

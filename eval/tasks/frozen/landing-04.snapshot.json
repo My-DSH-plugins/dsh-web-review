@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52021/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "d280172f-b0b1-4746-8b88-dd1d5e411d1b",
-      "comment": "把卡片之间的间距从 16px 加大到 24px",
+      "comment": "Increase the spacing between cards from 16px increased to 24px",
       "tagName": "main",
       "role": "",
-      "label": "主按钮 用于提交表单的主要操作。 提交 次要按钮 用于可逆的辅助操作。 取消 间距示例 卡片间…",
+      "label": "Primary button The main action for submitting the form. Submit Secondary Button For reversible secondary actions. Cancel Spacing Example between cards…",
       "cssPath": ".cards",
       "fullPath": "html > body > main.cards",
       "stableClasses": [
         "cards"
       ],
-      "textContent": "\n    \n      主按钮\n      用于提交表单的主要操作。\n      提交\n    \n    \n      次要按钮\n      用于可逆的辅助操作。\n      取消\n    \n    \n      间距示例\n      卡片间距为 16px，可尝试调整到 24px。\n      了解更多\n    \n  ",
+      "textContent": "\n    \n      Primary button\n      The main action for submitting the form.\n      Submit\n    \n    \n      Secondary Button\n      For reversible secondary actions.\n      Cancel\n    \n    \n      Spacing Example\n      Card spacing is 16px, try adjusting it to 24px.\n      Learn more\n    \n  ",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

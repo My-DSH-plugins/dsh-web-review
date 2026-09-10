@@ -270,8 +270,8 @@ export function ScrubNumber({ label, value, onChange, onScrubChange, step = 1, m
         type="button"
         className={css.numberHandle}
         data-webview-scrub-handle=""
-        aria-label={`${label} · 拖动调整`}
-        title={canScrub ? `${label} · 拖动调整` : `${label} · 当前值仅支持文本编辑`}
+        aria-label={`${label} · drag to adjust`}
+        title={canScrub ? `${label} · drag to adjust` : `${label} · current value supports text editing only`}
         disabled={!canScrub}
         onPointerDown={(event) => {
           const parsed = numericValue()
@@ -394,7 +394,7 @@ export function ColorControl({ label, value, onChange, onScrubChange }: { label:
           style={position}
           role="dialog"
           aria-modal="true"
-          aria-label={`${label} · 颜色选择器`}
+          aria-label={`${label} · Color picker`}
           onKeyDown={(event) => {
             if (event.key === 'Escape') {
               event.preventDefault()
@@ -414,7 +414,7 @@ export function ColorControl({ label, value, onChange, onScrubChange }: { label:
             focusable[next]?.focus()
           }}
         >
-          <input className={css.spectrum} type="color" aria-label={`${label} · 色谱`} value={hexOf(color)} onChange={(event) => {
+          <input className={css.spectrum} type="color" aria-label={`${label} · Spectrum`} value={hexOf(color)} onChange={(event) => {
             const next = parseColor(event.target.value)
             if (next !== null) onChange(cssColor({ ...next, a: color.a }))
           }} />
@@ -424,7 +424,7 @@ export function ColorControl({ label, value, onChange, onScrubChange }: { label:
               if (next !== null) onChange(cssColor({ ...next, a: color.a }))
               else onChange(event.target.value)
             }} /></label>
-            <label><span className={css.popoverLabel}>Alpha</span><ScrubNumber label={`${label} · 透明度`} value={`${String(Math.round(color.a * 100))}%`} min={0} max={100} onScrubChange={onScrubChange} onChange={(next) => {
+            <label><span className={css.popoverLabel}>Alpha</span><ScrubNumber label={`${label} · Opacity`} value={`${String(Math.round(color.a * 100))}%`} min={0} max={100} onScrubChange={onScrubChange} onChange={(next) => {
               const numeric = parseNumeric(next)
               if (numeric !== null) onChange(cssColor({ ...color, a: numeric.number / 100 }))
             }} /></label>

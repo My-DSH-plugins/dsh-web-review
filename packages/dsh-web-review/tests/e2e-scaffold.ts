@@ -220,7 +220,7 @@ export async function startServices(options: StartServicesOptions = {}): Promise
   const overlayPath = join(dshHome, 'e2e.cordis.yml')
   writeFileSync(overlayPath, [
     '- insert:',
-    `    - id: dsh-web-review`,
+    `    - id: dsh-web-review-english`,
     `      name: ${JSON.stringify(entryName.name)}`,
     '- id: directory-picker',
     '  disabled: true',

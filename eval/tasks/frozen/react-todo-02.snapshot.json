@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52885/",
-    "title": "待办清单"
+    "title": "Todo list"
   },
   "comments": [
     {
       "id": "7211fb88-358c-4dd3-aa12-ac752fa6939a",
-      "comment": "加大待办事项之间的间距",
+      "comment": "Increase the spacing between todo items",
       "tagName": "li",
       "role": "",
-      "label": "写评测用例",
+      "label": "Write eval cases",
       "cssPath": "li:nth-of-type(1).todo-item",
       "fullPath": "html > body > div#root > div.layout > main.content > ul.todos > li.todo-item",
       "stableClasses": [
         "todo-item"
       ],
-      "textContent": "写评测用例",
+      "textContent": "Write eval cases",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

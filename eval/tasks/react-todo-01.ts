@@ -9,13 +9,13 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'protocol-smoke',
   difficulty: 'hard',
-  title: '为侧栏项目添加悬停高亮',
+  title: 'Add hover highlighting to sidebar items',
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'li.nav-item',
-      comment: '让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff',
+      comment: 'Make sidebar list items highlight on hover with a background of #eef2ff',
     }],
     ...frozen,
   }],

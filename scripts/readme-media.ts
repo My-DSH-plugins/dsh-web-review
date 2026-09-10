@@ -10,13 +10,13 @@
  *                                     through the isolated Preview Origin
  * - web-review-annotation-editor.jpg  the expanded Adjust inspector with the
  *                                     comment and live style changes applied
- * - web-review-demo.gif               the full annotation loop: 添加页面注释 →
- *                                     pick the hero title → 调整 (expand) →
- *                                     change 文本颜色 (hex stepped through
+ * - web-review-demo.gif               the full annotation loop: Add page comment →
+ *                                     pick the hero title → Adjust (expand) →
+ *                                     change Text color (hex stepped through
  *                                     intermediate shades) → scroll the
- *                                     inspector → change 字号 → type the
- *                                     comment → 确认注释 → click the toolbar
- *                                     发送 button
+ *                                     inspector → change Font size → type the
+ *                                     comment → Confirm comment → click the toolbar
+ *                                     Send button
  *
  * The run is disposable. It copies the persistent acceptance profile into a
  * temp DSH_HOME (acknowledged settings, workspace registration, sessions, and
@@ -64,11 +64,11 @@ const HERO_HEADING = '.hero h1'
 // px per px of horizontal drag, so a 20px drag walks the title to 48px.
 const FONT_SIZE_BASE_PX = 28
 const FONT_SIZE_TARGET_PX = 48
-const COMMENT_TEXT = '标题改成暖黄色，字号放大到 ' + FONT_SIZE_TARGET_PX + 'px，让首屏更醒目。'
+const COMMENT_TEXT = 'Change the title to warm yellow and increase the font size to ' + FONT_SIZE_TARGET_PX + 'px, making the hero section more eye-catching.'
 // Shades walked through the color picker, pale to gold.
 const TEXT_COLOR_SHADES = ['#FFF1C6', '#FFE9A8', '#FFDF8A', '#FFDB68', '#FFD43B'] as const
-const SESSION_TITLE = '网页批注验收'
-const DEMO_LINK_TEXT = '打开网页批注 Demo'
+const SESSION_TITLE = 'Web Annotation Acceptance'
+const DEMO_LINK_TEXT = 'Open Web Annotation Demo'
 
 /** UI labels used by the drive; resolved by probing the rendered tab. */
 interface MediaLabels {
@@ -87,20 +87,20 @@ interface MediaLabels {
 }
 
 const ZH_LABELS: MediaLabels = {
-  previewTab: '网页预览',
-  pick: '添加页面注释',
-  adjust: '调整',
-  confirm: '确认注释',
-  send: '发送',
-  commentPlaceholder: '描述这些更改…',
-  textColor: '文本颜色',
-  fontSize: '字号',
-  alphaSuffix: '透明度',
+  previewTab: 'Web Preview',
+  pick: 'Add page comment',
+  adjust: 'Adjust',
+  confirm: 'Confirm comment',
+  send: 'Send',
+  commentPlaceholder: 'Describe these changes…',
+  textColor: 'Text color',
+  fontSize: 'Font size',
+  alphaSuffix: 'Opacity',
   // Scrub handle and spectrum aria-labels hardcode these suffixes in Chinese
   // in both locales (InspectorControls).
-  dragSuffix: '拖动调整',
-  spectrumSuffix: '色谱',
-  defaultPrompt: '请根据页面批注修改前端实现。',
+  dragSuffix: 'drag to adjust',
+  spectrumSuffix: 'Spectrum',
+  defaultPrompt: 'Modify the frontend implementation based on the page annotations.',
 }
 
 const EN_LABELS: MediaLabels = {
@@ -113,9 +113,9 @@ const EN_LABELS: MediaLabels = {
   textColor: 'Text color',
   fontSize: 'Font size',
   // InspectorControls hardcodes these suffixes in Chinese in both locales.
-  alphaSuffix: '透明度',
-  dragSuffix: '拖动调整',
-  spectrumSuffix: '色谱',
+  alphaSuffix: 'Opacity',
+  dragSuffix: 'drag to adjust',
+  spectrumSuffix: 'Spectrum',
   defaultPrompt: 'Please apply the page comments to the frontend implementation.',
 }
 
@@ -190,7 +190,7 @@ function startMediaEndpoint(): Promise<{ port: number; hold: () => void; close: 
  * Copy the persistent acceptance profile into a disposable DSH_HOME. The
  * session store and its projection cache come along unchanged — the GUI's
  * sidebar list is cache-backed, so a re-seeded jsonl alone would not show up.
- * The seeded 网页批注验收 turn keeps its recorded acceptance demo URL, which
+ * The seeded Web Annotation Acceptance turn keeps its recorded acceptance demo URL, which
  * is why this run reuses the acceptance ports instead of free ones.
  */
 function prepareDisposableHome(): string {
@@ -263,7 +263,7 @@ async function driveMedia(
   // document; the controls passed in keep working across the reload.
   if (options.gif) await installCursorHudDom(page)
   // A fresh browser profile shows the internal-beta notice; acknowledge it.
-  for (const name of ['继续', 'Continue']) {
+  for (const name of ['Continue', 'Continue']) {
     const acknowledge = page.getByRole('button', { name }).first()
     try {
       await acknowledge.waitFor({ state: 'visible', timeout: 10_000 })
@@ -409,7 +409,7 @@ async function driveMedia(
   await clickAt(closePopoverBox.x + closePopoverBox.width / 2, closePopoverBox.y + closePopoverBox.height / 2)
   await page.waitForTimeout(900)
 
-  // Scroll the inspector down (the GIF's 下滑 beat), then enlarge the font
+  // Scroll the inspector down (the GIF's scroll down beat), then enlarge the font
   // size by dragging the scrub handle: the field value and the hero title
   // grow step by step, so the process reads instead of a typed jump.
   const sizeHandle = editor.getByRole('button', { name: labels.fontSize + ' · ' + labels.dragSuffix, exact: true })
@@ -586,7 +586,7 @@ const endpoint = await startMediaEndpoint()
 const overlayPath = join(dshHome, 'media.cordis.yml')
 writeFileSync(overlayPath, [
   '- insert:',
-  '    - id: dsh-web-review',
+  '    - id: dsh-web-review-english',
   '      name: ' + JSON.stringify(
     (JSON.parse(readFileSync(join(root, 'packages', 'dsh-web-review', 'entry-name.json'), 'utf8')) as { name: string }).name,
   ),

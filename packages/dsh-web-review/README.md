@@ -1,4 +1,4 @@
-# @canglongcl/dsh-web-review
+# dsh-web-review-english
 
 External `dsh web` plugin that adds a Preview conversation tab, isolated
 per-session page proxy, in-frame element picker, and browser-comment context
@@ -29,7 +29,7 @@ pnpm demo            # optional fixture page on port 5173
 
 For repeat manual testing, `pnpm dev:acceptance` keeps its dedicated DSH home
 at `.artifacts/acceptance/dsh-home`. It creates or reuses a provider-free,
-settled **网页批注验收** history through the Harness persistence service; open
+settled **Web Annotation Acceptance** history through the Harness persistence service; open
 that conversation and click its Demo link to enter Preview. Workspace state and
 other conversation history survive later restarts without changing the normal user profile. The first free port pair is
 saved to `.artifacts/acceptance/ports.json`, so Preview URLs remain valid on
@@ -91,7 +91,7 @@ plugin-sourced user-role message, and keeps it pending for pre-step admission.
 This creates two distinct logged records:
 
 1. the user's unchanged stock-composer message; and
-2. a **Context injection** record sourced from `dsh-web-review`, appended to the
+2. a **Context injection** record sourced from `dsh-web-review-english`, appended to the
    entered `agent/pre-step` message batch before the model request starts.
 
 When the matching client plugin is installed, that durable record uses the

@@ -12,18 +12,18 @@ real DSH Web GUI (isolated Preview, real picker, real property inspector, real
 annotation toolbar) with Playwright and writes exactly the assets the root
 README already references:
 
-- `docs/assets/web-review-preview.jpg` — the 网页预览 tab in browse mode with
+- `docs/assets/web-review-preview.jpg` — the Web Preview tab in browse mode with
   the demo page loaded through the isolated Preview Origin.
 - `docs/assets/web-review-annotation-editor.jpg` — the host-owned annotation
   editor expanded into the Adjust inspector, with the comment filled and live
   style changes applied to the picked element.
 - `docs/assets/web-review-demo.gif` — the full annotation loop:
-  添加页面注释 → pick the hero title → 调整 (expand the inspector) → change
-  文本颜色 by clicking the picker's spectrum control and walking its value
+  Add page comment → pick the hero title → Adjust (expand the inspector) → change
+  Text color by clicking the picker's spectrum control and walking its value
   through five shades so the title visibly progresses from white to gold →
-  scroll the inspector down → drag the 字号 scrub handle (28px → 48px, the
+  scroll the inspector down → drag the Font size scrub handle (28px → 48px, the
   field value and the hero title grow step by step) → type a comment →
-  确认注释 → click the toolbar 发送 button and watch the message go out.
+  Confirm comment → click the toolbar Send button and watch the message go out.
 
 ## Design
 
@@ -53,7 +53,7 @@ Three children are spawned and killed at exit:
   instance.
 - an in-process hang endpoint. `DEEPSEEK_BASE_URL` points at it: boot probes
   get 503 instantly, and it switches to never-responding right before the
-  GIF's 发送 click, so the recorded send shows a real sent message and a
+  GIF's Send click, so the recorded send shows a real sent message and a
   pending assistant turn without ever spending a model call. The credential
   chain is still loaded from the product sources (repo `.env`, then
   `~/.dsh/.env`) so readiness reads "configured", but no key value is ever
@@ -67,7 +67,7 @@ stays crisp, and the 1280×800 video is supersampled from the 2x render for a
 sharper GIF. The run pins the Chinese product UI
 (`localStorage dsh.locale = zh`, the same browser-scope boot default the eval
 capture uses for English) because the README media is Chinese; the drive still
-probes the rendered 网页预览/Web Preview tab label and resolves the matching
+probes the rendered Web Preview/Web Preview tab label and resolves the matching
 zh/en label set as a self-check, and it acknowledges the fresh-profile
 internal-beta notice when shown.
 
@@ -81,20 +81,20 @@ two JPEG screenshots are captured so the product shots stay clean, and a
 `.artifacts/media-cursor-sample.png` snapshot after the hero pick makes the
 HUD rendering verifiable. It then drives:
 
-1. open the seeded 网页批注验收 conversation and click its assistant Demo link
+1. open the seeded Web Annotation Acceptance conversation and click its assistant Demo link
    (assistant-link delegation opens Preview);
 2. wait for the iframe to render the demo page → screenshot 1;
 3. context `recordVideo` covers the whole run, but the GIF is trimmed to the
-   annotation loop: record a start marker before the 添加页面注释 click and an
+   annotation loop: record a start marker before the Add page comment click and an
    end marker after the sent message appears, then trim with ffmpeg;
-4. pick `.hero h1`, open 调整, edit 文本颜色 (click the spectrum control,
+4. pick `.hero h1`, open Adjust, edit Text color (click the spectrum control,
    then walk its value through five shades via the value-setter + input event
    trick — the native OS picker itself cannot be scripted and no hex field is
-   typed into), wheel the inspector down, then drag the 字号 scrub handle
+   typed into), wheel the inspector down, then drag the Font size scrub handle
    right by 20px (step 1px/px, so the field and title ramp 28 → 48 live),
    type the comment → screenshot 2;
-5. 确认注释, wait for the capsule `synced` acknowledgement, click 发送
-   (`发送 (1)`), wait for the fixed prompt message, hold ~2s for the tail;
+5. Confirm comment, wait for the capsule `synced` acknowledgement, click Send
+   (`Send (1)`), wait for the fixed prompt message, hold ~2s for the tail;
 6. close the browser, convert the trimmed webm to a palette GIF with
    `ffmpeg-static` (fps 10, lanczos scale, 128-color diff palette, Bayer
    dither; if the result exceeds 9 MB it re-encodes at 1024 wide with a

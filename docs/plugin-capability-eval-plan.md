@@ -2,7 +2,7 @@
 
 ## Objective
 
-Evaluate whether `dsh-web-review` gives a coding model enough page-grounded information to complete realistic frontend changes with low localization and exploration cost. Frontend work is the carrier for the evaluation, not the subject being benchmarked. The primary result is a diagnosis of the plugin interface: which evidence fields, annotation workflows, and optional UI skills satisfy model needs, and which missing signals cause avoidable failure.
+Evaluate whether `dsh-web-review-english` gives a coding model enough page-grounded information to complete realistic frontend changes with low localization and exploration cost. Frontend work is the carrier for the evaluation, not the subject being benchmarked. The primary result is a diagnosis of the plugin interface: which evidence fields, annotation workflows, and optional UI skills satisfy model needs, and which missing signals cause avoidable failure.
 
 The existing frontend modification suite remains useful as a protocol smoke suite. Its single-element color, hover, and text tasks prove that a real GUI capture can cross the plugin wire, enter the model request, and reach an automatic grader. They do not establish plugin value because the ordinary user prompt repeats the complete annotation intent, the fixture repositories are small enough to search exhaustively, and every run receives the plugin context without a comparison arm.
 
@@ -52,7 +52,7 @@ interface EvalRound {
 type EvalArm = 'full' | 'text-only' | 'oracle'
 ```
 
-The default prompt is the product's no-draft send request, `请根据页面批注修改前端实现。`. Requirements live in annotation comments and inspector changes. A scenario may add a short composer draft only for cross-comment constraints that a real user would naturally type outside an individual element comment.
+The default prompt is the product's no-draft send request, `Modify the frontend implementation based on the page annotations.`. Requirements live in annotation comments and inspector changes. A scenario may add a short composer draft only for cross-comment constraints that a real user would naturally type outside an individual element comment.
 
 ## Diagnostic arms
 
@@ -194,7 +194,7 @@ excluded from the causal aggregate.
 
 Grader calibration follows the annotation's semantic precision. Values named
 by the user (for example `20px`, `#7a5af8`, or exact replacement text) remain
-exact. Qualitative requests such as “更深” or “危险样式” accept equivalent
+exact. Qualitative requests such as “Deeper” or “danger styling” accept equivalent
 implementations and must not require a golden-only color, helper class, or
 whitespace choice. Missing target selectors produce a localization/assertion
 failure rather than a grader crash. Existing workspaces can be regraded

@@ -4,10 +4,10 @@ index ed90ab1..dd54af9 100644
 +++ gb/src/App.tsx
 @@ -12,7 +12,7 @@ export function App() {
          <ul className="nav-list">
-           <NavItem label="收件箱" />
-           <NavItem label="已加星标" />
--          <NavItem label="草稿" />
-+          <NavItem label="草稿箱" />
+           <NavItem label="Inbox" />
+           <NavItem label="Starred" />
+-          <NavItem label="Drafts" />
++          <NavItem label="Draft Box" />
          </ul>
        </nav>
        <main className="content">
@@ -15,8 +15,8 @@ index ed90ab1..dd54af9 100644
          <ul className="todos">
            {todos.map((todo) => <li key={todo} className="todo-item">{todo}</li>)}
          </ul>
--        <button className="add-button" onClick={() => setTodos([...todos, '新任务'])}>添加任务</button>
-+        <button className="add-button" onClick={() => setTodos([...todos, '新任务'])}>新建任务</button>
+-        <button className="add-button" onClick={() => setTodos([...todos, 'New task'])}>Add task</button>
++        <button className="add-button" onClick={() => setTodos([...todos, 'New task'])}>New task</button>
        </main>
      </div>
    )

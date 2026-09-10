@@ -154,7 +154,7 @@ describe('renderChangelog', () => {
       entry([commit({ subject: 'add preview', type: 'feat' })], { version: '1.1.0', previous: '1.0.0' }),
       { version: '1.0.0', date: '2026-08-10', commits: [] },
     ])
-    expect(out.startsWith('# Changelog\n\nAll notable changes to `dsh-web-review` are documented in this file.')).toBe(true)
+    expect(out.startsWith('# Changelog\n\nAll notable changes to `dsh-web-review-english` are documented in this file.')).toBe(true)
     expect(out).toContain('## [1.1.0] - 2026-08-20\n\n### Added\n\n- add preview')
     expect(out).toContain('[1.1.0]: https://github.com/CanglongCl/dsh-web-review/compare/v1.0.0...v1.1.0')
     expect(out).toContain('[1.0.0]: https://github.com/CanglongCl/dsh-web-review/commits/v1.0.0')

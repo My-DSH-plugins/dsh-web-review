@@ -226,7 +226,7 @@ export async function launchHeadless(
     bin,
     '--profile', 'headless',
     '--patch', overlayPath,
-    task.rounds[0]?.prompt ?? '请根据页面批注修改前端实现。',
+    task.rounds[0]?.prompt ?? 'Modify the frontend implementation based on the page annotations.',
   ], { cwd: workspaceDir, env, stdio: ['ignore', 'pipe', 'pipe'] })
   let stdout = ''
   let stderr = ''

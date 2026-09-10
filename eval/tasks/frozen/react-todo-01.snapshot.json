@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52843/",
-    "title": "待办清单"
+    "title": "Todo list"
   },
   "comments": [
     {
       "id": "bfd21d7c-38cf-414d-92ae-31b74b821c46",
-      "comment": "让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff",
+      "comment": "Make sidebar list items highlight on hover with a background of #eef2ff",
       "tagName": "li",
       "role": "",
-      "label": "收件箱",
+      "label": "Inbox",
       "cssPath": "li:nth-of-type(1).nav-item",
       "fullPath": "html > body > div#root > div.layout > nav.sidebar > ul.nav-list > li.nav-item",
       "stableClasses": [
         "nav-item"
       ],
-      "textContent": "收件箱",
+      "textContent": "Inbox",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

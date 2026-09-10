@@ -1,6 +1,6 @@
 /**
- * dsh-web-review browser half: the "网页预览" conversation view tab (isolated
- * Preview frame + message bridge) and the "注释" dock above
+ * dsh-web-review browser half: the "Web Preview" conversation view tab (isolated
+ * Preview frame + message bridge) and the "Comment" dock above
  * the composer, sharing one webview store instance. Structured annotation
  * snapshots commit immediately to the node half's `/webview-annotations`
  * route as pending state, then become separately logged plugin context only
@@ -95,11 +95,11 @@ function scopedConversation(ctx: ClientContext, sessionId: SessionId): IConversa
   // Harness declares a host SessionStore under the same Cordis service key;
   // verify the browser service shape before narrowing the merged type.
   const sessions: unknown = ctx.sessions
-  if (!isClientSessions(sessions)) throw new Error('dsh-web-review: client sessions service unavailable')
+  if (!isClientSessions(sessions)) throw new Error('dsh-web-review-english: client sessions service unavailable')
   const scope = sessions.scope(sessionId)
-  if (scope === undefined) throw new Error(`dsh-web-review: session "${sessionId}" resolved no scope`)
+  if (scope === undefined) throw new Error(`dsh-web-review-english: session "${sessionId}" resolved no scope`)
   const conversation = scope.get('conversation')
-  if (conversation === undefined) throw new Error('dsh-web-review: conversation service unavailable through session scope')
+  if (conversation === undefined) throw new Error('dsh-web-review-english: conversation service unavailable through session scope')
   return conversation
 }
 
@@ -108,9 +108,9 @@ export function setUiSkillDraft(ctx: Pick<ClientContext, 'sessions'>, sessionId:
   if (!isUiSkillName(name)) throw new Error(`unknown UI optimization Skill "${name}"`)
   const sessions = ctx.sessions as unknown as ISessions
   const sessionScope = sessions.scope(sessionId)
-  if (sessionScope === undefined) throw new Error(`dsh-web-review: session "${sessionId}" resolved no scope`)
+  if (sessionScope === undefined) throw new Error(`dsh-web-review-english: session "${sessionId}" resolved no scope`)
   const conversation = sessionScope.get('conversation')
-  if (conversation === undefined) throw new Error('dsh-web-review: conversation service unavailable through session scope')
+  if (conversation === undefined) throw new Error('dsh-web-review-english: conversation service unavailable through session scope')
   conversation.input.for(sessionScope).setDraft(`/${name}`)
 }
 
@@ -250,7 +250,7 @@ function openPreviewUrl(
  * unsatisfied inject would PENDING the fiber and fail the whole web boot.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-web-review: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-web-review-english: dictionaries')
 
   // Registration-time text (the view tab label) reads through the bound
   // translate as a thunk, so it follows the active locale without
@@ -272,7 +272,7 @@ export function apply(ctx: ClientContext): void {
   const sessions = ctx.sessions as unknown as ISessions
   ctx.effect(() => sessions.list.subscribe(() => {
     webviewStores.pruneAbsent(sessions.list.getSnapshot().ids)
-  }), 'dsh-web-review: webview engine pruning')
+  }), 'dsh-web-review-english: webview engine pruning')
 
   /** Session-bound injected face shared by the view and the sidebar tab. */
   const buildViewFace = (sessionId: SessionId): WebviewViewInjected => ({
@@ -298,7 +298,7 @@ export function apply(ctx: ClientContext): void {
           setUiSkillDraft(scope, session.sessionId, option.id)
         },
       },
-    }), 'dsh-web-review: /skills contribution')
+    }), 'dsh-web-review-english: /skills contribution')
   })
 
   ctx.slots.inject('conversation.input.dock', () => ctx.slots.register({
@@ -348,5 +348,5 @@ export function apply(ctx: ClientContext): void {
     sidebarDispose?.()
     sidebarDispose = null
     viewDispose = registerViewContribution()
-  }).dispose, 'dsh-web-review: sidebar watch')
+  }).dispose, 'dsh-web-review-english: sidebar watch')
 }

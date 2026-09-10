@@ -9,16 +9,16 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'text',
   difficulty: 'easy',
-  title: '修改了解更多按钮文案',
-  instruction: '把第三个卡片里的“了解更多”按钮文案改成“查看详情”',
+  title: 'Change the Learn more button label',
+  instruction: 'In the third card, change the“Learn more”button copy to“View Details”',
   capture: {
     target: '.card:nth-of-type(3) button.btn-ghost',
-    comment: '把第三个卡片里的“了解更多”按钮文案改成“查看详情”',
+    comment: 'In the third card, change the“Learn more”button copy to“View Details”',
   },
   snapshot,
   captureMeta,
   grader: {
-    pass: [{ kind: 'dom', selector: '.card:nth-of-type(3) button.btn-ghost', text: '查看详情' }],
+    pass: [{ kind: 'dom', selector: '.card:nth-of-type(3) button.btn-ghost', text: 'View Details' }],
   },
   golden: { kind: 'html-dir', dir: 'golden' },
 }

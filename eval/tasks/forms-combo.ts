@@ -20,33 +20,33 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'multi-target',
   difficulty: 'long',
-  title: '统一处理表单页面的七条批注',
+  title: 'Handle all seven annotations on the form page',
   tokenBudget: { expected: 60000, warnAbove: 80000 },
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'button[type="submit"]',
-      comment: '把提交按钮文案从“提交”改成“立即提交”，鼠标悬停时背景加深为 #3b5bdb',
+      comment: 'Change the submit button label from“Submit”to“Submit now”, and on hover the background darkens to #3b5bdb',
     }, {
       target: 'input[type="search"]',
-      comment: '给顶部搜索输入框补上可访问名称“搜索”',
+      comment: 'Add an accessible name to the top search input field“Search”',
     }, {
       target: '.error',
-      comment: '把错误提示文字的颜色改成 #d64545，并把邮箱错误提示文案改成“请填写有效的邮箱地址”',
+      comment: 'Change the error message text color to #d64545, and change the email error message text to“Please enter a valid email address”',
     }, {
       target: '.form-field',
-      comment: '加大表单项之间的垂直间距',
+      comment: 'Increase the vertical spacing between form fields',
     }, {
       target: '.form',
-      comment: '让表单容器水平居中并限制最大宽度为 480px',
+      comment: 'Center the form container horizontally and limit its max width to 480px',
       targetPosition: { xRatio: 0.5, yRatio: 0.02 },
     }, {
       target: '#email',
-      comment: '给输入框聚焦时增加淡蓝色阴影，并把所有输入框的圆角统一改成 8px',
+      comment: 'Add a light blue shadow when an input is focused, and unify all input border radii to 8px',
     }, {
       target: 'label',
-      comment: '把表单标签的字号加大到 15px 并加粗到 600',
+      comment: 'Increase the form label font size to 15px and bold to 600',
     }],
     ...frozen,
   }],

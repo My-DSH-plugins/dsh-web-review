@@ -7,7 +7,7 @@ import type { EvalRound } from '../../../eval/types.ts'
 
 function round(): EvalRound {
   return {
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [],
     snapshot: {
       sessionId: 'session-eval',

@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52933/",
-    "title": "待办清单"
+    "title": "Todo list"
   },
   "comments": [
     {
       "id": "fe54def2-6619-4365-92cc-317441663134",
-      "comment": "把\"添加任务\"按钮文案改成\"新建任务\"",
+      "comment": "Change\"Add task\"button copy to\"New task\"",
       "tagName": "button",
       "role": "button",
-      "label": "添加任务",
+      "label": "Add task",
       "cssPath": ".add-button",
       "fullPath": "html > body > div#root > div.layout > main.content > button.add-button",
       "stableClasses": [
         "add-button"
       ],
-      "textContent": "添加任务",
+      "textContent": "Add task",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

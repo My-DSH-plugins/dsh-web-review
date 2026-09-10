@@ -68,7 +68,7 @@ try {
   await shot(page, 'panel-property-editor-keyword-menu-narrow')
   await page.keyboard.press('Escape')
   await page.locator('[data-webview-annotation-editor]').getByRole('button', { name: 'Text color' }).click()
-  const colorDialog = page.getByRole('dialog', { name: 'Text color · 颜色选择器' })
+  const colorDialog = page.getByRole('dialog', { name: 'Text color · Color picker' })
   await colorDialog.waitFor()
   const geometry = await colorDialog.evaluate((dialog) => {
     const outer = dialog.getBoundingClientRect()

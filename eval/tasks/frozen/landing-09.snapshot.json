@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52123/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "2ba9b994-0d6f-4c30-840e-fff477f38034",
-      "comment": "把卡片标题的字重加粗到 600",
+      "comment": "Bolden the card title’s font weight to 600",
       "tagName": "h3",
       "role": "heading",
-      "label": "主按钮",
+      "label": "Primary button",
       "cssPath": "div:nth-of-type(1).card h3",
       "fullPath": "html > body > main.cards > div.card > h3",
       "stableClasses": [],
-      "textContent": "主按钮",
+      "textContent": "Primary button",
       "inToolChrome": false,
       "anchor": null,
       "changes": [],

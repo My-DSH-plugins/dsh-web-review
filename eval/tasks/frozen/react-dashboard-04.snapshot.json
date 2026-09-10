@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52287/",
-    "title": "数据看板"
+    "title": "Data Dashboard"
   },
   "comments": [
     {
       "id": "8122f058-2c7e-4123-b80b-0b5204b62b17",
-      "comment": "窗口宽度小于 768px 时统计卡片堆叠成单列",
+      "comment": "When the window width is less than 768px , the stat cards stack into a single column",
       "tagName": "section",
       "role": "",
-      "label": "12,480今日访问3,219活跃用户24.6%转化率¥86,400总收入",
+      "label": "12,480Visits Today3,219Active Users24.6%Conversion Rate¥86,400Total revenue",
       "cssPath": ".stats",
       "fullPath": "html > body > div#root > div.dashboard > section.stats",
       "stableClasses": [
         "stats"
       ],
-      "textContent": "12,480今日访问3,219活跃用户24.6%转化率¥86,400总收入",
+      "textContent": "12,480Visits Today3,219Active Users24.6%Conversion Rate¥86,400Total revenue",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

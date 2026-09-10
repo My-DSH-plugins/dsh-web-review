@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc">
-  <title id="title">批注编辑器：拖动聚焦与临时隐藏交互原型</title>
-  <desc id="desc">三幅并排画板展示编辑器正常态、拖动数值时仅保留当前属性行、以及只保留眼睛圆钮的临时隐藏态。</desc>
+  <title id="title">Annotation Editor: Drag Focus and Temporary Hide Interaction Prototype</title>
+  <desc id="desc">Three side-by-side artboards show the editor in its normal state, with only the current property row retained while dragging a value, and the temporarily hidden state where only the round eye button remains.</desc>
   <defs>
     <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
       <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#172033" flood-opacity=".16"/>
@@ -34,15 +34,15 @@
   </defs>
 
   <rect width="1500" height="920" fill="#f4f6f9"/>
-  <text x="48" y="54" class="h1">属性编辑器：看得见页面，也看得见控制</text>
-  <text x="48" y="82" class="sub">拖动聚焦降低遮挡；眼睛按钮可将编辑器暂时折叠为一个圆形控件。</text>
+  <text x="48" y="54" class="h1">Property editor: see the page, see the controls</text>
+  <text x="48" y="82" class="sub">Dragging focuses the editor to reduce occlusion; the eye button can temporarily collapse the editor into a single round control.</text>
 
   <!-- Artboard backgrounds -->
   <g transform="translate(48 120)">
     <rect width="438" height="704" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="37" class="badge">01 · NORMAL</text>
-    <text x="24" y="65" class="state">正常编辑</text>
-    <text x="24" y="88" class="tiny">完整编辑器，新增眼睛按钮</text>
+    <text x="24" y="65" class="state">Normal editing</text>
+    <text x="24" y="88" class="tiny">Full editor, with a newly added eye button</text>
     <rect x="20" y="112" width="398" height="568" rx="14" fill="url(#hero)" stroke="#e2e7ef"/>
     <rect x="40" y="143" width="358" height="90" rx="16" fill="#fff"/>
     <rect x="58" y="164" width="194" height="12" rx="6" fill="#cad8ef"/>
@@ -57,34 +57,34 @@
       <rect x="0" y="0" width="330" height="52" rx="18" fill="#fff"/>
       <circle cx="25" cy="26" r="16" fill="#f1f3f6"/>
       <path d="M18 23h6m5 0h7M18 30h9m4 0h5M24 19v8m6-1v8" stroke="#59616c" stroke-width="1.3" stroke-linecap="round"/>
-      <text x="51" y="31" fill="#a3a8b0" font-size="13">描述你希望怎样修改…</text>
+      <text x="51" y="31" fill="#a3a8b0" font-size="13">Describe how you’d like to change it…</text>
       <circle cx="267" cy="26" r="16" fill="#f1f3f6"/>
       <g transform="translate(259 18)" color="#4f5661"><use href="#eye-open"/></g>
       <circle cx="305" cy="26" r="16" fill="#4176e6"/><g transform="translate(297 18)" color="#fff"><use href="#check"/></g>
       <line x1="0" y1="52" x2="330" y2="52" stroke="#e8eaed"/>
-      <text x="14" y="78" fill="#24282e" font-size="12" font-weight="700">填充</text>
+      <text x="14" y="78" fill="#24282e" font-size="12" font-weight="700">Fill</text>
       <path d="m307 71 5 5 5-5" fill="none" stroke="#868c95" stroke-width="1.3"/>
-      <text x="14" y="111" class="label">颜色</text><rect x="178" y="91" width="126" height="28" rx="7" fill="#f3f5f7"/><circle cx="194" cy="105" r="7" fill="#17191c"/><text x="294" y="109" class="value" text-anchor="end">#17191c</text>
-      <text x="14" y="145" class="label">背景</text><rect x="178" y="125" width="126" height="28" rx="7" fill="#f3f5f7"/><circle cx="194" cy="139" r="7" fill="#fff" stroke="#ccd1d7"/><text x="294" y="143" class="value" text-anchor="end">#ffffff</text>
-      <text x="14" y="179" class="label">透明度</text><rect x="178" y="159" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="177" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="177" class="value" text-anchor="end">100%</text>
+      <text x="14" y="111" class="label">Color</text><rect x="178" y="91" width="126" height="28" rx="7" fill="#f3f5f7"/><circle cx="194" cy="105" r="7" fill="#17191c"/><text x="294" y="109" class="value" text-anchor="end">#17191c</text>
+      <text x="14" y="145" class="label">Background</text><rect x="178" y="125" width="126" height="28" rx="7" fill="#f3f5f7"/><circle cx="194" cy="139" r="7" fill="#fff" stroke="#ccd1d7"/><text x="294" y="143" class="value" text-anchor="end">#ffffff</text>
+      <text x="14" y="179" class="label">Opacity</text><rect x="178" y="159" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="177" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="177" class="value" text-anchor="end">100%</text>
       <line x1="0" y1="199" x2="330" y2="199" stroke="#e8eaed"/>
-      <text x="14" y="226" fill="#24282e" font-size="12" font-weight="700">文字</text>
-      <text x="14" y="260" class="label">字号</text><rect x="178" y="240" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="258" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="258" class="value" text-anchor="end">24px</text>
-      <text x="14" y="294" class="label">行高</text><rect x="178" y="274" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="292" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="292" class="value" text-anchor="end">32px</text>
+      <text x="14" y="226" fill="#24282e" font-size="12" font-weight="700">Text</text>
+      <text x="14" y="260" class="label">Font size</text><rect x="178" y="240" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="258" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="258" class="value" text-anchor="end">24px</text>
+      <text x="14" y="294" class="label">Line height</text><rect x="178" y="274" width="126" height="28" rx="7" fill="#f3f5f7"/><text x="194" y="292" fill="#747a82" font-size="10" text-anchor="middle">↔</text><text x="294" y="292" class="value" text-anchor="end">32px</text>
       <line x1="0" y1="320" x2="330" y2="320" stroke="#e8eaed"/>
-      <rect x="14" y="336" width="58" height="32" rx="16" fill="#fff" stroke="#d9dde2"/><text x="43" y="357" fill="#252a31" font-size="12" text-anchor="middle">取消</text>
+      <rect x="14" y="336" width="58" height="32" rx="16" fill="#fff" stroke="#d9dde2"/><text x="43" y="357" fill="#252a31" font-size="12" text-anchor="middle">Cancel</text>
       <circle cx="302" cy="352" r="16" fill="#4176e6"/><g transform="translate(294 344)" color="#fff"><use href="#check"/></g>
     </g>
     <path d="M350 268 C396 250 403 225 385 207" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="286" y="202" class="callout">新增眼睛按钮</text>
+    <text x="286" y="202" class="callout">Add eye button</text>
   </g>
 
   <!-- Scrubbing artboard -->
   <g transform="translate(531 120)">
     <rect width="438" height="704" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="37" class="badge">02 · SCRUBBING</text>
-    <text x="24" y="65" class="state">拖动时聚焦</text>
-    <text x="24" y="88" class="tiny">当前控件 100%，其余编辑器完全隐藏</text>
+    <text x="24" y="65" class="state">Focus on drag</text>
+    <text x="24" y="88" class="tiny">The current control 100%, while the rest of the editor is fully hidden</text>
     <rect x="20" y="112" width="398" height="568" rx="14" fill="url(#hero)" stroke="#e2e7ef"/>
     <rect x="40" y="143" width="358" height="90" rx="16" fill="#fff"/>
     <rect x="58" y="164" width="194" height="12" rx="6" fill="#cad8ef"/>
@@ -97,23 +97,23 @@
       <rect width="330" height="382" rx="18" fill="#fff" stroke="#dfe3e8" opacity="0"/>
       <g class="muted">
         <circle cx="25" cy="26" r="16" fill="#f1f3f6"/>
-        <text x="51" y="31" fill="#a3a8b0" font-size="13">描述你希望怎样修改…</text>
+        <text x="51" y="31" fill="#a3a8b0" font-size="13">Describe how you’d like to change it…</text>
         <circle cx="267" cy="26" r="16" fill="#f1f3f6"/><g transform="translate(259 18)" color="#4f5661"><use href="#eye-open"/></g>
         <circle cx="305" cy="26" r="16" fill="#4176e6"/><g transform="translate(297 18)" color="#fff"><use href="#check"/></g>
         <line x1="0" y1="52" x2="330" y2="52" stroke="#aab0b8"/>
-        <text x="14" y="78" fill="#24282e" font-size="12" font-weight="700">填充</text>
-        <text x="14" y="111" class="label">颜色</text><rect x="178" y="91" width="126" height="28" rx="7" fill="#d9dde2"/>
-        <text x="14" y="145" class="label">背景</text><rect x="178" y="125" width="126" height="28" rx="7" fill="#d9dde2"/>
-        <text x="14" y="179" class="label">透明度</text>
+        <text x="14" y="78" fill="#24282e" font-size="12" font-weight="700">Fill</text>
+        <text x="14" y="111" class="label">Color</text><rect x="178" y="91" width="126" height="28" rx="7" fill="#d9dde2"/>
+        <text x="14" y="145" class="label">Background</text><rect x="178" y="125" width="126" height="28" rx="7" fill="#d9dde2"/>
+        <text x="14" y="179" class="label">Opacity</text>
         <line x1="0" y1="199" x2="330" y2="199" stroke="#aab0b8"/>
-        <text x="14" y="226" fill="#24282e" font-size="12" font-weight="700">文字</text>
-        <text x="14" y="294" class="label">行高</text><rect x="178" y="274" width="126" height="28" rx="7" fill="#d9dde2"/>
+        <text x="14" y="226" fill="#24282e" font-size="12" font-weight="700">Text</text>
+        <text x="14" y="294" class="label">Line height</text><rect x="178" y="274" width="126" height="28" rx="7" fill="#d9dde2"/>
         <line x1="0" y1="320" x2="330" y2="320" stroke="#aab0b8"/>
         <rect x="14" y="336" width="58" height="32" rx="16" fill="#fff" stroke="#8d949d"/>
         <circle cx="302" cy="352" r="16" fill="#4176e6"/>
       </g>
       <!-- Active scrubber intentionally unchanged -->
-      <text x="14" y="260" class="label">字号</text>
+      <text x="14" y="260" class="label">Font size</text>
       <rect x="178" y="240" width="126" height="28" rx="7" fill="#f3f5f7"/>
       <text x="194" y="258" fill="#747a82" font-size="10" text-anchor="middle">↔</text>
       <text x="294" y="258" class="value" text-anchor="end">31px</text>
@@ -121,17 +121,17 @@
       <path d="M314 254h24m0 0-7-5m7 5-7 5" fill="none" stroke="#4176e6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
     <path d="M344 507 C400 486 405 451 389 427" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="268" y="420" class="callout">拖动控件保持不变</text>
+    <text x="268" y="420" class="callout">Drag controls stay unchanged</text>
     <rect x="52" y="646" width="334" height="22" rx="11" fill="#eaf1ff"/>
-    <text x="219" y="661" fill="#2458b8" font-size="11" font-weight="600" text-anchor="middle">立即独显 · 松手立即恢复 · 无隐藏动画</text>
+    <text x="219" y="661" fill="#2458b8" font-size="11" font-weight="600" text-anchor="middle">Shown alone immediately · Restores immediately on release · no hide animation</text>
   </g>
 
   <!-- Hidden artboard -->
   <g transform="translate(1014 120)">
     <rect width="438" height="704" rx="22" fill="#fff" stroke="#dfe3e8"/>
     <text x="24" y="37" class="badge">03 · HIDDEN</text>
-    <text x="24" y="65" class="state">临时隐藏</text>
-    <text x="24" y="88" class="tiny">编辑器收起，仅保留眼睛圆钮</text>
+    <text x="24" y="65" class="state">Temporarily hidden</text>
+    <text x="24" y="88" class="tiny">Editor collapsed, leaving only the eye round button</text>
     <rect x="20" y="112" width="398" height="568" rx="14" fill="url(#hero)" stroke="#e2e7ef"/>
     <rect x="40" y="143" width="358" height="90" rx="16" fill="#fff"/>
     <rect x="58" y="164" width="194" height="12" rx="6" fill="#cad8ef"/>
@@ -140,35 +140,35 @@
     <rect x="54" y="151" width="304" height="72" rx="12" fill="none" stroke="#3388ff" stroke-width="2"/>
     <circle cx="363" cy="151" r="12" fill="#3388ff"/><text x="363" y="155" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">1</text>
     <rect x="44" y="252" width="350" height="330" rx="18" fill="#fff" opacity=".22" stroke="#dfe3e8" stroke-dasharray="5 6"/>
-    <text x="219" y="421" fill="#8290a4" font-size="13" text-anchor="middle">页面内容完全可见</text>
+    <text x="219" y="421" fill="#8290a4" font-size="13" text-anchor="middle">Page content fully visible</text>
     <g transform="translate(348 252)" filter="url(#soft)">
       <circle cx="18" cy="18" r="18" fill="#fff" stroke="#d8dde4"/>
       <g transform="translate(10 10)" color="#3d4652"><use href="#eye-open"/></g>
     </g>
     <path d="M355 289 C325 313 326 343 346 360" fill="none" stroke="#4176e6" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="247" y="378" class="callout">再次点击，原位恢复</text>
+    <text x="247" y="378" class="callout">Click again to restore in place</text>
     <g transform="translate(52 618)">
-      <circle cx="6" cy="7" r="4" fill="#4f8df7"/><text x="18" y="11" class="tiny">保留草稿、滚动位置和实时预览</text>
-      <circle cx="6" cy="31" r="4" fill="#4f8df7"/><text x="18" y="35" class="tiny">隐藏不是取消，不触发回滚</text>
+      <circle cx="6" cy="7" r="4" fill="#4f8df7"/><text x="18" y="11" class="tiny">Keeps the draft, scroll position and live preview</text>
+      <circle cx="6" cy="31" r="4" fill="#4f8df7"/><text x="18" y="35" class="tiny">Hiding is not canceling and does not trigger a rollback</text>
     </g>
   </g>
 
   <!-- State flow -->
   <g transform="translate(48 856)">
     <rect width="1404" height="40" rx="12" fill="#e9edf3"/>
-    <text x="22" y="26" fill="#4c535e" font-size="12" font-weight="600">状态流</text>
-    <text x="115" y="26" fill="#252a31" font-size="12">正常态</text>
+    <text x="22" y="26" fill="#4c535e" font-size="12" font-weight="600">State flow</text>
+    <text x="115" y="26" fill="#252a31" font-size="12">Normal state</text>
     <path d="M170 20h64m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="247" y="26" fill="#626a75" font-size="11">拖动超过 3px</text>
-    <text x="352" y="26" fill="#252a31" font-size="12">聚焦态</text>
+    <text x="247" y="26" fill="#626a75" font-size="11">Drag more than 3px</text>
+    <text x="352" y="26" fill="#252a31" font-size="12">Focused state</text>
     <path d="M407 20h68m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
     <text x="487" y="26" fill="#626a75" font-size="11">pointer up / cancel</text>
-    <text x="610" y="26" fill="#252a31" font-size="12">正常态</text>
+    <text x="610" y="26" fill="#252a31" font-size="12">Normal state</text>
     <path d="M665 20h68m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="745" y="26" fill="#626a75" font-size="11">点击眼睛</text>
-    <text x="820" y="26" fill="#252a31" font-size="12">隐藏态</text>
+    <text x="745" y="26" fill="#626a75" font-size="11">Click the eye</text>
+    <text x="820" y="26" fill="#252a31" font-size="12">Hidden state</text>
     <path d="M875 20h68m-7-5 7 5-7 5" fill="none" stroke="#7c8490" stroke-width="1.4"/>
-    <text x="955" y="26" fill="#626a75" font-size="11">再次点击</text>
-    <text x="1032" y="26" fill="#252a31" font-size="12">原位恢复</text>
+    <text x="955" y="26" fill="#626a75" font-size="11">Click again</text>
+    <text x="1032" y="26" fill="#252a31" font-size="12">Restore in place</text>
   </g>
 </svg>

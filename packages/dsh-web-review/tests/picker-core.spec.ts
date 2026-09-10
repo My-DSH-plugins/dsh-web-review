@@ -79,10 +79,10 @@ describe('fullPathOf', () => {
 
 describe('identity helpers', () => {
   it('accessibleLabel prefers aria-label/title, falls back to visible text', () => {
-    document.body.innerHTML = '<button aria-label="保存">save</button><button title="删除">x</button><div class="card"><p>卡片标题</p></div>'
-    expect(accessibleLabel(document.querySelector('button[aria-label]') as Element)).toBe('保存')
-    expect(accessibleLabel(document.querySelector('button[title]') as Element)).toBe('删除')
-    expect(accessibleLabel(document.querySelector('.card') as Element)).toBe('卡片标题')
+    document.body.innerHTML = '<button aria-label="Save">save</button><button title="Delete">x</button><div class="card"><p>Card title</p></div>'
+    expect(accessibleLabel(document.querySelector('button[aria-label]') as Element)).toBe('Save')
+    expect(accessibleLabel(document.querySelector('button[title]') as Element)).toBe('Delete')
+    expect(accessibleLabel(document.querySelector('.card') as Element)).toBe('Card title')
   })
 
   it('roleOf maps tags and explicit roles', () => {

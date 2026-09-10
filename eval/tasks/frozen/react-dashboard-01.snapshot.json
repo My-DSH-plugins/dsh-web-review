@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52162/",
-    "title": "数据看板"
+    "title": "Data Dashboard"
   },
   "comments": [
     {
       "id": "ece71988-1c04-4534-a43f-85fdfc6db8d9",
-      "comment": "让统计卡片区域在页面上均匀分布并对齐",
+      "comment": "Make the stat cards area evenly distributed and aligned on the page",
       "tagName": "section",
       "role": "",
-      "label": "12,480今日访问3,219活跃用户24.6%转化率¥86,400总收入",
+      "label": "12,480Visits Today3,219Active Users24.6%Conversion Rate¥86,400Total revenue",
       "cssPath": ".stats",
       "fullPath": "html > body > div#root > div.dashboard > section.stats",
       "stableClasses": [
         "stats"
       ],
-      "textContent": "12,480今日访问3,219活跃用户24.6%转化率¥86,400总收入",
+      "textContent": "12,480Visits Today3,219Active Users24.6%Conversion Rate¥86,400Total revenue",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

@@ -15,23 +15,23 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'multi-target',
   difficulty: 'long',
-  title: '统一处理商品页面的四条批注',
+  title: 'Handle all four comments on the product page',
   tokenBudget: { expected: 45000, warnAbove: 60000 },
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: '.price',
-      comment: '把价格文字的颜色改成 #e8590c',
+      comment: 'Change the price text color to #e8590c',
     }, {
       target: '.product-title',
-      comment: '把商品标题的字重加粗到 700',
+      comment: 'Bold the product title font weight to 700',
     }, {
       target: '.products',
-      comment: '加大商品卡片之间的间距，并把商品网格改成每行三列',
+      comment: 'Increase the spacing between product cards and change the product grid to three columns per row',
     }, {
       target: '.buy',
-      comment: '把所有“加入购物车”按钮的圆角统一改成 999px',
+      comment: 'Change all“Add to cart”buttons’ border radius is uniformly changed to 999px',
     }],
     ...frozen,
   }],

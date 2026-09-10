@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52413/",
-    "title": "个人主页"
+    "title": "Profile Page"
   },
   "comments": [
     {
       "id": "e5b340ab-807a-45d6-9479-874a65032410",
-      "comment": "把简介文案改成“热爱前端工程与界面设计”",
+      "comment": "Change the bio text to“Passionate about frontend engineering and interface design”",
       "tagName": "p",
       "role": "",
-      "label": "一名专注于产品体验的前端工程师",
+      "label": "A frontend engineer focused on product experience",
       "cssPath": ".bio",
       "fullPath": "html > body > div#root > div.profile > div.info > p.bio",
       "stableClasses": [
         "bio"
       ],
-      "textContent": "一名专注于产品体验的前端工程师",
+      "textContent": "A frontend engineer focused on product experience",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

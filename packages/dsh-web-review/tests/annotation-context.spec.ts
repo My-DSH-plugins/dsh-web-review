@@ -395,7 +395,7 @@ describe('pending annotation admission', () => {
     expect(decision.messages[0]).toBe(existing)
     expect(decision.messages[1]).toMatchObject({
       source: {
-        kind: 'plugin', plugin: 'dsh-web-review', form: 'snapshot',
+        kind: 'plugin', plugin: 'dsh-web-review-english', form: 'snapshot',
         snapshotId: expect.any(String),
         sections: [
           expect.objectContaining({ name: 'Overview' }),
@@ -436,7 +436,7 @@ describe('pending annotation admission', () => {
     // The page-snapshot guide injected during the busy window is also not a
     // user prompt, so the annotation stays queued behind it.
     const guide = createUserMessage({
-      source: { kind: 'plugin', plugin: 'dsh-web-review' },
+      source: { kind: 'plugin', plugin: 'dsh-web-review-english' },
       content: [{ type: 'text', text: '## Page snapshot' }],
     })
     const guideStep = await attach(state, agent, async () => ({
@@ -456,7 +456,7 @@ describe('pending annotation admission', () => {
     expect(queued.messages[0]).toBe(userPrompt)
     expect(queued.messages[1]).toMatchObject({
       source: {
-        kind: 'plugin', plugin: 'dsh-web-review', form: 'snapshot',
+        kind: 'plugin', plugin: 'dsh-web-review-english', form: 'snapshot',
         snapshotId: expect.any(String),
         sections: expect.arrayContaining([expect.objectContaining({ name: 'Overview' })]),
       },
@@ -509,7 +509,7 @@ describe('pending annotation admission', () => {
     })
     expect(decision.messages[1]).toMatchObject({
       source: {
-        kind: 'plugin', plugin: 'dsh-web-review', form: 'snapshot',
+        kind: 'plugin', plugin: 'dsh-web-review-english', form: 'snapshot',
         snapshotId: expect.any(String), sections: expect.any(Array),
       },
       content: [{ type: 'text', text: expect.stringContaining('# Browser comments') }],

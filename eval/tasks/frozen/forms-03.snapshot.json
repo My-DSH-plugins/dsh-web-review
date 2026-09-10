@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51807/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "61781794-80ed-4ee6-b51b-3b63f682307b",
-      "comment": "把错误提示文字的颜色改成 #d64545",
+      "comment": "Change the error message text color to #d64545",
       "tagName": "div",
       "role": "",
-      "label": "邮箱格式不正确",
+      "label": "Invalid email format",
       "cssPath": ".error",
       "fullPath": "html > body > form.form > div.form-field:nth-of-type(2) > div.error",
       "stableClasses": [
         "error"
       ],
-      "textContent": "邮箱格式不正确",
+      "textContent": "Invalid email format",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

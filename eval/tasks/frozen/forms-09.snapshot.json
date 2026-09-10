@@ -3,19 +3,19 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51921/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "ef71fdac-0881-4e86-99e1-403153790690",
-      "comment": "把表单标签的字号加大到 15px 并加粗到 600",
+      "comment": "Increase the form label font size to 15px and bold to 600",
       "tagName": "label",
       "role": "",
-      "label": "姓名",
+      "label": "Name",
       "cssPath": "div:nth-of-type(1).form-field label",
       "fullPath": "html > body > form.form > div.form-field > label",
       "stableClasses": [],
-      "textContent": "姓名",
+      "textContent": "Name",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

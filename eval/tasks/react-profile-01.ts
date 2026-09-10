@@ -9,17 +9,17 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'text',
   difficulty: 'easy',
-  title: '修改个人简介文案',
-  instruction: '把简介文案改成“热爱前端工程与界面设计”',
+  title: 'Change the bio text',
+  instruction: 'Change the bio text to“Passionate about frontend engineering and interface design”',
   capture: {
     target: '.bio',
-    comment: '把简介文案改成“热爱前端工程与界面设计”',
+    comment: 'Change the bio text to“Passionate about frontend engineering and interface design”',
   },
   snapshot,
   captureMeta,
   grader: {
-    pass: [{ kind: 'dom', selector: '.bio', text: '热爱前端工程与界面设计' }],
-    noRegression: [{ kind: 'dom', selector: '.name', text: '李雷' }],
+    pass: [{ kind: 'dom', selector: '.bio', text: 'Passionate about frontend engineering and interface design' }],
+    noRegression: [{ kind: 'dom', selector: '.name', text: 'Li Lei' }],
   },
   golden: { kind: 'git-patch', patchFile: 'golden.patch' },
 }

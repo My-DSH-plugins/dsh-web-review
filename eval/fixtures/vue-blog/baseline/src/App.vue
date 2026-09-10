@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <h1 class="title">My Blog</h1>
-    <p class="subtitle">前端开发笔记</p>
+    <p class="subtitle">Frontend Development Notes</p>
     <ul class="posts">
-      <li>第一篇：搭建本地评测</li>
-      <li>第二篇：批注协议拆解</li>
+      <li>Post 1: Setting up local evaluation</li>
+      <li>Part 2: Breaking down the annotation protocol</li>
     </ul>
   </div>
 </template>

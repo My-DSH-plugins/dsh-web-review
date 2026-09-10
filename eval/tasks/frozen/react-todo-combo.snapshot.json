@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:63869/",
-    "title": "待办清单"
+    "title": "Todo list"
   },
   "comments": [
     {
       "id": "3a52c54a-4ac0-40c8-8a10-8698d2c8531f",
-      "comment": "让侧边栏列表项在鼠标悬停时背景高亮为 #eef2ff",
+      "comment": "Make sidebar list items highlight on hover with a background of #eef2ff",
       "tagName": "li",
       "role": "",
-      "label": "收件箱",
+      "label": "Inbox",
       "cssPath": "li:nth-of-type(1).nav-item",
       "fullPath": "html > body > div#root > div.layout > nav.sidebar > ul.nav-list > li.nav-item",
       "stableClasses": [
         "nav-item"
       ],
-      "textContent": "收件箱",
+      "textContent": "Inbox",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -34,16 +34,16 @@
     },
     {
       "id": "f167fda3-c261-4984-8391-17798b061ce6",
-      "comment": "加大待办事项之间的间距",
+      "comment": "Increase the spacing between todo items",
       "tagName": "li",
       "role": "",
-      "label": "写评测用例",
+      "label": "Write eval cases",
       "cssPath": "li:nth-of-type(1).todo-item",
       "fullPath": "html > body > div#root > div.layout > main.content > ul.todos > li.todo-item",
       "stableClasses": [
         "todo-item"
       ],
-      "textContent": "写评测用例",
+      "textContent": "Write eval cases",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -60,16 +60,16 @@
     },
     {
       "id": "a1411968-8473-4b43-a2f8-4b23d1753352",
-      "comment": "把“添加任务”按钮文案改成“新建任务”，并给它加上柔和阴影",
+      "comment": "Change“Add task”button copy to“New task”, and give it a soft shadow",
       "tagName": "button",
       "role": "button",
-      "label": "添加任务",
+      "label": "Add task",
       "cssPath": ".add-button",
       "fullPath": "html > body > div#root > div.layout > main.content > button.add-button",
       "stableClasses": [
         "add-button"
       ],
-      "textContent": "添加任务",
+      "textContent": "Add task",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",
@@ -79,8 +79,8 @@
       },
       "changes": [],
       "textChange": {
-        "before": "添加任务",
-        "after": "新建任务"
+        "before": "Add task",
+        "after": "New task"
       },
       "viewport": {
         "width": 1392,
@@ -89,16 +89,16 @@
     },
     {
       "id": "5afd0d05-923a-4100-ab81-b891a5328fca",
-      "comment": "把侧边栏“草稿”这一项改成“草稿箱”",
+      "comment": "Change the sidebar“Drafts” item to“Draft Box”",
       "tagName": "li",
       "role": "",
-      "label": "草稿",
+      "label": "Drafts",
       "cssPath": "li:nth-of-type(3).nav-item",
       "fullPath": "html > body > div#root > div.layout > nav.sidebar > ul.nav-list > li.nav-item:nth-of-type(3)",
       "stableClasses": [
         "nav-item"
       ],
-      "textContent": "草稿",
+      "textContent": "Drafts",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

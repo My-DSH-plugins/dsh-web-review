@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52588/",
-    "title": "个人主页"
+    "title": "Profile Page"
   },
   "comments": [
     {
       "id": "f123c455-866b-473a-82b1-d6044c9086c7",
-      "comment": "让个人信息行改为上下排列并居中",
+      "comment": "Make the personal info row stack vertically and be centered",
       "tagName": "p",
       "role": "",
-      "label": "一名专注于产品体验的前端工程师",
+      "label": "A frontend engineer focused on product experience",
       "cssPath": ".bio",
       "fullPath": "html > body > div#root > div.profile > div.info > p.bio",
       "stableClasses": [
         "bio"
       ],
-      "textContent": "一名专注于产品体验的前端工程师",
+      "textContent": "A frontend engineer focused on product experience",
       "inToolChrome": false,
       "anchor": {
         "framework": "react",

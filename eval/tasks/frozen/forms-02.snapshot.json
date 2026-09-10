@@ -3,12 +3,12 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:51786/",
-    "title": "用户信息表单"
+    "title": "User Information Form"
   },
   "comments": [
     {
       "id": "a0a150c0-51d1-437c-8387-27f7c4146dd6",
-      "comment": "给顶部搜索输入框补上可访问名称“搜索”",
+      "comment": "Add an accessible name to the top search input field“Search”",
       "tagName": "input",
       "role": "textbox",
       "label": "",

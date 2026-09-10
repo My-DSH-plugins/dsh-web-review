@@ -20,37 +20,37 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'multi-target',
   difficulty: 'long',
-  title: '统一处理落地页的八条批注',
+  title: 'Handle the eight landing page annotations together',
   tokenBudget: { expected: 60000, warnAbove: 80000 },
   arms: ['full'],
   rounds: [{
-    prompt: '请根据页面批注修改前端实现。',
+    prompt: 'Modify the frontend implementation based on the page annotations.',
     capture: [{
       target: 'button.btn-primary',
-      comment: '把首页主按钮的背景颜色改深一点，改成 #224466，并把内边距加大到上下 10px、左右 24px',
+      comment: 'Make the homepage primary button background color a bit darker, change it to #224466, and increase the padding to top and bottom 10px, left and right 24px',
       adjusts: [{ property: 'background-color', after: '#224466' }],
     }, {
       target: '.card:nth-of-type(3) button.btn-ghost',
-      comment: '把第三个卡片里的“了解更多”按钮文案改成“查看详情”',
+      comment: 'In the third card, change the“Learn more”button copy to“View Details”',
     }, {
       target: '.hero h1',
-      comment: '把首页主标题的字号从 28px 加大到 32px',
+      comment: 'Increase the homepage main heading’s font size from 28px increased to 32px',
     }, {
       target: '.cards',
-      comment: '把卡片之间的间距从 16px 加大到 24px',
+      comment: 'Increase the spacing between cards from 16px increased to 24px',
     }, {
       target: '.hero',
-      comment: '让首页宣传区的内容改为左对齐',
+      comment: 'Left-align the content in the homepage hero',
       targetPosition: { xRatio: 0.08, yRatio: 0.9 },
     }, {
       target: '.card',
-      comment: '给卡片增加更明显的阴影，并把所有卡片的圆角从 12px 改成 8px',
+      comment: 'Give the cards a more prominent shadow, and change the border radius of all cards from 12px to 8px',
     }, {
       target: '.card:nth-of-type(2) button.btn-ghost',
-      comment: '把“取消”按钮的背景改成浅灰色 #d7dbe0',
+      comment: 'Change“Cancel”Change the button’s background to light gray #d7dbe0',
     }, {
       target: '.card h3',
-      comment: '把卡片标题的字重加粗到 600',
+      comment: 'Bolden the card title’s font weight to 600',
     }],
     ...frozen,
   }],

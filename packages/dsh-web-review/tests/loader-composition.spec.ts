@@ -263,7 +263,7 @@ describe('isolated preview Origin (real Loader + webserver composition)', () => 
   it('registers the reviewed Preview capability guidance', async () => {
     const loaded = await loadComposition()
     const section = (await loaded.systemPrompt.assemble()).sections
-      .find(candidate => candidate.name === 'plugin:dsh-web-review-preview')
+      .find(candidate => candidate.name === 'plugin:dsh-web-review-english-preview')
     expect(section?.text).toBe(PREVIEW_GUIDANCE)
   })
 

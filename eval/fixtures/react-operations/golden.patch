@@ -4,10 +4,10 @@ index de95c12..258d9e5 100644
 +++ b/src/components/OrderTable.tsx
 @@ -4,7 +4,7 @@ export function OrderTable({ orders, onOpen }: { orders: Order[]; onOpen: (order
    return <section className="results" aria-labelledby="results-title">
-     <div className="results-heading"><div><h2 id="results-title">订单列表</h2><p>共 128 条结果</p></div><button className="button primary">导出数据</button></div>
-     <div className="table-scroll"><table><thead><tr><th>订单</th><th>客户</th><th>金额</th><th>状态</th><th>操作</th></tr></thead>
--      <tbody>{orders.map(order => <tr key={order.id}><td>{order.id}</td><td>{order.customer}</td><td>{order.amount}</td><td><span className={`status ${order.status}`}>{order.status}</span></td><td className="actions"><button className="button secondary" onClick={() => onOpen(order)}>查看</button><button className="button primary cancel-order">取消订单</button></td></tr>)}</tbody>
-+      <tbody>{orders.map(order => <tr key={order.id}><td>{order.id}</td><td>{order.customer}</td><td>{order.amount}</td><td><span className={`status ${order.status}`}>{order.status}</span></td><td className="actions"><button className="button secondary" onClick={() => onOpen(order)}>查看</button><button className="button danger cancel-order">取消订单</button></td></tr>)}</tbody>
+     <div className="results-heading"><div><h2 id="results-title">Order list</h2><p>Total 128 results</p></div><button className="button primary">Export data</button></div>
+     <div className="table-scroll"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+-      <tbody>{orders.map(order => <tr key={order.id}><td>{order.id}</td><td>{order.customer}</td><td>{order.amount}</td><td><span className={`status ${order.status}`}>{order.status}</span></td><td className="actions"><button className="button secondary" onClick={() => onOpen(order)}>View</button><button className="button primary cancel-order">Cancel order</button></td></tr>)}</tbody>
++      <tbody>{orders.map(order => <tr key={order.id}><td>{order.id}</td><td>{order.customer}</td><td>{order.amount}</td><td><span className={`status ${order.status}`}>{order.status}</span></td><td className="actions"><button className="button secondary" onClick={() => onOpen(order)}>View</button><button className="button danger cancel-order">Cancel order</button></td></tr>)}</tbody>
      </table></div>
    </section>
  }
@@ -36,7 +36,7 @@ index 360f8dd..ff3a315 100644
  .table-scroll { overflow-x: auto; } table { width: 100%; border-collapse: collapse; margin-top: 16px; } th, td { padding: 13px 10px; text-align: left; border-top: 1px solid #edf0f4; font-size: 13px; } th { color: #647089; font-weight: 600; }
  .button { border: 0; border-radius: 7px; padding: 8px 12px; cursor: pointer; }.button.primary { background: #3267d6; color: white; }.button.secondary { background: #eef1f6; color: #27334a; }.actions { display: flex; gap: 8px; }
 +.button.danger { background: #b4232f; color: white; }
- .status { padding: 4px 8px; border-radius: 999px; background: #eef1f6; }.status.已取消 { background: #fbe9e9; color: #9c3030; }
+ .status { padding: 4px 8px; border-radius: 999px; background: #eef1f6; }.status.Cancelled { background: #fbe9e9; color: #9c3030; }
  .drawer-backdrop { position: fixed; inset: 0; background: rgb(18 28 45 / 38%); display: flex; justify-content: flex-end; pointer-events: none; }.drawer { width: 440px; height: 100%; background: white; padding: 24px; box-shadow: -12px 0 30px rgb(18 28 45 / 12%); pointer-events: auto; }.drawer header { display: flex; align-items: flex-start; gap: 12px; justify-content: space-between; }.drawer header span { color: #647089; font-size: 12px; }.drawer h2 { margin-top: 6px; font-size: 20px; white-space: nowrap; }.icon-button { flex: 0 0 auto; width: 32px; height: 32px; border: 0; border-radius: 50%; background: #eef1f6; font-size: 22px; }.drawer dl { display: grid; gap: 14px; margin-top: 28px; }.drawer dl div { display: flex; justify-content: space-between; border-bottom: 1px solid #edf0f4; padding-bottom: 12px; }.drawer dt { color: #647089; }.drawer dd { margin: 0; font-weight: 600; }
 -@media (max-width: 720px) { .app-shell { display: block; }.sidebar { display: none; }.main-content { padding: 18px 14px; }.filter-bar { overflow-x: auto; }.metrics { grid-template-columns: 1fr; }.drawer { width: 220px; } }
 +@media (max-width: 720px) { .app-shell { display: block; }.sidebar { display: none; }.main-content { padding: 18px 14px; }.filter-bar { align-items: stretch; overflow: visible; }.filter-bar label, .filter-bar > .button { display: none; }.metrics { grid-template-columns: 1fr; }.drawer { width: 220px; }.drawer h2 { max-width: calc(100vw - 100px); overflow: hidden; text-overflow: ellipsis; } }

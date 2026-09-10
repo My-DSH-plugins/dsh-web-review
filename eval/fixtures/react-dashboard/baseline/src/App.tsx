@@ -8,20 +8,20 @@ function StatCard({ label, value }: { label: string; value: string }) {
 }
 
 const stats = [
-  { label: '今日访问', value: '12,480' },
-  { label: '活跃用户', value: '3,219' },
-  { label: '转化率', value: '24.6%' },
-  { label: '总收入', value: '¥86,400' },
+  { label: 'Visits Today', value: '12,480' },
+  { label: 'Active Users', value: '3,219' },
+  { label: 'Conversion Rate', value: '24.6%' },
+  { label: 'Total revenue', value: '¥86,400' },
 ]
 
 export function App() {
   return (
     <div className="dashboard">
       <header className="topbar">
-        <div className="avatar" aria-label="用户头像">李</div>
+        <div className="avatar" aria-label="User avatar">Li</div>
         <div className="user-info">
-          <div className="username">李明</div>
-          <div className="role">产品运营</div>
+          <div className="username">Li Ming</div>
+          <div className="role">Product Operations</div>
         </div>
       </header>
       <section className="stats">

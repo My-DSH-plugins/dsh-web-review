@@ -128,7 +128,7 @@ const entryName = JSON.parse(
 ) as { name: string }
 writeFileSync(overlayPath, [
   '- insert:',
-  '    - id: dsh-web-review',
+  '    - id: dsh-web-review-english',
   `      name: ${JSON.stringify(entryName.name)}`,
   '- id: directory-picker',
   '  disabled: true',
@@ -168,8 +168,8 @@ const start = (command: string, args: readonly string[], cwd: string, env: NodeJ
 console.log(`acceptance: profile and history: ${dshHome}`)
 console.log(`acceptance: DSH UI: http://${host}:${webPort}`)
 console.log(`acceptance: demo page: http://${host}:${demoPort}`)
-console.log(`acceptance: mock history: ${seededHistory ? 'created' : 'reused'} (网页批注验收)`)
-console.log('acceptance: open 网页批注验收 and click its Demo link')
+console.log(`acceptance: mock history: ${seededHistory ? 'created' : 'reused'} (Web Annotation Acceptance)`)
+console.log('acceptance: open Web Annotation Acceptance and click its Demo link')
 
 const launch = harnessWebLaunch(harness, overlayPath, host, webPort, sharedEnv)
 const web = start(launch.command, launch.args, root, launch.env)

@@ -9,16 +9,16 @@ export const task: EvalTask = {
   fixtureKind: 'static',
   category: 'accessibility',
   difficulty: 'medium',
-  title: '为搜索输入框添加可访问名称',
-  instruction: '给顶部搜索输入框补上可访问名称“搜索”',
+  title: 'Add an accessible name to the search input',
+  instruction: 'Add an accessible name to the top search input field“Search”',
   capture: {
     target: 'input[type="search"]',
-    comment: '给顶部搜索输入框补上可访问名称“搜索”',
+    comment: 'Add an accessible name to the top search input field“Search”',
   },
   snapshot,
   captureMeta,
   grader: {
-    pass: [{ kind: 'dom', selector: 'input[type="search"]', accessibleName: '搜索' }],
+    pass: [{ kind: 'dom', selector: 'input[type="search"]', accessibleName: 'Search' }],
   },
   golden: { kind: 'html-dir', dir: 'golden' },
 }

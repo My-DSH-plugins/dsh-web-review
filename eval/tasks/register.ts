@@ -25,7 +25,7 @@ function normalizeTask(task: EvalTask): LoadedEvalTask {
     category: 'protocol-smoke',
     arms: ['full'],
     rounds: [{
-      prompt: '请根据页面批注修改前端实现。',
+      prompt: 'Modify the frontend implementation based on the page annotations.',
       capture: [task.capture],
       snapshot: task.snapshot,
       captureMeta: task.captureMeta,

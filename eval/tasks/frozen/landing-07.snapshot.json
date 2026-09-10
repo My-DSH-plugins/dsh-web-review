@@ -3,21 +3,21 @@
   "selectedSkills": [],
   "page": {
     "url": "http://127.0.0.1:52081/",
-    "title": "魔法 UI 演示页"
+    "title": "Magic UI Demo Page"
   },
   "comments": [
     {
       "id": "e563e6cd-9307-44ec-8ad1-5fdf00f09c76",
-      "comment": "把“取消”按钮的背景改成浅灰色 #d7dbe0",
+      "comment": "Change“Cancel”Change the button’s background to light gray #d7dbe0",
       "tagName": "button",
       "role": "button",
-      "label": "取消",
+      "label": "Cancel",
       "cssPath": "div:nth-of-type(2) .btn-ghost",
       "fullPath": "html > body > main.cards > div.card:nth-of-type(2) > button.btn-ghost",
       "stableClasses": [
         "btn-ghost"
       ],
-      "textContent": "取消",
+      "textContent": "Cancel",
       "inToolChrome": false,
       "anchor": null,
       "changes": [

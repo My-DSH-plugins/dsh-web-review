@@ -7,10 +7,10 @@ index 66e118d..7e72848 100644
      <div className="profile">
        <div className="info">
 -        <img className="avatar" src={AVATAR} />
-+        <img className="avatar" src={AVATAR} aria-label="用户头像" />
-         <h1 className="name">李雷</h1>
--        <p className="bio">一名专注于产品体验的前端工程师</p>
-+        <p className="bio">热爱前端工程与界面设计</p>
++        <img className="avatar" src={AVATAR} aria-label="User avatar" />
+         <h1 className="name">Li Lei</h1>
+-        <p className="bio">A frontend engineer focused on product experience</p>
++        <p className="bio">Passionate about frontend engineering and interface design</p>
        </div>
      </div>
    )

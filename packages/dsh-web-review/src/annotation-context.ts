@@ -38,7 +38,7 @@ import {
 } from './browser-comments-context.ts'
 
 /** Plugin provenance recorded on every injected context message. */
-export const ANNOTATION_SOURCE = { kind: 'plugin', plugin: 'dsh-web-review' } as const
+export const ANNOTATION_SOURCE = { kind: 'plugin', plugin: 'dsh-web-review-english' } as const
 
 export interface PendingAnnotationContext {
   snapshotId: AnnotationSnapshotIdType

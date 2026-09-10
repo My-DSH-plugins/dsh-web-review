@@ -1,204 +1,204 @@
-# 参与开发
+# Contributing
 
-本文面向 `dsh-web-review` 的维护者和贡献者，介绍本地开发、技术架构、验证与公开发布流程。普通用户请阅读 [README.md](./README.md)。
+This document is for `dsh-web-review-english` maintainers and contributors, covering local development, the technical architecture, verification, and the public release process. Regular users should read [README.md](./README.md).
 
-## 发布边界
+## Release boundaries
 
-- 源码包保持 `private: true`。
-- npm 包名保持 `@canglongcl/dsh-web-review`，正式 tarball 的发布访问级别必须为 `public`。
-- 不要在仓库文件、命令参数、日志或截图中写入真实令牌和 provider 凭据。
+- The source package stays `private: true`.
+- npm The package name stays `dsh-web-review-english`, and the official tarball ’s release access level must be `public`.
+- Do not write real tokens and provider credentials.
 
-完整且具有约束力的工程规则见 [AGENTS.md](./AGENTS.md)。修改协议、加载方式或安全边界前必须先阅读该文件。
+The complete and binding engineering rules are in [AGENTS.md](./AGENTS.md). This file must be read before modifying the protocol, loading method, or security boundary.
 
-## 环境准备
+## Environment setup
 
-### 1. 安装依赖
+### 1. Install dependencies
 
-直接从公共 npm registry 安装依赖，无需配置 `@deepseek-ai` 只读令牌：
+Directly from the public npm registry Install dependencies with no need to configure `@deepseek-ai` read-only token:
 
 ```sh
 pnpm install
 ```
 
-安装过程会配置仓库的 pre-commit hook。普通的类型检查、构建、单元测试、打包和 npm 发布使用锁定的公共 npm 依赖，不要求本地存在 Harness checkout。
+The install process configures the repository’s pre-commit hook. Ordinary type checking, builds, unit tests, packaging and npm Publishing uses locked public npm dependencies, and does not require a local Harness checkout.
 
-### 2. 准备 Harness
+### 2. Prepare Harness
 
-开发、手动验收和 E2E 需要外部 DeepSeek Harness checkout。当前兼容基线是：
+development, manual acceptance, and E2E requires an external DeepSeek Harness checkout. The current compatibility baseline is:
 
 ```text
 snapshot-20260812T172954Z-final-unwatermarked-5fa48343c7
 7b9644f2b664e46c9518506035aa6c8d5af4d8e8
 ```
 
-Harness 必须位于本仓库之外，不要为本插件修改 Harness 源码：
+Harness must be outside this repository; do not modify it for this plugin Harness source code:
 
 ```sh
-export DSH_HARNESS='/绝对路径/deepseek-harness'
+export DSH_HARNESS='/absolute path/deepseek-harness'
 pnpm setup:harness
 ```
 
-`setup:harness` 会检查目标 commit、构建状态和必需产物，并生成本机专用、已被 gitignore 的 `cordis.yml` 与 `packages/dsh-web-review/entry-name.json`。
+`setup:harness` checks the target commit, build status, and required artifacts, and generates a machine-local, already gitignore of `cordis.yml` and `packages/dsh-web-review/entry-name.json`.
 
-## 开发流程
+## Development workflow
 
-启动完整开发环境：
+Start the full development environment:
 
 ```sh
 pnpm dev
 ```
 
-它会同时启动 Harness Web profile 和本包的客户端 bundle watch。浏览器端修改可通过刷新应用，Node 端修改需要重启 Web 进程。
+It starts both Harness Web profile and this package’s client bundle watch. Browser-side changes can be applied by refreshing,Node -side changes require a restart Web process.
 
-启动演示页面：
+Start the demo page:
 
 ```sh
 pnpm demo
 ```
 
-演示页默认地址为 `http://127.0.0.1:5173`。
+The demo page defaults to `http://127.0.0.1:5173`.
 
-需要可重复的隔离验收环境时运行：
+To get a repeatable, isolated acceptance environment, run:
 
 ```sh
 pnpm dev:acceptance
 ```
 
-该命令使用 `.artifacts/acceptance/` 下的独立 profile、固定端口和持久测试会话，不修改日常 DSH profile。测试凭据不会进入日志或版本库。
+This command uses `.artifacts/acceptance/` in an isolated profile, a fixed port and a persistent test session, without touching the everyday DSH profile. Test credentials never enter logs or the version control repository.
 
-## 技术架构
+## Technical architecture
 
-插件由一个双面 package 和一个隔离 frame artifact 组成：
+The plugin consists of a two-sided package and an isolated frame artifact composed of:
 
-| 部分 | 主要职责 |
+| Part | Main responsibilities |
 |---|---|
-| Node 端 | 创建和撤销预览会话、运行 loopback 代理、校验批注快照、准备 Agent 上下文 |
-| DSH 浏览器端 | 注册网页预览标签、宿主层编辑器、批注胶囊和发送确认 |
-| 隔离 frame bridge | 在预览页面内执行元素选择、序列化 DOM 信息、临时样式预览与精确回滚 |
-| Agent 协作 | 在 `agent/pre-step` 中追加独立的 Browser Comments 消息，使用现有工作区工具修改源码 |
+| Node side | Create and revoke preview sessions, run loopback proxy, validate annotation snapshots, and prepare Agent context |
+| DSH Browser side | registers the web preview tab, the host-layer editor, the annotation pill and the send confirmation |
+| Isolated frame bridge | Perform element selection within the preview page, serialize DOM information, temporary style previews, and precise rollback |
+| Agent Collaboration | In `agent/pre-step` append a separate Browser Comments message, then use the existing workspace tools to modify the source |
 
-### 加载方式
+### Loading method
 
-- 开发环境通过 profile-local alias `@dsh-web-review-dev/plugin` 加载外部 checkout。
-- `scripts/profile-plugin-link.ts` 在 Web profile 下维护对应 symlink；非 symlink 占用该路径时会失败，不会覆盖。
-- `cordis.yml` 只通过 `dsh web --patch` 增加本插件，不修改 Harness profile 或源码。
-- 开发 bundle 和正式 bundle 使用不同的 loader ID，不能混用。
-- Node bundle 必须自包含，运行时不能依赖本 checkout 的 `node_modules`。
+- In the development environment, this is done through profile-local alias `@dsh-web-review-dev/plugin` loads an external checkout.
+- `scripts/profile-plugin-link.ts` In Web profile maintains the corresponding symlink; if a non- symlink occupying that path causes a failure rather than an overwrite.
+- `cordis.yml` is added only via `dsh web --patch` add this plugin without modifying Harness profile  or source code.
+- Development bundle and official bundle use different loader ID, and they cannot be mixed.
+- Node bundle must be self-contained and must not depend at runtime on this checkout of `node_modules`.
 
-### 预览隔离
+### Preview isolation
 
-- DSH host 只提供预览会话控制接口，不在宿主 Origin 返回目标页面内容。
-- 每个顶层目标使用随机、短生命周期的 `*.localhost` Preview Origin。
-- 会话绑定目标 Origin，并固定首次 DNS 解析，防止 rebinding。
-- 代理只转发受支持的方法与有界请求，绝不转发浏览器 Cookie 或 Authorization。
-- HTML 使用解析器改写，并在页面脚本之前注入 `<base>`、bridge 配置与 bridge bundle。
-- Host 与 frame 只通过严格校验的 `postMessage` 协议通信；生产代码不得直接读取 iframe DOM。
+- DSH host only provides preview session control APIs, and on the host Origin return the target page content.
+- Each top-level target uses a random, short-lived `*.localhost` Preview Origin.
+- The session binds the target Origin, and pins the first DNS resolution, preventing rebinding.
+- The proxy forwards only supported methods and bounded requests, and never forwards browser Cookie or Authorization.
+- HTML is rewritten with a parser, and before the page scripts it injects `<base>`, bridge config and the bridge bundle.
+- Host and frame only through the strictly validated `postMessage`  protocol; production code must not directly read iframe DOM.
 
-### 元素选择与临时编辑
+### Element Selection and Temporary Editing
 
-- bridge 独占页面中的实时元素引用和回滚记录，React store 只保存可序列化快照。
-- 元素快照、选择器、页面 URL 和 framework anchor 都是不可信页面证据。
-- 评论、请求的样式值和文本替换属于用户输入，但仍需通过长度、数量和属性白名单校验。
-- 临时样式修改前必须记录精确的原始 inline value 与 priority。
-- 重置、取消、移除、清空、发送成功、导航和卸载都必须恢复页面原状。
+- bridge exclusively holds the live element references and rollback records in the page,React store stores only serializable snapshots.
+- Element snapshots, selectors, page URL and framework anchor are all untrusted page evidence.
+- Comments, requested style values and text replacements are user input, but still have to pass length, count and property allowlist validation.
+- Before a temporary style change, the exact original inline value and priority.
+- Reset, cancel, remove, clear, successful send, navigation and unmount must all restore the page to its original state.
 
-### 批注与发送
+### Annotation and sending
 
-- 浏览器发送结构化 `{ sessionId, page, comments[] }`，不在客户端拼接模型提示词。
-- Node 端严格校验后生成稳定的 `# Browser comments` 上下文。
-- 批注以独立的 plugin-sourced user message 追加，不得改写用户输入框原文。
-- 只有带有匹配 `snapshotId` 的持久 Context 记录才能清除胶囊，失败或被拒绝的发送必须保留批注以供重试。
-- 插件不注册新的模型工具；Agent 使用会话已有的文件和 Shell 工具修改工作区。
+- The browser sends a structured `{ sessionId, page, comments[] }`, and the model prompt is not assembled on the client.
+- Node -side strict validation generates a stable `# Browser comments` context.
+- Annotations are appended as an independent plugin-sourced user message are appended, and the user’s original input text must not be rewritten.
+- Only `snapshotId` persistent Context record can clear the pill; failed or rejected sends must keep the annotation so it can be retried.
+- The plugin does not register new model tools;Agent use the session’s existing file and Shell tools to modify the workspace.
 
-## 代码约定
+## Code conventions
 
-- 仓库全部使用 TypeScript，包括 `scripts/`、`demo/` 与测试。
-- 产品文案使用中文；代码注释、JSDoc 和协议上下文使用英文。
-- 业务状态放在 `createWebviewStore()` 中，组件只通过 props 接收数据。
-- 生产 host 代码不得保存 iframe 内的 `Element`，也不得调用页面函数。
-- HTML 改写必须使用 `parse5`，不得用正则表达式处理 HTML。
-- `cordis.yml`、`entry-name.json`、`lib/`、`dist/` 和测试产物均为生成文件，不得提交。
-- 提交信息遵循仓库现有风格。
+- The entire repository uses TypeScript, including `scripts/`, `demo/` and tests.
+- Product copy is written in English; code comments, JSDoc and protocol context also use English (this is the English variant of the upstream plugin).
+- Business state lives in `createWebviewStore()`  and components receive data only via props receive data.
+- Production host code must not retain iframe ’s `Element`, nor may it call page functions.
+- HTML Rewriting must use `parse5`, and regular expressions must not be used to process HTML.
+- `cordis.yml`, `entry-name.json`, `lib/`, `dist/` and test artifacts are generated files and must not be committed.
+- Commit messages follow the repository’s existing style.
 
-## 验证
+## Verification
 
-提交前至少运行：
+Before committing, at least run:
 
 ```sh
 pnpm check
 ```
 
-涉及 UI、预览代理、bridge 或批注发送链路时，还需运行：
+When it involves UI, the preview proxy,bridge or the comment send path, also run:
 
 ```sh
-DSH_HARNESS='/绝对路径/deepseek-harness' pnpm test:e2e
+DSH_HARNESS='/absolute path/deepseek-harness' pnpm test:e2e
 ```
 
-也可以执行完整门禁：
+You can also run the full gate:
 
 ```sh
-DSH_HARNESS='/绝对路径/deepseek-harness' pnpm check:e2e
+DSH_HARNESS='/absolute path/deepseek-harness' pnpm check:e2e
 ```
 
-主要命令：
+Main commands:
 
-| 命令 | 用途 |
+| Command | Purpose |
 |---|---|
-| `pnpm typecheck` | TypeScript 项目检查 |
-| `pnpm test` | 构建并运行 Vitest |
-| `pnpm check` | 类型、测试、配置契约、bundle 与包白名单门禁 |
-| `pnpm test:e2e` | 真实 DSH GUI、隔离 Origin、点选与发送链路 |
-| `pnpm package:official` | 生成正式安装包 |
-| `pnpm release:verify` | 校验待发布产物 |
-| `pnpm changelog` | 按 Conventional Commits 重新生成 `CHANGELOG.md`，或输出单版本发布说明 |
+| `pnpm typecheck` | TypeScript Project check |
+| `pnpm test` | Build and run Vitest |
+| `pnpm check` | types, tests, config contracts,bundle and the package allowlist gate |
+| `pnpm test:e2e` | real DSH GUI, isolated Origin, element picking and the send pipeline |
+| `pnpm package:official` | Generate the official install package |
+| `pnpm release:verify` | Verify the release artifacts |
+| `pnpm changelog` | according to Conventional Commits Regenerate `CHANGELOG.md`, or output a single-version release note |
 
-pre-commit hook 会运行快速门禁，不包含需要启动服务和 provider 配置的浏览器 E2E。
+pre-commit hook runs a fast gate that does not include the browser E2E requiring a running service and provider configured browser E2E.
 
-## 打包与发布
+## Packaging and Publishing
 
-构建正式安装包：
+Build the official install package:
 
 ```sh
 pnpm package:official
 ```
 
-产物位于 `dist/`，仅包含白名单内的 manifest、自包含 bundles、bridge、Skills、README 和演示资源。
+Artifacts are located in `dist/`, containing only the whitelisted manifest, self-contained bundles, bridge, Skills, README and demo assets.
 
-正式 npm 发布只通过 `.github/workflows/release-npm.yml`：
+Official npm releases are published only through `.github/workflows/release-npm.yml`: 
 
-1. PR 与 `main` 运行 npm-only 质量门禁。
-2. 与 `package.json` 版本完全一致的 `v*` tag 才能触发发布。
-3. 发布 Job 使用前一 Job 已校验的 tarball，不重新构建。
-4. 发布 Job 通过 npm Trusted Publishing 使用短期 GitHub OIDC 身份，并显式保持 `public`。
+1. PR and `main` run npm-only quality gate.
+2. and `package.json` exactly matching the version in `v*` tag triggers a release.
+3. release Job uses the previous Job validated tarball, without rebuilding.
+4. release Job Passed npm Trusted Publishing uses short-lived GitHub OIDC identity, and explicitly keeps `public`.
 
-每次发布都会同步更新 `CHANGELOG.md`（Keep a Changelog 格式，内容由 Conventional Commits 自动生成）。发布前运行 `pnpm changelog --next <version>` 生成新版本小节并随 `release: bump` 提交（`pnpm release:beta` 自动完成）；发布身份校验（`pnpm release:verify`）要求 `CHANGELOG.md` 首节与 tag 版本一致。CI 在 npm 发布成功后创建同名 GitHub Release：发布说明由 `pnpm changelog --version <version>` 从提交历史重新生成（与仓库内 `CHANGELOG.md` 同源），候选版本标记为 prerelease，并附上已校验的 tarball 与 `SHA256SUMS`。
+Every release also updates `CHANGELOG.md` (Keep a Changelog  format, with content from Conventional Commits auto-generated). Before releasing, run `pnpm changelog --next <version>` generate a new version section and commit it along with `release: bump` commit (`pnpm release:beta` completed automatically); release identity verification (`pnpm release:verify`) requires `CHANGELOG.md` first section and tag matches the version.CI In npm After a successful publish, creates a same-named GitHub Release: release notes are `pnpm changelog --version <version>` regenerated from the commit history (from the same source as the repo’s `CHANGELOG.md` from the same source), and release candidates are marked as prerelease, along with the verified tarball and `SHA256SUMS`.
 
-dist-tag 规则：`x.y.z-beta.N` 发布到 `beta`，其他候选版本（如 `-rc`）发布到 `next`，稳定版本发布到 `latest`。创建 tag 前必须单独完成显式 Harness E2E：
+dist-tag rules:`x.y.z-beta.N` are published to `beta`, while other candidate versions (such as `-rc`) are published to `next`, and stable versions are published to `latest`. Create tag before, an explicit Harness E2E: 
 
 ```sh
-DSH_HARNESS='/绝对路径/deepseek-harness' pnpm check:e2e
+DSH_HARNESS='/absolute path/deepseek-harness' pnpm check:e2e
 git tag -a v<version> -m "dsh-web-review v<version>"
 git push personal v<version>
 ```
 
-### Beta 渠道
+### Beta channel
 
-`pnpm release:beta [基础版本] [--dry-run]` 完成 beta 发布的本地前置步骤：
+`pnpm release:beta [base version] [--dry-run]` Done beta local prerequisites for publishing:
 
-- 校验两份 manifest 版本一致且为合法 semver，工作区干净；
-- 计算下一个 beta 版本：当前是 `x.y.z-beta.N` 时递增为 `x.y.z-beta.(N+1)`；否则从当前稳定版本的下一个 minor（或显式给出的基础版本）开始，即 `x.y.z-beta.0`；
-- 校验新版本高于 npm 上已发布的 `beta` / `latest`；
-- 重新生成 `CHANGELOG.md`（`--next` 小节）并写入两份 manifest，运行 `pnpm release:verify`，提交包含 `CHANGELOG.md` 的 `release: bump <version>`，打 `v<version>` 注释 tag 并推送到 origin。
+- Verify that both manifest versions match and are valid semver, and the workspace is clean;
+- Compute the next beta version: if it is currently `x.y.z-beta.N` it increments to `x.y.z-beta.(N+1)`; otherwise, it starts from the next minor (or the explicitly provided base version), namely `x.y.z-beta.0`; 
+- verify the new version is higher than npm already published on `beta` / `latest`; 
+- Regenerate `CHANGELOG.md` (`--next`  section) and write both manifest, run `pnpm release:verify`, commit including `CHANGELOG.md` of `release: bump <version>`, create `v<version>` Comment tag and push to origin.
 
-tag 推送后 CI 自动打包、发布到 `beta` dist-tag 并创建同名 GitHub Release，用户可用 `npm i @canglongcl/dsh-web-review@beta` 安装。`--dry-run` 只打印计划，不修改任何文件。
+tag is pushed, CI automatically packages and publishes to `beta` dist-tag and creates a same-named GitHub Release, and users can use `npm i dsh-web-review-english@beta` to install.`--dry-run` only prints the plan and modifies no files.
 
-Trusted Publisher 与 CI 边界的详细配置以 [AGENTS.md](./AGENTS.md) 为准。发布 workflow 不保存 npm 写令牌。
+Trusted Publisher and CI for the detailed configuration of the boundary, refer to [AGENTS.md](./AGENTS.md) is authoritative. The release workflow does not store npm write token.
 
-## 提交变更
+## Committing changes
 
-提交前确认：
+Before committing, confirm:
 
-1. 改动未突破 Preview Origin、消息信任边界或公开发布约束。
-2. 没有提交生成文件、凭据、日志、截图或构建产物。
-3. `pnpm check` 通过；相关 UI 或发送路径的 E2E 也已通过。
-4. 用户可见行为和限制已同步更新到 [README.md](./README.md)。
+1. Changes did not breach Preview Origin, the message trust boundary, or public release constraints.
+2. No generated files, credentials, logs, screenshots, or build artifacts were committed.
+3. `pnpm check`  passes; the related UI or send-path E2E have also passed.
+4. User-visible behavior and limitations have been synced to [README.md](./README.md).

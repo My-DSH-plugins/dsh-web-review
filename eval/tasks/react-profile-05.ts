@@ -9,17 +9,17 @@ export const task: EvalTask = {
   fixtureKind: 'react',
   category: 'layout',
   difficulty: 'medium',
-  title: '纵向排列并居中个人信息',
-  instruction: '让个人信息行改为上下排列并居中',
+  title: 'Stack and center the profile information',
+  instruction: 'Make the personal info row stack vertically and be centered',
   capture: {
     target: '.info',
-    comment: '让个人信息行改为上下排列并居中',
+    comment: 'Make the personal info row stack vertically and be centered',
   },
   snapshot,
   captureMeta,
   grader: {
     pass: [{ kind: 'dom', selector: '.info', style: { 'flex-direction': 'column', 'align-items': 'center' } }],
-    noRegression: [{ kind: 'dom', selector: '.name', text: '李雷' }],
+    noRegression: [{ kind: 'dom', selector: '.name', text: 'Li Lei' }],
   },
   golden: { kind: 'git-patch', patchFile: 'golden.patch' },
 }
