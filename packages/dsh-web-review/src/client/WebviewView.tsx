@@ -29,13 +29,15 @@ import {
   IconNewChatOutline16,
   IconRefreshOutline16,
   IconRightUpOutline16,
-  IconSendOutline16,
+  IconSendOutline14,
   IconTrashOutline16,
   IconWarningOutline16,
   Input,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { BakedActions, InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-runtime/client'
+import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
+// Type-only: pulls the SessionStandardProps merge (useSession, useProjection).
+import type {} from '@deepseek-ai/dsh-client-ui-session/client'
 import { ANNOTATION_LIMITS, MAX_ANNOTATIONS } from '../annotation-contract.ts'
 import type {
   PreviewElementHandle,
@@ -524,7 +526,7 @@ export function WebviewView({
               aria-label={`${t('panel.pick.send')} ${String(state.picks.length)}`}
               onClick={() => { void submitAnnotations() }}
             >
-              <IconSendOutline16 size={14} />
+              <IconSendOutline14 size={14} />
               <span>{sendingAnnotations ? t('panel.pick.sending') : t('panel.pick.send')}</span>
               <span className={css.annotationCount} aria-hidden>({state.picks.length})</span>
             </button>

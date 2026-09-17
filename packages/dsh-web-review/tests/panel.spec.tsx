@@ -4,7 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { useSyncExternalStore } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { SnapshotSelectorHook, Translate } from '@deepseek-ai/dsh-client-ui-slots'
-import type { ConversationSnapshot } from '@deepseek-ai/dsh-client-runtime/client'
+import type { ConversationSnapshot } from '@deepseek-ai/dsh-client-ui-conversation/client'
 import {
   AnnotationSnapshotId,
   type AnnotationDraft,
@@ -44,33 +44,41 @@ function hookFor(store: ReturnType<WebviewStore['create']>): SnapshotSelectorHoo
   return (selector) => useSyncExternalStore(store.subscribe, () => selector(store.getSnapshot()))
 }
 
+/** WebviewView only reads `promptError` from the Session snapshot. */
+const EMPTY_SESSION = Object.freeze({ promptError: null })
+const promptErrorSessionHook = ((selector: (value: unknown) => unknown) =>
+  selector(EMPTY_SESSION)) as never
+
 function sessionSource() {
-  let snapshot = { nodes: [] } as unknown as ConversationSnapshot
+  // Nodes reach the dock through the 'chat' view target's legacy slice.
+  let nodes: unknown[] = []
+  const snapshotOf = (): ConversationSnapshot => ({
+    views: { get: (target: string) => (target === 'chat' ? { legacy: { nodes } } : undefined) },
+    activeTargets: new Set(['chat']),
+  } as unknown as ConversationSnapshot)
+  let snapshot = snapshotOf()
   const listeners = new Set<() => void>()
-  const useSession: SnapshotSelectorHook<ConversationSnapshot> = (selector) =>
+  const useConversation: SnapshotSelectorHook<ConversationSnapshot> = (selector) =>
     useSyncExternalStore(
       (listener) => { listeners.add(listener); return () => { listeners.delete(listener) } },
       () => selector(snapshot),
     )
+  const publish = (next: unknown[]) => {
+    nodes = next
+    snapshot = snapshotOf()
+    for (const listener of listeners) listener()
+  }
   return {
-    useSession,
+    useConversation,
     appendHuman(seq: number) {
-      snapshot = {
-        ...snapshot,
-        nodes: [...snapshot.nodes, { kind: 'user', seq, time: 1, content: [], source: { kind: 'user' } }],
-      }
-      for (const listener of listeners) listener()
+      publish([...nodes, { kind: 'user', seq, time: 1, content: [], source: { kind: 'user' } }])
     },
     appendAnnotationContext(seq: number, snapshotId: string) {
-      snapshot = {
-        ...snapshot,
-        nodes: [...snapshot.nodes, {
-          kind: 'context', seq, time: 1, content: [{ type: 'text', text: '# Browser comments' }],
-          source: { kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId },
-          provenance: { role: 'inject', label: 'dsh-web-review-english' }, form: null,
-        }],
-      }
-      for (const listener of listeners) listener()
+      publish([...nodes, {
+        kind: 'context', seq, time: 1, content: [{ type: 'text', text: '# Browser comments' }],
+        source: { kind: 'plugin', plugin: 'dsh-web-review-english', snapshotId },
+        provenance: { role: 'inject', label: 'dsh-web-review-english' }, form: null,
+      }])
     },
   }
 }
@@ -263,9 +271,8 @@ function renderView(
   useInput?: WebviewSlotProps['useInput'],
 ) {
   const store = createWebviewStore().create()
-  const session = sessionSource()
   const input = {
-    draft, draftRev: 0, phase, occurrences: [], queue: [], imageIds: [],
+    draft, draftRev: 0, phase, occurrences: [], queue: [], attachmentIds: [],
   }
   let sessionSequence = 0
   const createPreviewSession = (target: string): Promise<PreviewSessionDescriptor> => {
@@ -294,7 +301,7 @@ function renderView(
       {...({} as any)}
       useWebviewStore={hookFor(store)}
       actions={store.actions}
-      useSession={session.useSession}
+      useSession={promptErrorSessionHook}
       useInput={useInput ?? ((selector) => selector(input))}
       inputActions={{ setDraft: vi.fn(), submit }}
       sendAnnotationsWithoutDraft={sendAnnotationsWithoutDraft}
@@ -309,7 +316,7 @@ function renderView(
 
 function renderDock(
   sync: WebviewDockInjected['syncAnnotations'] = successfulSync(),
-  useSession: SnapshotSelectorHook<ConversationSnapshot> = sessionSource().useSession,
+  useConversation: SnapshotSelectorHook<ConversationSnapshot> = sessionSource().useConversation,
   openPreview: WebviewDockInjected['openPreview'] = vi.fn(),
 ) {
   const store = createWebviewStore().create()
@@ -319,7 +326,7 @@ function renderDock(
       {...({} as any)}
       useWebviewStore={hookFor(store)}
       actions={store.actions}
-      useSession={useSession}
+      useConversation={useConversation}
       syncAnnotations={sync}
       openPreview={openPreview}
       t={t}
@@ -774,7 +781,7 @@ describe('DraftOverlayBar', () => {
   it('ignores unrelated human messages and clears only the matching durable annotation context', async () => {
     const session = sessionSource()
     const sync = vi.fn<(_draft: AnnotationDraft) => Promise<AnnotationSyncReceipt>>(successfulSync())
-    const store = renderDock(sync, session.useSession)
+    const store = renderDock(sync, session.useConversation)
     act(() => {
       store.actions.setUrl('http://localhost:5173/')
       store.actions.addPick(pick('p1', 'Apply this change'))
@@ -798,7 +805,7 @@ describe('DraftOverlayBar', () => {
       if (comment === undefined) return { kind: 'empty' }
       return receipt(comment === 'A' ? 'snapshot-a' : 'snapshot-b')
     })
-    const store = renderDock(sync, session.useSession)
+    const store = renderDock(sync, session.useConversation)
     act(() => {
       store.actions.setUrl('http://localhost:5173/')
       store.actions.addPick(pick('p1', 'A'))

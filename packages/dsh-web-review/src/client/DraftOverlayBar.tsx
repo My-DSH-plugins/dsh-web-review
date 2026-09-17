@@ -11,8 +11,11 @@ import {
   IconWarningOutline16,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { BakedActions, InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-runtime/client'
-import type { ConversationNode } from '@deepseek-ai/dsh-client-runtime/client'
+import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
+import type { ConversationNode } from '@deepseek-ai/dsh-client-ui-conversation/client'
+// Type-only: pulls the ConversationViewSnapshotMap merge that declares the
+// 'chat' view target, whose legacy slice carries the ordered node list.
+import type {} from '@deepseek-ai/dsh-client-ui-chat/client'
 import {
   annotationSnapshotIdOfSource,
   type AnnotationDraft,
@@ -69,10 +72,11 @@ function annotationContextId(node: ConversationNode): ReturnType<typeof annotati
 }
 
 /** Annotation composer capsule and hover/focus detail card. */
-export function DraftOverlayBar({ useWebviewStore, useSession, actions, syncAnnotations, openPreview, t }: WebviewDockProps) {
+export function DraftOverlayBar({ useWebviewStore, useConversation, actions, syncAnnotations, openPreview, t }: WebviewDockProps) {
   const state = useWebviewStore((s) => s)
-  const latestAnnotationContextId = useSession((session) => {
-    const node = session.nodes.findLast(candidate => annotationContextId(candidate) !== undefined)
+  const latestAnnotationContextId = useConversation((conversation) => {
+    const nodes = conversation.views.get('chat')?.legacy.nodes ?? []
+    const node = nodes.findLast(candidate => annotationContextId(candidate) !== undefined)
     return node === undefined ? undefined : annotationContextId(node)
   })
   const [open, setOpen] = useState(false)

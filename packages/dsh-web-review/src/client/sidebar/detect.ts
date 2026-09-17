@@ -11,7 +11,7 @@
  * (internal/status), which covers both activation orders and detects the
  * service disappearing when its providing fiber unloads.
  */
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { BetterSidebarService } from 'dsh-better-sidebar/client/service'
 
 /** A live better-sidebar engagement snapshot (capability-probed). */

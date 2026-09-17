@@ -18,7 +18,10 @@
  * services; the underlying surface components stay pure props components.
  */
 import { useEffect, useMemo, type ReactNode } from 'react'
-import type { ClientContext, ConversationSnapshot, ISessions, IWorkspaces, SessionId, UseProjection } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+import type { ISessions, UseProjection } from '@deepseek-ai/dsh-api-session-controller/client'
+import type { IWorkspaces } from '@deepseek-ai/dsh-api-workspace-controller/client'
+import type { SessionId } from '@deepseek-ai/dsh-session'
 import type { TranslateNS } from '@deepseek-ai/dsh-client-locale/client'
 import type { SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
 import type { TabComponentProps } from 'dsh-better-sidebar/client/service'
@@ -30,13 +33,17 @@ import css from './SidebarPreviewTab.module.css'
 /** Never-invoked fallback for the global standard seats when a service is absent. */
 const emptySessionHook = ((selector: unknown) => selector as never) as SnapshotSelectorHook<never>
 
+/** Retain counts are read by session id, not by selector, so it needs its own shape. */
+const emptyRetainInfoHook = ((_sessionId: unknown, selector?: (value: unknown) => unknown) =>
+  (selector === undefined ? undefined : selector(undefined))) as WebviewSlotProps['useSessionRetainInfo']
+
 /** Structural input facade slice (ui-conversation does not export the type). */
 type SessionInputLike = {
   state: { getSnapshot(): unknown; subscribe(fn: () => void): () => void }
   setDraft(text: string): void
-  addImages(ids: readonly unknown[]): boolean
-  removeImage(id: unknown): void
-  pruneImages(ids: readonly unknown[]): void
+  addAttachments(ids: readonly never[]): boolean
+  removeAttachment(id: never): void
+  pruneAttachments(ids: readonly never[]): void
   submit(mode?: unknown): void
 }
 
@@ -150,7 +157,13 @@ export function SidebarPreviewTab({ ctx: tabCtx, scope, tab, deps }: SidebarPrev
         useWebviewStore={useWebviewStore}
         actions={engine.actions}
         sessionId={sessionId}
-        useSession={useSession as SnapshotSelectorHook<ConversationSnapshot>}
+        useSession={useSession as WebviewSlotProps['useSession']}
+        useConversation={emptySessionHook as WebviewSlotProps['useConversation']}
+        useChat={emptySessionHook as WebviewSlotProps['useChat']}
+        useSessionStatus={emptySessionHook as WebviewSlotProps['useSessionStatus']}
+        useSessionRetainInfo={emptyRetainInfoHook}
+        usePanelInfo={emptySessionHook as WebviewSlotProps['usePanelInfo']}
+        {...{ viewRequest: null, openView: () => {}, completeViewRequest: () => {} }}
         useInput={useInput as WebviewSlotProps['useInput']}
         inputActions={input}
         useProjection={useProjection!}

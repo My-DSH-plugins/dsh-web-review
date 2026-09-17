@@ -366,7 +366,7 @@ describe('SidebarPreviewTab', () => {
           {...({} as any)}
           useWebviewStore={hookForSource(engine)}
           actions={engine.actions}
-          useSession={hookForSource(face)}
+          useConversation={hookForSource(conversationFake) as never}
           syncAnnotations={syncAnnotations}
           openPreview={openPreview}
           t={t}
@@ -467,6 +467,17 @@ describe('SidebarPreviewTab', () => {
 /** Bind one selector hook over a bare observable source (renderer parity). */
 function hookForSource<T>(source: { getSnapshot(): T; subscribe(listener: () => void): () => void }): SnapshotSelectorHook<T> {
   return (selector) => useSyncExternalStore(source.subscribe, () => selector(source.getSnapshot()))
+}
+
+// Frozen so useSyncExternalStore sees a stable snapshot identity. These specs
+// exercise engine sharing, not annotation context, so the node list stays empty.
+const EMPTY_CONVERSATION = Object.freeze({
+  views: { get: (target: string) => (target === 'chat' ? { legacy: { nodes: [] } } : undefined) },
+  activeTargets: new Set(['chat']),
+})
+const conversationFake = {
+  getSnapshot: () => EMPTY_CONVERSATION,
+  subscribe: () => () => {},
 }
 
 function pickItem(id: string, comment: string): PickItem {

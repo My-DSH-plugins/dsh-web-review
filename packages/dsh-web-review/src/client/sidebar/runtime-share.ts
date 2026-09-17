@@ -11,7 +11,7 @@
  * values.
  */
 import { useCallback, useRef, useSyncExternalStore } from 'react'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-runtime/client'
+import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
 import type { SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
 
 /** Bind one selector hook over a bare observable snapshot source. */

@@ -18,7 +18,11 @@
  * and follows the declaring ui-conversation entry across reloads. The inject
  * face stays thin: one serialized, acknowledged per-session annotation sync.
  */
-import type { ClientContext, ISessions, SessionId } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+// Type-only: pulls the SlotRegistry service merge (ctx.slots).
+import type {} from '@deepseek-ai/dsh-client-ui-renderer/client'
+import type { ISessions } from '@deepseek-ai/dsh-api-session-controller/client'
+import type { SessionId } from '@deepseek-ai/dsh-session'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
 // Type-only: pulls the ui-conversation SlotMap merge (the view/dock entries).
 import type { IConversation } from '@deepseek-ai/dsh-client-ui-conversation/client'
@@ -226,7 +230,7 @@ function openPreviewUrl(
   actions.setUrl(normalized)
   actions.setTitle('')
   actions.clearPicks()
-  ctx.layout.closeDetails()
+  ctx.layout.closeRightbar()
   const service = integration.service
   if (service !== null && service.isTabEnabled(PREVIEW_TAB_ID)) {
     service.openTab({ type: PREVIEW_TAB_ID, url: normalized })
@@ -285,7 +289,8 @@ export function apply(ctx: ClientContext): void {
   ctx.inject(['commandUi'], (scope: ClientContext) => {
     scope.effect(() => scope.commandUi.register({
       name: 'skills',
-      description: t('command.skills.description'),
+      // Thunk: re-read on every projection so the text follows the active locale.
+      description: () => t('command.skills.description'),
       available: () => true,
       ui: {
         kind: 'popupSelect',

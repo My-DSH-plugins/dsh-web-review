@@ -66,7 +66,7 @@ interface FakeApplyHarness {
   injected: string[][]
   /** Effects the fake ctx.effect ran; the last is the sidebar watch disposer. */
   effects: Array<() => void>
-  closeDetails: ReturnType<typeof vi.fn>
+  closeRightbar: ReturnType<typeof vi.fn>
   /** Change the live session list and notify the pruning subscription. */
   setLiveIds(ids: string[]): void
   /** Registrations of one slot that are still live. */
@@ -83,7 +83,7 @@ function fakeApplyContext(options: { service?: BetterSidebarService; sessionIds?
   const registrations: Array<{ slot: string; count: number; dispose: () => void; opts?: Record<string, unknown> }> = []
   const effects: Array<() => void> = []
   const injected: string[][] = []
-  const closeDetails = vi.fn()
+  const closeRightbar = vi.fn()
   const commandUi = { register: vi.fn() }
 
   const ctx = {
@@ -142,7 +142,7 @@ function fakeApplyContext(options: { service?: BetterSidebarService; sessionIds?
       sessionOf: vi.fn(() => undefined),
     },
     conversation: { input: { for: vi.fn(() => undefined) } },
-    layout: { closeDetails },
+    layout: { closeRightbar },
     commandUi,
   }
 
@@ -153,7 +153,7 @@ function fakeApplyContext(options: { service?: BetterSidebarService; sessionIds?
     registrations,
     injected,
     effects,
-    closeDetails,
+    closeRightbar,
     setLiveIds: (ids: string[]): void => {
       liveIds = ids
       listListener?.()
@@ -205,7 +205,7 @@ describe('apply: better-sidebar wiring', () => {
     expect(h.liveRegistrations('conversation.view')).toHaveLength(1)
     // rc.8 removed the conversation.chat.contextview chain slot; the
     // browser-comments fold renders through the harness ContextInjectionRow.
-    expect(h.closeDetails).not.toHaveBeenCalled()
+    expect(h.closeRightbar).not.toHaveBeenCalled()
   })
 
   it('yields the conversation view while engaged and restores it on disengagement', () => {
@@ -256,7 +256,7 @@ describe('apply: better-sidebar wiring', () => {
     // writes the normalized URL into the shared engine.
     openPreview('https://example.com/')
     expect(chat.clicked).toHaveBeenCalledTimes(1)
-    expect(h.closeDetails).toHaveBeenCalledTimes(1)
+    expect(h.closeRightbar).toHaveBeenCalledTimes(1)
     expect((dockInject('session-a').hooks.webviewStore as { getSnapshot(): { url: string } }).getSnapshot().url)
       .toBe('https://example.com/')
 

@@ -15,7 +15,8 @@
  * Instances are pruned when their session leaves the live session list
  * (subscribe ctx.sessions.list) or on explicit prune.
  */
-import type { EngineStoreInstance, SessionId } from '@deepseek-ai/dsh-client-runtime/client'
+import type { EngineStoreInstance } from '@deepseek-ai/dsh-client-store'
+import type { SessionId } from '@deepseek-ai/dsh-session'
 import type { WebviewActions, WebviewState, WebviewStore } from './stores.ts'
 
 export type WebviewEngine = EngineStoreInstance<WebviewState, WebviewActions>
