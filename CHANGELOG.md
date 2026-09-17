@@ -5,6 +5,12 @@ All notable changes to `dsh-web-review-english` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-09-17
+
+### Fixed
+
+- migrate to DSH 0.1.6: drop the removed `@deepseek-ai/dsh-client-runtime` client dependency and port the Session/Conversation/layout contracts, restoring the web shell boot that 0.5.0 broke on the current DSH release line
+
 ## [0.5.0] - 2026-08-25
 
 ## [0.5.0-beta.1] - 2026-08-25
